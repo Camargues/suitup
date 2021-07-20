@@ -310,7 +310,7 @@
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>배송 요청사항</label>
-                                        <textarea placeholder="Message*" name="orderMemo"></textarea>
+                                        <textarea placeholder="요청사항을 입력해주세요*" name="orderMemo"></textarea>
                                     </div>
                                 </div>
                             </div>

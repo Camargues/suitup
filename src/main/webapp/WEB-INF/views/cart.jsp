@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+    
 <!doctype html>
 <html>
 <head>
@@ -267,14 +268,14 @@
                                     <c:if test="${not empty cartList }">
                                     <c:forEach items="${cartList }" var="cart">
                                         <tr>
-                                            <td class="product-thumbnail"><a href="${cartList.pro_num }"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
-                                            <td class="product-name"><a href="#">${cartList.pro_name }</a></td>
-                                            <td class="product-price"><span class="amount">${cartList.pro_price }</span></td>
-                                            <td class="product-quantity"><input type="number" value="${cartList.cart_count }" /></td>
-                                            <td class="product-subtotal">${cartList.pro_price * cartList.cart_count }</td>
-                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cartList.cart_num }">X</a></td>
+                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
+                                            <td class="product-name"><a href="#">${cartList.proName }</a></td>
+                                            <td class="product-price"><span class="amount">${cartList.proPice }</span></td>
+                                            <td class="product-quantity"><input type="number" value="${cartList.cartCount }" /></td>
+                                            <td class="product-subtotal">${cartList.proPrice * cartList.cartCount }</td>
+                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cartList.cartNum }">X</a></td>
                                         </tr>
-                                        <c:set var= "sum" value="${sum + (cartList.pro_price * cartList.cart_count)}"/>
+                                        <c:set var= "sum" value="${sum + (cartList.proPrice * cartList.cartCount)}"/>
                                         </c:forEach>
                                         </c:if>
                                     </tbody>
@@ -303,7 +304,7 @@
                                                             <!-- 10만원 미만시 2500원 -->
                                                                 <label>
                                                                  <c:choose>
-                                                                 <c:when test="${empty boardList or sum < 100000}">
+                                                                 <c:when test="${empty cartList or sum < 100000}">
                                                                     <span class="amount">2500 원</span>
                                                                     <c:set var= "sum" value="${sum + 2500}"/>
                                                                     </c:when>
