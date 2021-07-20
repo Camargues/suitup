@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
 <html>
 <head>
     <meta charset="utf-8">
@@ -142,7 +141,7 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                    <li><a href="#">장바구니</a></li>
+                                    <li><a href="cart.do">장바구니</a></li>
                                     <li><a href="#">결제하기</a></li>
                                     <!-- mem_admin 쿼리값이 1일때만 노출 -->
                                     <li class="drop"><a href="#">관리자 메뉴</a>
@@ -177,7 +176,7 @@
                                                 <li><a href="#">모자</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">장바구니</a></li>
+                                        <li><a href="cart.do">장바구니</a></li>
                                         <li><a href="#">결제하기</a></li>
                                     </ul>
                                 </nav>
@@ -1020,12 +1019,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <ul class="social__icon">
-                                    <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
-                                </ul>
                             </div>
                         </div>
                         <!-- End Single Footer Widget -->
@@ -1056,9 +1049,9 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="index.jsp">홈</a></li>
-                                    <li><a href="shop.html">인기상품</a></li>
-                                    <li><a href="contact.html">장바구니</a></li>
+                                    <li><a href="#">홈</a></li>
+                                    <li><a href="#">인기상품</a></li>
+                                    <li><a href="cart.do">장바구니</a></li>
                                 </ul>
                             </div>
                         </div>
