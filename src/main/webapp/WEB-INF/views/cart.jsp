@@ -188,7 +188,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li><a href="login-register.html"><span class="ti-user"></span></a></li>
+                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -257,6 +257,8 @@
                                             <th class="product-thumbnail">상품이미지</th>
                                             <th class="product-name">상품명</th>
                                             <th class="product-price">가격</th>
+                                            <th class="product-size">사이즈</th>
+                                            <th class="product-color">색상</th>
                                             <th class="product-quantity">수량</th>
                                             <th class="product-subtotal">합계</th>
                                             <th class="product-remove">상품삭제</th>
@@ -266,16 +268,20 @@
                                     <!-- 장바구니 합계 구할 sum 함수 선언 -->
                                     <c:set var = "sum" value = "0" />
                                     <c:if test="${not empty cartList }">
+                                   
                                     <c:forEach items="${cartList }" var="cart">
+                                   
                                         <tr>
                                             <td class="product-thumbnail"><a href="#"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
-                                            <td class="product-name"><a href="#">${cartList.proName }</a></td>
-                                            <td class="product-price"><span class="amount">${cartList.proPice }</span></td>
-                                            <td class="product-quantity"><input type="number" value="${cartList.cartCount }" /></td>
-                                            <td class="product-subtotal">${cartList.proPrice * cartList.cartCount }</td>
-                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cartList.cartNum }">X</a></td>
+                                            <td class="product-name"><a href="#">${cart.proName }</a></td>
+                                            <td class="product-price"><span class="amount">${cart.proPrice }</span></td>
+                                            <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
+                                            <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
+                                            <td class="product-quantity"><input type="number" value="${cart.cartCount }" /></td>
+                                            <td class="product-subtotal">${cart.proPrice * cart.cartCount }</td>
+                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cart.cartNum }">X</a></td>
                                         </tr>
-                                        <c:set var= "sum" value="${sum + (cartList.proPrice * cartList.cartCount)}"/>
+                                        <c:set var= "sum" value="${sum + (cart.proPrice * cart.cartCount)}"/>
                                         </c:forEach>
                                         </c:if>
                                     </tbody>
@@ -294,7 +300,7 @@
                                             <tbody>
                                                 <tr class="cart-subtotal">
                                                     <th>합계</th>
-                                                    <td><span class="amount">0 원</span></td>
+                                                    <td><span class="amount">${sum } 원</span></td>
                                                 </tr>
                                                 <tr class="shipping">
                                                     <th>배송비</th>
@@ -331,7 +337,7 @@
                                             </tbody>
                                         </table>
                                         <div class="wc-proceed-to-checkout">
-                                            <a href="checkout.html">결제하기</a>
+                                            <a href="checkout.do">결제하기</a>
                                         </div>
                                     </div>
                                 </div>

@@ -187,7 +187,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li><a href="login-register.html"><span class="ti-user"></span></a></li>
+                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -228,11 +228,11 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Checkout</h2>
+                                <h2 class="bradcaump-title">결제하기</h2>
                                 <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.html">Home</a>
+                                  <a class="breadcrumb-item" href="index.jsp">홈</a>
                                   <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">Checkout</span>
+                                  <span class="breadcrumb-item active">결제하기</span>
                                 </nav>
                             </div>
                         </div>
@@ -247,7 +247,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <form action="#">               
+                        <form action="insertOrder.do" method="post">  
+                                    
                             <div class="table-content table-responsive">
                                 <table>
                                     <thead>
@@ -255,31 +256,37 @@
                                             <th class="product-thumbnail">상품이미지</th>
                                             <th class="product-name">상품명</th>
                                             <th class="product-price">가격</th>
+                                            <th class="product-size">사이즈</th>
+                                            <th class="product-color">색상</th>
                                             <th class="product-quantity">수량</th>
                                             <th class="product-subtotal">합계</th>
-                                            <th class="product-remove">상품삭제</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <!-- 장바구니 합계 구할 sum 함수 선언 -->
                                     <c:set var = "sum" value = "0" />
                                     <c:if test="${not empty cartList }">
+                                   <c:set var= "i" value = "0"/>
                                     <c:forEach items="${cartList }" var="cart">
+                                   
                                         <tr>
-                                            <td class="product-thumbnail"><a href="${cartList.pro_num }"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
-                                            <td class="product-name"><a href="#">${cartList.pro_name }</a></td>
-                                            <td class="product-price"><span class="amount">${cartList.pro_price }</span></td>
-                                            <td class="product-quantity"><input type="number" value="${cartList.cart_count }" /></td>
-                                            <td class="product-subtotal">${cartList.pro_price * cartList.cart_count }</td>
-                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cartList.cart_num }">X</a></td>
+                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
+                                            <td class="product-name"><a href="#">${cart.proName }</a></td>
+                                            <td class="product-price"><span class="amount">${cart.proPrice }</span></td>
+                                            <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
+                                            <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
+                                            <td class="product-quantity"><input type="number" value="${cart.cartCount }" readonly/></td>
+                                            <td class="product-subtotal">${cart.proPrice * cart.cartCount }</td>
                                         </tr>
-                                        <c:set var= "sum" value="${sum + (cartList.pro_price * cartList.cart_count)}"/>
+                                                          
+                                        
+                                        <c:set var= "sum" value="${sum + (cart.proPrice * cart.cartCount)}"/>
                                         </c:forEach>
                                         </c:if>
                                     </tbody>
                                 </table>
                             </div>
-                        </form> 
+                        
                     </div>
                 </div>
             </div>
@@ -294,23 +301,23 @@
                             <!-- Start Checkbox Area -->
                             <div class="checkout-form">
                                 <h2 class="section-title-3">주문 / 결제</h2>
-                                <form action="#" method="get">
+                                
                                 <div class="checkout-form-inner">
                                     <div class="single-checkout-box">
                                     <label>수령인</label>
-                                        <input type="text" placeholder="홍길동*" name="orderReceiver">
+                                        <input type="text" placeholder="홍길동*" name="receiver">
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>연락처</label>
-                                        <input type="text" placeholder="010-0000-0000*" name="orderPhone">
+                                        <input type="text" placeholder="010-0000-0000*" name="phone">
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>배송지</label>
-                                        <input type="text" placeholder="서울시 금천구*" name="orderAddress">
+                                        <input type="text" placeholder="서울시 금천구*" name="address">
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>배송 요청사항</label>
-                                        <textarea placeholder="요청사항을 입력해주세요*" name="orderMemo"></textarea>
+                                        <textarea placeholder="요청사항을 입력해주세요*" name="memo"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -391,6 +398,7 @@
                                                 </tr>
                                                 <tr>
                                                 <td>
+                                                
                                                 <!-- Start Payment Way -->
                                 <div class="checkout-btn">
                                     <input type="submit" value="주문하기"/>

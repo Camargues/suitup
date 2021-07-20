@@ -2,13 +2,21 @@ package com.suitup.domain;
 
 public class SuitUpCartVO {
 	
+	// 상품번호
 	private int proNum;
+	// 상품명
 	private String proName;
+	// 회원 아이디
 	private String memId;
+	// 상품 사이즈
 	private String dtproSize;
+	// 상품 컬러
 	private String dtproColor;
+	// 상품 수량
 	private int cartCount;
+	// 상품 가격
 	private int proPrice;
+	// 장바구니 번호
 	private int cartNum;
 	
 	public int getProNum() {

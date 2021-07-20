@@ -7,4 +7,17 @@
 	<select id="getCartList" resultType="SuitUpCartVO" parameterType="SuitUpCartVO">
 		SELECT * FROM SU_CART WHERE MEM_ID = #{memId}
 	</select>
+	
+	<insert id="insertOrder" parameterType="SuitUpOrderVO">
+	
+		INSERT INTO SU_ORDER VALUES(
+		SU_ORDER_NUM_SEQ.NEXTVAL, #{memId}, ${proNum}, #{dtproSize},#{dtproColor},${orderCount},'주문완료',SYSDATE,
+		#{orderAddress}, #{orderReceiver}, #{orderPhone}, #{orderMemo}, ${proPrice}
+		)
+
+	</insert>
+	
+	<delete id="deleteCartList" parameterType="SuitUpCartVO">
+		DELETE FROM SU_CART WHERE MEM_ID = #{memId}
+	</delete>
 </mapper>
