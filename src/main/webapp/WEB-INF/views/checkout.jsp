@@ -397,11 +397,11 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                <td>
+                                                <td align="right" colspan="2">
                                                 
                                                 <!-- Start Payment Way -->
-                                <div class="checkout-btn">
-                                    <input type="submit" value="주문하기"/>
+                                <div align="right">
+                                    <input TYPE="image" src="resources/images/icons/checkout.png" name="Submit" value="Submit"  align="absmiddle"/>
                                 </div>    
                                 </form>
                                 
