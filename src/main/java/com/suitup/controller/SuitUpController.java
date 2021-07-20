@@ -11,4 +11,9 @@ public class SuitUpController {
 	public String viewPage(@PathVariable String url) {
 		return url;
 	}
+	
+	@RequestMapping("cart.do")
+	public void cart() {
+		
+	}
 }

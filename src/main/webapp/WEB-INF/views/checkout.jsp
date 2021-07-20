@@ -486,7 +486,7 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="#">홈</a></li>
+                                    <li><a href="index.jsp">홈</a></li>
                                     <li><a href="#">인기상품</a></li>
                                     <li><a href="cart.do">장바구니</a></li>
                                 </ul>

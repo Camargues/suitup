@@ -142,8 +142,8 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                    <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="#">결제하러 가기</a></li>
+                                      <li><a href="cart.do">장바구니</a></li>
+                                    <li><a href="checkout.do">결제하기</a></li>
                                     <!-- mem_admin 쿼리값이 1일때만 노출 -->
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -412,7 +412,7 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="#">홈</a></li>
+                                    <li><a href="index.jsp">홈</a></li>
                                     <li><a href="#">인기상품</a></li>
                                     <li><a href="cart.do">장바구니</a></li>
                                 </ul>
