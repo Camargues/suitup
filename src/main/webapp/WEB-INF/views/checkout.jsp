@@ -279,14 +279,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row">
-                                <div class="col-md-8 col-sm-7 col-xs-12">
-                                    <div class="buttons-cart">
-                                        <a href="#">쇼핑 계속하기</a>
-                                    </div>
-                                </div>
-                                
-                            </div>
                         </form> 
                     </div>
                 </div>
@@ -306,31 +298,20 @@
                                 <div class="checkout-form-inner">
                                     <div class="single-checkout-box">
                                     <label>수령인</label>
-                                        <input type="text" placeholder="홍길동*" >
+                                        <input type="text" placeholder="홍길동*" name="orderReceiver">
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>연락처</label>
-                                        <input type="text" placeholder="010-0000-0000*">
+                                        <input type="text" placeholder="010-0000-0000*" name="orderPhone">
+                                    </div>
+                                    <div class="single-checkout-box">
+                                    <label>배송지</label>
+                                        <input type="text" placeholder="서울시 금천구*" name="orderAddress">
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>배송 요청사항</label>
-                                        <textarea name="message" placeholder="Message*"></textarea>
+                                        <textarea placeholder="Message*" name="orderMemo"></textarea>
                                     </div>
-                                    <div class="single-checkout-box select-option mt--40">
-                                        <select>
-                                            <option>Country*</option>
-                                            <option>Bangladesh</option>
-                                            <option>Bangladesh</option>
-                                            <option>Bangladesh</option>
-                                            <option>Bangladesh</option>
-                                        </select>
-                                        <input type="text" placeholder="Company Name*">
-                                    </div>
-                                    <div class="single-checkout-box">
-                                        <input type="email" placeholder="State*">
-                                        <input type="text" placeholder="Zip Code*">
-                                    </div>
-
                                 </div>
                             </div>
                             <!-- End Checkbox Area -->
@@ -360,10 +341,12 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <!-- End Payment Box -->
 
                         </div>
                     </div>
+                    
                     <div class="col-md-4 col-lg-4">
                         <div class="checkout-right-sidebar">
                                     <div class="cart_totals">
@@ -413,6 +396,7 @@
                                     <input type="submit" value="주문하기"/>
                                 </div>    
                                 </form>
+                                
                             <!-- End Payment Way -->  
                             </td>
                             </tr>              
@@ -430,7 +414,7 @@
                     </div>
                    
                 </div>
-                                                                               
+            </section>                                                                   
         <!-- End Checkout Area -->
        <footer class="htc__foooter__area gray-bg">
             <div class="container">
