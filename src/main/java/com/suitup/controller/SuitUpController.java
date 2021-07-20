@@ -14,10 +14,10 @@ public class SuitUpController {
 	@Autowired
 	private SuitUpService suitupService;
 
-//	@RequestMapping("/{url}.do")
-//	public String viewPage(@PathVariable String url) {
-//		return url;
-//	}
+	@RequestMapping("/{url}.do")
+	public String viewPage(@PathVariable String url) {
+		return url;
+	}
 	
 	// 장바구니 진입시
 	@RequestMapping("cart.do")
