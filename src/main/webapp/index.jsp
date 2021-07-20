@@ -142,7 +142,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="#">결제하기</a></li>
+                                    <li><a href="checkout.do">결제하기</a></li>
                                     <!-- mem_admin 쿼리값이 1일때만 노출 -->
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -177,7 +177,7 @@
                                             </ul>
                                         </li>
                                         <li><a href="cart.do">장바구니</a></li>
-                                        <li><a href="#">결제하기</a></li>
+                                        <li><a href="checkout.do">결제하기</a></li>
                                     </ul>
                                 </nav>
                             </div>                          

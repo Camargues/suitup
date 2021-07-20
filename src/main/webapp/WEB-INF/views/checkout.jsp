@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!doctype html>
-<html>
+<html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>장바구니 | Suit up</title>
+    <title>주문서 작성 | Suit Up</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -34,7 +34,7 @@
 
 
     <!-- Modernizr JS -->
-    <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
 
-    <!-- Body main wrapper start -->
+        <!-- Body main wrapper start -->
     <div class="wrapper fixed__footer">
         <!-- Start Header Style -->
         <header id="header" class="htc-header header--3 bg__white">
@@ -143,7 +143,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="#">결제하러 가기</a></li>
+                                    <li><a href="checkout.do">결제하기</a></li>
                                     <!-- mem_admin 쿼리값이 1일때만 노출 -->
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -178,7 +178,7 @@
                                             </ul>
                                         </li>
                                         <li><a href="cart.do">장바구니</a></li>
-                                        <li><a href="#">결제하기</a></li>
+                                        <li><a href="checkout.do">결제하기</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -221,8 +221,6 @@
                 </div>
             </div>
             <!-- End Search Popap -->
-		</div>
-        <!-- End Offset Wrapper -->
         <!-- Start Bradcaump area -->
         <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/2.jpg) no-repeat scroll center center / cover ;">
             <div class="ht__bradcaump__wrap">
@@ -230,11 +228,11 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">장바구니</h2>
+                                <h2 class="bradcaump-title">Checkout</h2>
                                 <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.jsp">홈</a>
+                                  <a class="breadcrumb-item" href="index.html">Home</a>
                                   <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">장바구니</span>
+                                  <span class="breadcrumb-item active">Checkout</span>
                                 </nav>
                             </div>
                         </div>
@@ -242,6 +240,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <!-- End Bradcaump area -->
         <!-- cart-main-area start -->
         <div class="cart-main-area ptb--120 bg__white">
@@ -286,7 +285,87 @@
                                         <a href="#">쇼핑 계속하기</a>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-5 col-xs-12">
+                                
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- cart-main-area end -->
+        <!-- Start Checkout Area -->
+        <section class="our-checkout-area ptb--120 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-lg-8">
+                        <div class="ckeckout-left-sidebar">
+                            <!-- Start Checkbox Area -->
+                            <div class="checkout-form">
+                                <h2 class="section-title-3">주문 / 결제</h2>
+                                <form action="#" method="get">
+                                <div class="checkout-form-inner">
+                                    <div class="single-checkout-box">
+                                    <label>수령인</label>
+                                        <input type="text" placeholder="홍길동*" >
+                                    </div>
+                                    <div class="single-checkout-box">
+                                    <label>연락처</label>
+                                        <input type="text" placeholder="010-0000-0000*">
+                                    </div>
+                                    <div class="single-checkout-box">
+                                    <label>배송 요청사항</label>
+                                        <textarea name="message" placeholder="Message*"></textarea>
+                                    </div>
+                                    <div class="single-checkout-box select-option mt--40">
+                                        <select>
+                                            <option>Country*</option>
+                                            <option>Bangladesh</option>
+                                            <option>Bangladesh</option>
+                                            <option>Bangladesh</option>
+                                            <option>Bangladesh</option>
+                                        </select>
+                                        <input type="text" placeholder="Company Name*">
+                                    </div>
+                                    <div class="single-checkout-box">
+                                        <input type="email" placeholder="State*">
+                                        <input type="text" placeholder="Zip Code*">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End Checkbox Area -->
+                            <!-- Start Payment Box -->
+                            <div class="payment-form">
+                                <h2 class="section-title-3">결제 정보 입력</h2>
+                                <p>구현하지 않은 부분입니다</p>
+                                <div class="payment-form-inner">
+                                <label>카드 번호</label><p/>
+                                    <div class="single-checkout-box">
+                                        
+                                        <input type="text" placeholder="xxxx-xxxx-xxxx-xxxx*">
+                                    </div>
+                                    <div class="single-checkout-box select-option">
+                                    <label>카드 유효기간</label>
+                                    <p/>
+                                        <select>
+                                            <option>MM/YY*</option>
+                                            <option>MM/YY</option>
+                                            <option>MM/YY</option>
+                                            <option>MM/YY</option>
+                                            <option>MM/YY</option>
+                                        </select>
+                                        <p/>
+                                        <label>CVC번호</label><p/>
+                                        <input type="text" placeholder="카드 뒷면 숫자 3자리*">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Payment Box -->
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="checkout-right-sidebar">
                                     <div class="cart_totals">
                                         <h2>장바구니 합계</h2>
                                         <table>
@@ -326,23 +405,34 @@
                                                     </c:if>
                                                         <strong><span class="amount">${sum }&nbsp;원</span></strong>
                                                     </td>
-                                                </tr>                                           
+                                                </tr>
+                                                <tr>
+                                                <td>
+                                                <!-- Start Payment Way -->
+                                <div class="checkout-btn">
+                                    <input type="submit" value="주문하기"/>
+                                </div>    
+                                </form>
+                            <!-- End Payment Way -->  
+                            </td>
+                            </tr>              
+                                                
+                        
                                             </tbody>
                                         </table>
-                                        <div class="wc-proceed-to-checkout">
-                                            <a href="checkout.html">결제하기</a>
-                                        </div>
+
                                     </div>
+                                   
                                 </div>
-                            </div>
-                        </form> 
+                               
+                        </div>
+                        
                     </div>
+                   
                 </div>
-            </div>
-        </div>
-        <!-- cart-main-area end -->
-         <!-- Start Footer Area -->
-        <footer class="htc__foooter__area gray-bg">
+                                                                               
+        <!-- End Checkout Area -->
+       <footer class="htc__foooter__area gray-bg">
             <div class="container">
                 <div class="row">
                     <div class="footer__container clearfix">
@@ -426,6 +516,7 @@
         <!-- End Footer Area -->
     </div>
     <!-- Body main wrapper end -->
+    
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!-- jquery latest version -->
