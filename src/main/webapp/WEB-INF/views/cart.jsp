@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!doctype html>
 <html>
 <head>
@@ -223,17 +224,17 @@
 		</div>
         <!-- End Offset Wrapper -->
         <!-- Start Bradcaump area -->
-        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/2.jpg) no-repeat scroll center center / cover ;">
             <div class="ht__bradcaump__wrap">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Cart</h2>
+                                <h2 class="bradcaump-title">장바구니</h2>
                                 <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.html">Home</a>
+                                  <a class="breadcrumb-item" href="index.jsp">홈</a>
                                   <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">Cart</span>
+                                  <span class="breadcrumb-item active">장바구니</span>
                                 </nav>
                             </div>
                         </div>
@@ -252,87 +253,84 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="product-thumbnail">Image</th>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-subtotal">Total</th>
-                                            <th class="product-remove">Remove</th>
+                                            <th class="product-thumbnail">상품이미지</th>
+                                            <th class="product-name">상품명</th>
+                                            <th class="product-price">가격</th>
+                                            <th class="product-quantity">수량</th>
+                                            <th class="product-subtotal">합계</th>
+                                            <th class="product-remove">상품삭제</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <!-- 장바구니 합계 구할 sum 함수 선언 -->
+                                    <c:set var = "sum" value = "0" />
+                                    <c:if test="${not empty cartList }">
+                                    <c:forEach items="${cartList }" var="cart">
                                         <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/product/4.png" alt="product img" /></a></td>
-                                            <td class="product-name"><a href="#">Vestibulum suscipit</a></td>
-                                            <td class="product-price"><span class="amount">£165.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1" /></td>
-                                            <td class="product-subtotal">£165.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
+                                            <td class="product-thumbnail"><a href="${cartList.pro_num }"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
+                                            <td class="product-name"><a href="#">${cartList.pro_name }</a></td>
+                                            <td class="product-price"><span class="amount">${cartList.pro_price }</span></td>
+                                            <td class="product-quantity"><input type="number" value="${cartList.cart_count }" /></td>
+                                            <td class="product-subtotal">${cartList.pro_price * cartList.cart_count }</td>
+                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cartList.cart_num }">X</a></td>
                                         </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/product/3.png" alt="product img" /></a></td>
-                                            <td class="product-name"><a href="#">Vestibulum dictum magna</a></td>
-                                            <td class="product-price"><span class="amount">£50.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1" /></td>
-                                            <td class="product-subtotal">£50.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
-                                        </tr>
+                                        <c:set var= "sum" value="${sum + (cartList.pro_price * cartList.cart_count)}"/>
+                                        </c:forEach>
+                                        </c:if>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="row">
                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                     <div class="buttons-cart">
-                                        <input type="submit" value="Update Cart" />
-                                        <a href="#">Continue Shopping</a>
-                                    </div>
-                                    <div class="coupon">
-                                        <h3>Coupon</h3>
-                                        <p>Enter your coupon code if you have one.</p>
-                                        <input type="text" placeholder="Coupon code" />
-                                        <input type="submit" value="Apply Coupon" />
+                                        <a href="#">쇼핑 계속하기</a>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                     <div class="cart_totals">
-                                        <h2>Cart Totals</h2>
+                                        <h2>장바구니 합계</h2>
                                         <table>
                                             <tbody>
                                                 <tr class="cart-subtotal">
-                                                    <th>Subtotal</th>
-                                                    <td><span class="amount">£215.00</span></td>
+                                                    <th>합계</th>
+                                                    <td><span class="amount">0 원</span></td>
                                                 </tr>
                                                 <tr class="shipping">
-                                                    <th>Shipping</th>
+                                                    <th>배송비</th>
                                                     <td>
                                                         <ul id="shipping_method">
                                                             <li>
-                                                                <input type="radio" /> 
+                                                            <!-- 10만원 미만시 2500원 -->
                                                                 <label>
-                                                                    Flat Rate: <span class="amount">£7.00</span>
+                                                                 <c:choose>
+                                                                 <c:when test="${empty boardList or sum < 100000}">
+                                                                    <span class="amount">2500 원</span>
+                                                                    <c:set var= "sum" value="${sum + 2500}"/>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                    <span class="amount">무료</span>
+                                                                    </c:otherwise>
+                                                                    </c:choose>
                                                                 </label>
                                                             </li>
                                                             <li>
-                                                                <input type="radio" /> 
-                                                                <label>
-                                                                    Free Shipping
-                                                                </label>
-                                                            </li>
-                                                            <li></li>
                                                         </ul>
-                                                        <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
+                                                        <p class="shipping-calculator-button">10만원 이상 구매시 배송비 무료</p>
                                                     </td>
                                                 </tr>
                                                 <tr class="order-total">
-                                                    <th>Total</th>
+                                                    <th>합계</th>
                                                     <td>
-                                                        <strong><span class="amount">£215.00</span></strong>
+                                                    <c:if test="${sum <= 2500}">
+                                                    <c:set var="sum" value="0"/>
+                                                    </c:if>
+                                                        <strong><span class="amount">${sum }&nbsp;원</span></strong>
                                                     </td>
                                                 </tr>                                           
                                             </tbody>
                                         </table>
                                         <div class="wc-proceed-to-checkout">
-                                            <a href="checkout.html">Proceed to Checkout</a>
+                                            <a href="checkout.html">결제하기</a>
                                         </div>
                                     </div>
                                 </div>
@@ -343,7 +341,7 @@
             </div>
         </div>
         <!-- cart-main-area end -->
-        <!-- Start Footer Area -->
+         <!-- Start Footer Area -->
         <footer class="htc__foooter__area gray-bg">
             <div class="container">
                 <div class="row">
@@ -352,7 +350,7 @@
                         <div class="col-md-3 col-lg-3 col-sm-6">
                             <div class="ft__widget">
                                 <div class="ft__logo">
-                                    <a href="index.html">
+                                    <a href="index.jsp">
                                         <img src="resources/images/logo/logo.png" alt="footer logo">
                                     </a>
                                 </div>
@@ -363,7 +361,7 @@
                                                 <i class="zmdi zmdi-pin"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>194 Main Rd T, FS Rayed <br> VIC 3057, USA</p>
+                                                <p>서울 금천구</p>
                                             </div>
                                         </li>
                                         <li>
@@ -379,73 +377,29 @@
                                                 <i class="zmdi zmdi-phone-in-talk"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>+012 345 678 102 </p>
+                                                <p>02-2025-8523</p>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
-                                <ul class="social__icon">
-                                    <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
-                                </ul>
                             </div>
                         </div>
                         <!-- End Single Footer Widget -->
+ 
                         <!-- Start Single Footer Widget -->
-                        <div class="col-md-3 col-lg-2 col-sm-6 smt-30 xmt-30">
+                      <div class="col-md-3 col-lg-2 col-sm-6 smt-30 xmt-30" >
                             <div class="ft__widget">
-                                <h2 class="ft__title">Categories</h2>
+                                <h2 class="ft__title">카테고리</h2>
                                 <ul class="footer-categories">
-                                    <li><a href="shop-sidebar.html">Men</a></li>
-                                    <li><a href="shop-sidebar.html">Women</a></li>
-                                    <li><a href="shop-sidebar.html">Accessories</a></li>
-                                    <li><a href="shop-sidebar.html">Shoes</a></li>
-                                    <li><a href="shop-sidebar.html">Dress</a></li>
-                                    <li><a href="shop-sidebar.html">Denim</a></li>
+                                    <li><a href="#">인기상품</a></li>
+                                    <li><a href="#">아우터</a></li>
+                                    <li><a href="#">상의</a></li>
+                                    <li><a href="#">하의</a></li>
+                                    <li><a href="#">신발</a></li>
+                                    <li><a href="#">모자</a></li>
                                 </ul>
                             </div>
-                        </div>
-                        <!-- Start Single Footer Widget -->
-                        <div class="col-md-3 col-lg-2 col-sm-6 smt-30 xmt-30">
-                            <div class="ft__widget">
-                                <h2 class="ft__title">Infomation</h2>
-                                <ul class="footer-categories">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Returns & Exchanges</a></li>
-                                    <li><a href="#">Shipping & Delivery</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Start Single Footer Widget -->
-                        <div class="col-md-3 col-lg-3 col-lg-offset-1 col-sm-6 smt-30 xmt-30">
-                            <div class="ft__widget">
-                                <h2 class="ft__title">Newsletter</h2>
-                                <div class="newsletter__form">
-                                    <p>Subscribe to our newsletter and get 10% off your first purchase .</p>
-                                    <div class="input__box">
-                                        <div id="mc_embed_signup">
-                                            <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                                                <div id="mc_embed_signup_scroll" class="htc__news__inner">
-                                                    <div class="news__input">
-                                                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Email Address" required>
-                                                    </div>
-                                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                                                    <div class="clearfix subscribe__btn"><input type="submit" value="Send" name="subscribe" id="mc-embedded-subscribe" class="bst__btn btn--white__color">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>        
-                                </div>
-                            </div>
-                        </div>
+                        </div> 
                         <!-- End Single Footer Widget -->
                     </div>
                 </div>
@@ -455,13 +409,12 @@
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                             <div class="copyright__inner">
                                 <div class="copyright">
-                                    <p>© 2017 <a href="https://freethemescloud.com/">Free themes Cloud</a>
-                                    All Right Reserved.</p>
+                                    <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="shop.html">Product</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="#">홈</a></li>
+                                    <li><a href="#">인기상품</a></li>
+                                    <li><a href="cart.do">장바구니</a></li>
                                 </ul>
                             </div>
                         </div>
