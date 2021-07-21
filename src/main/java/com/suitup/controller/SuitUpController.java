@@ -75,6 +75,7 @@ public class SuitUpController {
 			ordervo.setOrderPhone(phone);
 			ordervo.setOrderMemo(memo);
 			ordervo.setProPrice(vo.getProPrice());
+			ordervo.setProName(vo.getProName());
 			
 			result = result + suitupService.insertOrder(ordervo);
 		}
@@ -91,4 +92,23 @@ public class SuitUpController {
 		
 	}
 	
+	// 장바구니 한품목 삭제
+	@RequestMapping("dropCart.do")
+	public String deleteCart(String cart_num) {
+		System.out.println(cart_num);
+		
+		suitupService.deleteCart(cart_num);
+		return "redirect:cart.do";
+	}
+	
+	// 주문내역 진입시
+		@RequestMapping("history.do")
+		public void history(Model m) {
+			SuitUpOrderVO vo = new SuitUpOrderVO();
+			// 테스트용으로 admin 계정 카트 목록 불러오기
+			// 세션값 넣는걸로 변경 예정
+			vo.setMemId("admin");
+			m.addAttribute("orderList", suitupService.getOrderList(vo));
+		}
+		
 }

@@ -12,4 +12,9 @@ public interface SuitUpDAO {
 	public int insertOrder(SuitUpOrderVO vo);
 	
 	public void deleteCartList(SuitUpCartVO vo);
+	
+	public void deleteCart(String cart_num);
+	
+	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo);
+	
 }

@@ -30,6 +30,9 @@ public class SuitUpOrderVO {
 	private String orderMemo;
 	// 상품 가격(1개기준)
 	private int proPrice;
+	// 상품명
+	private String proName;
+	
 	
 	
 	
@@ -111,6 +114,11 @@ public class SuitUpOrderVO {
 	public void setProPrice(int proPrice) {
 		this.proPrice = proPrice;
 	}
-
+	public String getProName() {
+		return proName;
+	}
+	public void setProName(String proName) {
+		this.proName = proName;
+	}
 	
 }

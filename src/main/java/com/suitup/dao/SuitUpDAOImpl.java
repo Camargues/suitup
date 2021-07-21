@@ -33,5 +33,16 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		mybatis.delete("SuitUpDAO.deleteCartList", vo);
 	}
 	
+	// 장바구니 한품목 삭제
+	public void deleteCart(String cart_num) {
+		System.out.println("===> Mybatis deleteCart() 호출");
+		mybatis.delete("SuitUpDAO.deleteCart", cart_num);
+	}
+
+	// 주문내역
+	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo) {
+		System.out.println("===> Mybatis getOrderList() 호출");
+		return mybatis.selectList("SuitUpDAO.orderList", vo);
+	}
 
 }

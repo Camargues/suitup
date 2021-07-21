@@ -447,6 +447,8 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
+    <!-- 카트 개별 삭제 ajax -->
+    <script src="resources/js/cart.js"></script>
 
 </body>
 

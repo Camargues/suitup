@@ -4,20 +4,33 @@
 <mapper namespace="SuitUpDAO">
 
 
+	<!-- 카트 리스트 불러오기 -->
 	<select id="getCartList" resultType="SuitUpCartVO" parameterType="SuitUpCartVO">
 		SELECT * FROM SU_CART WHERE MEM_ID = #{memId}
 	</select>
 	
+	<!-- 주문하기 -->
 	<insert id="insertOrder" parameterType="SuitUpOrderVO">
 	
 		INSERT INTO SU_ORDER VALUES(
 		SU_ORDER_NUM_SEQ.NEXTVAL, #{memId}, ${proNum}, #{dtproSize},#{dtproColor},${orderCount},'주문완료',SYSDATE,
-		#{orderAddress}, #{orderReceiver}, #{orderPhone}, #{orderMemo}, ${proPrice}
+		#{orderAddress}, #{orderReceiver}, #{orderPhone}, #{orderMemo}, ${proPrice}, #{proName}
 		)
 
 	</insert>
-	
+
+	<!-- 카트 전부 삭제 -->
 	<delete id="deleteCartList" parameterType="SuitUpCartVO">
 		DELETE FROM SU_CART WHERE MEM_ID = #{memId}
 	</delete>
+	
+	<!-- 카트 한품목 삭제 -->
+	<delete id="deleteCart" parameterType="String">
+		DELETE FROM SU_CART WHERE CART_NUM = #{cart_num}
+	</delete>
+	
+	<select id="orderList" parameterType="SuitUpOrderVO">
+		SELECT * FROM SU_ORDER WHERE MEM_ID = #{memId}
+	</select>
+	
 </mapper>

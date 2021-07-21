@@ -31,6 +31,16 @@ public class SuitUpServiceImpl implements SuitUpService {
 		
 	}
 
+	// 장바구니 한품목 삭제
+	public void deleteCart(String cart_num) {
+		suitupDAO.deleteCart(cart_num);		
+	}
+
+	// 주문내역 불러오기
+	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo) {
+		return suitupDAO.getOrderList(vo);
+	}
+
 
 
 }

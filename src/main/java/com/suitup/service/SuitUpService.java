@@ -14,4 +14,8 @@ public interface SuitUpService {
 	
 	void deleteCartList(SuitUpCartVO vo);
 	
+	void deleteCart(String cart_num);
+	
+	List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo);
+	
 }
