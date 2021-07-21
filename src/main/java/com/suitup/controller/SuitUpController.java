@@ -3,14 +3,19 @@ package com.suitup.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.suitup.domain.SuitUpCartVO;
+import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.service.SuitUpService;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
@@ -111,6 +116,44 @@ public class SuitUpController {
 			vo.setMemId("admin");
 			m.addAttribute("orderList", suitupService.getOrderList(vo));
 			
+		}
+		
+		// 회원가입 진입시
+		@RequestMapping("register.do") 
+		public ModelAndView register(SuitUpCustomerVO vo) {
+			int result = suitupService.userInsert(vo); 
+			
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("login-register-ok"); // 회원가입 완료 페이지로 이동
+			
+			String id= vo.getMemId();
+//			
+			mv.addObject("id",id);
+			return mv;	
+			//회원가입 완료페이지로
+		}
+		
+		// 회원가입 아이디 중복검사시 
+		@RequestMapping(value="idCheck.do", produces="application/text;charset=UTF-8")
+		@ResponseBody   //Ajax [String 으로 반환하면 페이지 이동이기 떄문에]
+		public String idCheck(SuitUpCustomerVO vo) {
+			SuitUpCustomerVO result = suitupService.userIdCheck(vo);
+			String message= "사용가능한 아이디입니다.";
+			if(result != null) message="이미 사용중인 아이디 입니다";
+			return message;
+		}
+		
+		//로그인시 ajax
+		@RequestMapping(value="login.do",  produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public String login(SuitUpCustomerVO vo, HttpSession session) {
+			SuitUpCustomerVO result = suitupService.userIdCheck(vo);
+			String message ="아이디 또는 비밀번호를 확인하세요.";
+			if(result != null) {
+				message="로그인성공";
+				session.setAttribute("SuitUpid", result.getMemId());
+			}
+			return message;
 		}
 		
 }

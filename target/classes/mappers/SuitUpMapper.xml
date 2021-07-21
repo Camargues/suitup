@@ -34,5 +34,31 @@
 		SELECT * FROM SU_ORDER WHERE MEM_ID = #{memId}
 	</select>
 	
+	<!-- 회원 가입 -->
+	<insert id="userInsert" parameterType="SuitUpCustomerVO">
+		INSERT INTO SU_MEM(MEM_ID,mem_admin,MEM_PASS,MEM_NAME,MEM_ADDR,MEM_PHONE) 
+		values(#{memId},0,#{memPass},#{memName},
+		<choose>
+			<when test="memAddr==null"> 
+				null,#{memPhone})
+			</when>
+
+			<when test="memPhone==null">
+				#{memAddr},null)
+			</when>
+			
+			<otherwise>
+				#{memAddr},#{memPhone})			
+			</otherwise>
+		</choose>
+	</insert>  
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" resultType="SuitUpCustomerVO" parameterType="SuitUpCustomerVO">
+		SELECT * FROM SU_MEM WHERE MEM_ID = #{memId} 
+		<if test="memPass != null">
+		AND MEM_PASS=#{memPass}
+		</if>
+	</select>
 	
 </mapper>

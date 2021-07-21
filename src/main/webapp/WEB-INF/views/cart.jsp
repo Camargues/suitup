@@ -279,7 +279,7 @@
                                             <td class="product-price"><span class="amount">${cart.proPrice }</span></td>
                                             <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
                                             <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
-                                            <td class="product-quantity"><input type="number" value="${cart.cartCount }" /></td>
+                                            <td class="product-quantity"><input type="number" value="${cart.cartCount }" id="${cart.cartNum }"/></td>
                                             <td class="product-subtotal">${cart.proPrice * cart.cartCount }</td>
                                             <td class="product-remove"><a href="dropCart.do?cart_num=${cart.cartNum }">X</a></td>
                                         </tr>

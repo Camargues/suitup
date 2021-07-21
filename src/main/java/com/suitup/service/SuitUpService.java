@@ -3,6 +3,7 @@ package com.suitup.service;
 import java.util.List;
 
 import com.suitup.domain.SuitUpCartVO;
+import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 
 public interface SuitUpService {
@@ -18,6 +19,10 @@ public interface SuitUpService {
 	
 	List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo);
 
-
+	// 회원가입 
+	public int userInsert(SuitUpCustomerVO vo);
+		
+		// 아이디 중복체크 
+	public SuitUpCustomerVO userIdCheck(SuitUpCustomerVO vo);
 	
 }

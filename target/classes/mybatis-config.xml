@@ -16,6 +16,8 @@
 		<typeAlias alias="SuitUpCartVO" type="com.suitup.domain.SuitUpCartVO" />
 	<!-- 주문하기 -->
 		<typeAlias alias="SuitUpOrderVO" type="com.suitup.domain.SuitUpOrderVO" />
+	<!-- 회원테이블 -->
+			<typeAlias alias="SuitUpCustomerVO" type="com.suitup.domain.SuitUpCustomerVO" />
 	</typeAliases>
 
 

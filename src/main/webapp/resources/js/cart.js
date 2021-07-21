@@ -12,4 +12,17 @@ $(function(){
 		
 	});
 	
+	$('td>input').attr('type','number').click(function(){
+		// 변경한 카트 수량의 값
+		var count = $(this).val();
+		// 변경한 카트 번호
+		var num = $(this).attr('id');
+		
+		
+//		$.ajax({
+//			url : ,
+//		})
+		
+	});
+	
 });

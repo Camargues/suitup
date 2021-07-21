@@ -31,6 +31,7 @@
 
     <!-- Modernizr JS -->
     <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-1.7.1.js"></script>
 </head>
 
 <body>
@@ -236,17 +237,18 @@
                         <div class="htc__login__register__wrap">
                             <!-- Start Single Content -->
                             <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
-                                <form class="login" method="post">
-                                    <input type="text" placeholder="User Name*">
-                                    <input type="password" placeholder="Password*">
+                                <form class="login" method="post" id="loginForm" action="login.do" >
+                                    <input type="text"  placeholder="User Name*" id="memId" name="memId">
+                                    <input type="password" placeholder="Password*" id="memPass" name="memPass">
+                                    <span id="idResult" style="width:150px;color:red"></span>
                                 </form>
                                 <div class="tabs__checkbox">
                                     <input type="checkbox">
                                     <span> 로그인 상태 유지</span>
-                                    <span class="forget"><a href="#">비밀번호 찾기?</a></span>
+                                    <span class="forget"><a href="#">비밀번호 찾기</a></span>
                                 </div>
                                 <div class="htc__login__btn mt--30">
-                                    <a href="#">Login</a>
+                                    <a href="#" onclick="id_check();">Login</a>
                                 </div>
                                 <div class="htc__social__connect">
                                     <h2>Or Login With</h2>
@@ -264,18 +266,19 @@
                             <!-- End Single Content -->
                             <!-- Start Single Content -->
                             <div id="register" role="tabpanel" class="single__tabs__panel tab-pane fade">
-                                <form class="login" method="post">
-                                    <input type="text" placeholder="아이디*" id="regiId">
-                                    <input type="password" placeholder="비밀번호*" id="regiPassWord">
-                                    <input type="password" placeholder="비밀번호 재확인*" id="regiConfirmPassWord">
-                                    <input type="text" placeholder="이름*" id="regiName">
-                                    <input type="text" placeholder="주민등록번호*" id="regiSocial">
-                                    <input type="text" placeholder="주소" id="regiAddr">
-                                    <input type="text" placeholder="휴대전화" id="regiPhone">
-                                </form>
+                                <form class="login" method="post" id="registerForm" action="register.do">
+                                    <input type="text" placeholder="아이디*" id="regiMemId" name="memId">
+                                    <span id="idCheckResult" style="width:150px;color:red"></span>
+                                    <input type="hidden"/>
+                                    <input type="password" placeholder="비밀번호*" id="regiMemPass" name="memPass">
+                                    <input type="password" placeholder="비밀번호 재확인*" id="regiMemPassConfirm">
+                                    <input type="text" placeholder="이름*" id="regiMemName" name="memName">
+                                    <input type="text" placeholder="주소" id="regiMemAddr" name="memAddr">
+                                    <input type="text" placeholder="휴대폰 번호" id="regiMemPhone" name="memPhone">
                                 <div class="htc__login__btn">
-                                    <a href="#" id="reisterBtn" onclick="register_check();">register</a>
+                                    <a href='#'  onclick="register_check();">register</a>
                                 </div>
+                                </form>
                              
                             </div>
                             <!-- End Single Content -->
@@ -385,7 +388,7 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
-    <script src="resources/js/registerCheck.js"></script>
+    <script src="resources/js/loginRegister.js"></script>
 
 </body>
 

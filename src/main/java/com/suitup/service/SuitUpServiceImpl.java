@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.suitup.dao.SuitUpDAO;
 import com.suitup.domain.SuitUpCartVO;
+import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 @Service("suitupService")
 public class SuitUpServiceImpl implements SuitUpService {
@@ -40,8 +41,14 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo) {
 		return suitupDAO.getOrderList(vo);
 	}
-	
-
+	// 회원가입
+	public int userInsert(SuitUpCustomerVO vo) {
+		return suitupDAO.memberInsert(vo);
+	}
+	// 아이디 중복 체크
+	public SuitUpCustomerVO userIdCheck(SuitUpCustomerVO vo) {
+		return suitupDAO.idCheck(vo);
+	}
 
 
 
