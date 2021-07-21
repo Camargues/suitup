@@ -143,7 +143,8 @@
                                         </ul>
                                     </li>
                                     <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="checkout.do">결제하기</a></li>
+                                        <li><a href="checkout.do">결제하기</a></li>
+                                        <li><a href="history.do">주문내역</a></li>
                                     <!-- mem_admin 쿼리값이 1일때만 노출 -->
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -179,6 +180,7 @@
                                         </li>
                                         <li><a href="cart.do">장바구니</a></li>
                                         <li><a href="checkout.do">결제하기</a></li>
+                                        <li><a href="history.do">주문내역</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -362,7 +364,7 @@
                                             <tbody>
                                                 <tr class="cart-subtotal">
                                                     <th>합계</th>
-                                                    <td><span class="amount">0 원</span></td>
+                                                    <td><span class="amount">${sum } 원</span></td>
                                                 </tr>
                                                 <tr class="shipping">
                                                     <th>배송비</th>
@@ -372,7 +374,7 @@
                                                             <!-- 10만원 미만시 2500원 -->
                                                                 <label>
                                                                  <c:choose>
-                                                                 <c:when test="${empty boardList or sum < 100000}">
+                                                                 <c:when test="${empty cartList or sum < 100000}">
                                                                     <span class="amount">2500 원</span>
                                                                     <c:set var= "sum" value="${sum + 2500}"/>
                                                                     </c:when>

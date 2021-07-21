@@ -16,5 +16,6 @@ public interface SuitUpDAO {
 	public void deleteCart(String cart_num);
 	
 	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo);
+
 	
 }

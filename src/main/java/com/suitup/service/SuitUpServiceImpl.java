@@ -40,6 +40,8 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo) {
 		return suitupDAO.getOrderList(vo);
 	}
+	
+
 
 
 

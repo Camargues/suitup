@@ -29,8 +29,10 @@
 		DELETE FROM SU_CART WHERE CART_NUM = #{cart_num}
 	</delete>
 	
-	<select id="orderList" parameterType="SuitUpOrderVO">
+	<!-- 주문 목록 불러오기 -->
+	<select id="orderList" parameterType="SuitUpOrderVO" resultType="SuitUpOrderVO">
 		SELECT * FROM SU_ORDER WHERE MEM_ID = #{memId}
 	</select>
+	
 	
 </mapper>

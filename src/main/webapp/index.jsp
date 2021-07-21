@@ -179,6 +179,7 @@
                                         </li>
                                         <li><a href="cart.do">장바구니</a></li>
                                         <li><a href="checkout.do">결제하기</a></li>
+                                        <li><a href="history.do">주문내역</a></li>
                                     </ul>
                                 </nav>
                             </div>                          

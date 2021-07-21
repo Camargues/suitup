@@ -98,6 +98,7 @@ public class SuitUpController {
 		System.out.println(cart_num);
 		
 		suitupService.deleteCart(cart_num);
+
 		return "redirect:cart.do";
 	}
 	
@@ -109,6 +110,7 @@ public class SuitUpController {
 			// 세션값 넣는걸로 변경 예정
 			vo.setMemId("admin");
 			m.addAttribute("orderList", suitupService.getOrderList(vo));
+			
 		}
 		
 }

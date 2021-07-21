@@ -44,5 +44,7 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("===> Mybatis getOrderList() 호출");
 		return mybatis.selectList("SuitUpDAO.orderList", vo);
 	}
+	
+
 
 }
