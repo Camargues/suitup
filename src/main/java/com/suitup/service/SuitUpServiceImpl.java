@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.suitup.dao.SuitUpDAO;
 import com.suitup.domain.SuitUpCartVO;
+import com.suitup.domain.SuitUpCategoryVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 @Service("suitupService")
@@ -48,6 +49,11 @@ public class SuitUpServiceImpl implements SuitUpService {
 	// 아이디 중복 체크
 	public SuitUpCustomerVO userIdCheck(SuitUpCustomerVO vo) {
 		return suitupDAO.idCheck(vo);
+	}
+
+	// 카테고리 목록 불러오기
+	public List<SuitUpCategoryVO> getCategoryList() {
+		return suitupDAO.getCategoryList();
 	}
 
 

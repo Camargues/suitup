@@ -28,7 +28,9 @@ public class SuitUpController {
 	
 	
 	@RequestMapping("/{url}.do")
-	public String viewPage(@PathVariable String url) {
+	public String viewPage(@PathVariable String url, Model m) {
+		// 카테고리 불러오기 위해 모든 페이지에 이 태그 넣기
+		m.addAttribute("categoryList", suitupService.getCategoryList());
 		return url;
 	}
 	
@@ -40,6 +42,7 @@ public class SuitUpController {
 		// 세션값 넣는걸로 변경 예정
 		vo.setMemId("admin");
 		m.addAttribute("cartList", suitupService.getCartList(vo));
+		m.addAttribute("categoryList", suitupService.getCategoryList());
 	}
 	
 	// 주문하러 가기
@@ -50,11 +53,12 @@ public class SuitUpController {
 		// 세션값 넣는걸로 변경 예정
 		vo.setMemId("admin");
 		m.addAttribute("cartList", suitupService.getCartList(vo));
+		m.addAttribute("categoryList", suitupService.getCategoryList());
 	}
 	
 	// 주문하기
 	@RequestMapping("insertOrder.do")
-	public String insertOrder(String receiver, String phone, String address, String memo) {
+	public String insertOrder(String receiver, String phone, String address, String memo, Model m) {
 		
 		// 몇건 주문 들어가는지 받아올 result 변수 선언
 		int result = 0;
@@ -87,7 +91,7 @@ public class SuitUpController {
 		
 		// 주문 완료 후 장바구니 비우기
 		suitupService.deleteCartList(cartvo);
-		
+		m.addAttribute("categoryList", suitupService.getCategoryList());
 		// 주문 성공시
 		if(result > 0)
 		// 주문내역 페이지 만들면 주문내역 페이지로 넘어감
@@ -99,11 +103,11 @@ public class SuitUpController {
 	
 	// 장바구니 한품목 삭제
 	@RequestMapping("dropCart.do")
-	public String deleteCart(String cart_num) {
+	public String deleteCart(String cart_num, Model m) {
 		System.out.println(cart_num);
 		
 		suitupService.deleteCart(cart_num);
-
+		m.addAttribute("categoryList", suitupService.getCategoryList());
 		return "redirect:cart.do";
 	}
 	
@@ -115,12 +119,12 @@ public class SuitUpController {
 			// 세션값 넣는걸로 변경 예정
 			vo.setMemId("admin");
 			m.addAttribute("orderList", suitupService.getOrderList(vo));
-			
+			m.addAttribute("categoryList", suitupService.getCategoryList());
 		}
 		
 		// 회원가입 진입시
 		@RequestMapping("register.do") 
-		public ModelAndView register(SuitUpCustomerVO vo) {
+		public ModelAndView register(SuitUpCustomerVO vo, Model m) {
 			int result = suitupService.userInsert(vo); 
 			
 			ModelAndView mv = new ModelAndView();
@@ -129,6 +133,7 @@ public class SuitUpController {
 			String id= vo.getMemId();
 //			
 			mv.addObject("id",id);
+			m.addAttribute("categoryList", suitupService.getCategoryList());
 			return mv;	
 			//회원가입 완료페이지로
 		}

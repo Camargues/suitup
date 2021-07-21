@@ -61,4 +61,9 @@
 		</if>
 	</select>
 	
+	<!-- 카테고리 목록 불러오기 -->
+	<select id="getCategoryList" resultType="SuitUpCategoryVO">
+		SELECT * FROM SU_CATE
+	</select>
+	
 </mapper>

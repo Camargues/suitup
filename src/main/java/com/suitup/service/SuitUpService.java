@@ -3,6 +3,7 @@ package com.suitup.service;
 import java.util.List;
 
 import com.suitup.domain.SuitUpCartVO;
+import com.suitup.domain.SuitUpCategoryVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 
@@ -24,5 +25,7 @@ public interface SuitUpService {
 		
 		// 아이디 중복체크 
 	public SuitUpCustomerVO userIdCheck(SuitUpCustomerVO vo);
+	
+	public List<SuitUpCategoryVO> getCategoryList();
 	
 }

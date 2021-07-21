@@ -18,6 +18,8 @@
 		<typeAlias alias="SuitUpOrderVO" type="com.suitup.domain.SuitUpOrderVO" />
 	<!-- 회원테이블 -->
 			<typeAlias alias="SuitUpCustomerVO" type="com.suitup.domain.SuitUpCustomerVO" />
+			<!-- 카테고리 테이블 -->
+			<typeAlias alias="SuitUpCategoryVO" type="com.suitup.domain.SuitUpCategoryVO" />
 	</typeAliases>
 
 

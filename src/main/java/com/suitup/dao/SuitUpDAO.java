@@ -3,6 +3,7 @@ package com.suitup.dao;
 import java.util.List;
 
 import com.suitup.domain.SuitUpCartVO;
+import com.suitup.domain.SuitUpCategoryVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 
@@ -21,6 +22,8 @@ public interface SuitUpDAO {
 	int memberInsert(SuitUpCustomerVO vo);
 	
 	SuitUpCustomerVO idCheck(SuitUpCustomerVO vo);
+	
+	public List<SuitUpCategoryVO> getCategoryList();
 
 	
 }

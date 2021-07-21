@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.suitup.domain.SuitUpCartVO;
+import com.suitup.domain.SuitUpCategoryVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 
@@ -56,6 +57,12 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 	public SuitUpCustomerVO idCheck(SuitUpCustomerVO vo) {
 		System.out.println("===> Mybatis idCheck() 호출");
 		return mybatis.selectOne("SuitUpDAO.idCheck",vo);
+	}
+
+	// 카테고리 목록 불러오기
+	public List<SuitUpCategoryVO> getCategoryList() {
+		System.out.println("===> Mybatis idCheck() 호출");
+		return mybatis.selectList("SuitUpDAO.getCategoryList");
 	}
 
 }

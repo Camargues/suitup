@@ -681,7 +681,9 @@ $('.image-popup').magnificPopup({
     $('#tab>li').click(function(){
     	$('#tabUl1,#tabUl2,#tabUl3,#tabUl4,#tabUl5').css("display", "none"); 
     	var i = $(this).attr('id').charAt(5);
-    	$('#tabUl'+i).css("display","inline-block");
+    	var li = $('#tabUl'+i)
+    	li.css("display","inline-block");
+    	
     });
     
     
