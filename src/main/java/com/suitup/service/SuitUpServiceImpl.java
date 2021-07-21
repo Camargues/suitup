@@ -10,6 +10,7 @@ import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
+import com.suitup.domain.SuitUpProductVO;
 @Service("suitupService")
 public class SuitUpServiceImpl implements SuitUpService {
 
@@ -56,6 +57,9 @@ public class SuitUpServiceImpl implements SuitUpService {
 		return suitupDAO.getCategoryList();
 	}
 
-
+	// 상품목록 검색하기
+	public List<SuitUpProductVO> getProductList(SuitUpProductVO vo){
+		return suitupDAO.getProductList(vo);
+	}
 
 }

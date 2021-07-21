@@ -1,6 +1,5 @@
 package com.suitup.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
+import com.suitup.domain.SuitUpProductVO;
 import com.suitup.service.SuitUpService;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 @Controller
 public class SuitUpController {
@@ -161,4 +159,10 @@ public class SuitUpController {
 			return message;
 		}
 		
+		// 상품목록 페이지
+		@RequestMapping("shop.do")
+		public void shop(Model m, SuitUpProductVO vo) {
+			m.addAttribute("categoryList", suitupService.getCategoryList());
+			m.addAttribute("productList", suitupService.getProductList(vo));
+		}
 }

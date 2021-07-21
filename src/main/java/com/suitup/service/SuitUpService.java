@@ -6,6 +6,7 @@ import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
+import com.suitup.domain.SuitUpProductVO;
 
 public interface SuitUpService {
 
@@ -27,5 +28,7 @@ public interface SuitUpService {
 	public SuitUpCustomerVO userIdCheck(SuitUpCustomerVO vo);
 	
 	public List<SuitUpCategoryVO> getCategoryList();
+	
+	public List<SuitUpProductVO> getProductList(SuitUpProductVO vo);
 	
 }

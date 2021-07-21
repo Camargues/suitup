@@ -64,6 +64,8 @@ $('.mobile-menu nav').meanmenu({
   03. Product  Masonry (width)
 --------------------------------------------- */ 
 $('.htc__product__container').imagesLoaded( function() {
+	
+	
   
     // filter items on button click
     $('.product__menu').on( 'click', 'button', function() {

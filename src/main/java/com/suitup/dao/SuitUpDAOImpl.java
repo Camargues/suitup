@@ -10,6 +10,7 @@ import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
+import com.suitup.domain.SuitUpProductVO;
 
 @Repository("suitupDAO") 
 public class SuitUpDAOImpl implements SuitUpDAO {
@@ -61,8 +62,14 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 
 	// 카테고리 목록 불러오기
 	public List<SuitUpCategoryVO> getCategoryList() {
-		System.out.println("===> Mybatis idCheck() 호출");
+		System.out.println("===> Mybatis getCategoryList() 호출");
 		return mybatis.selectList("SuitUpDAO.getCategoryList");
+	}
+
+	// 상품목록 불러오기
+	public List<SuitUpProductVO> getProductList(SuitUpProductVO vo) {
+		System.out.println("===> Mybatis getProductList() 호출");
+		return mybatis.selectList("SuitUpDAO.getProductList", vo);
 	}
 
 }

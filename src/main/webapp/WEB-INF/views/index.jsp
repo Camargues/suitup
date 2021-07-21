@@ -93,7 +93,7 @@
                                                 <c:set var='cateNum' value='1'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach>                                               
                                                </ul>
@@ -103,7 +103,7 @@
                                                     <c:set var='cateNum' value='2'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                </ul>
@@ -113,7 +113,7 @@
                                                     <c:set var='cateNum' value='3'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                </ul>
@@ -123,7 +123,7 @@
                                                     <c:set var='cateNum' value='4'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                </ul>
@@ -133,7 +133,7 @@
                                                     <c:set var='cateNum' value='5'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                </ul>
@@ -187,9 +187,9 @@
                                         <li><a href="#">카테고리별</a>
                                             <ul>
                                                 <c:set var="cateName" value=""/>
-                                        <c:forEach items="${categoryList }" var="list">
-                                        <c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                       			 <c:forEach items="${categoryList }" var="list">
+                                        		<c:if test="${cateName != list.cateName}">
+                                            <li><a href="shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>

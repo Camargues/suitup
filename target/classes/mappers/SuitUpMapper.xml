@@ -66,4 +66,13 @@
 		SELECT * FROM SU_CATE
 	</select>
 	
+	<!-- 상품목록 불러오기 -->
+	<select id="getProductList" parameterType="SuitUpProductVO" resultType="SuitUpProductVO">
+		SELECT * FROM SU_PRO
+		<where>
+			<if test="cateNum != null">AND CATE_NUM = #{cateNum}</if>
+			<!-- <if test="cateDtnum != null">AND CATE_DTNUM = ${cateDtnum}</if> -->
+		</where>
+	</select>
+	
 </mapper>
