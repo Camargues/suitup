@@ -2,6 +2,8 @@ package com.suitup.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,13 +151,21 @@ public class SuitUpController {
 		//로그인시 ajax
 		@RequestMapping(value="login.do",  produces="application/text;charset=UTF-8")
 		@ResponseBody
-		public String login(SuitUpCustomerVO vo, HttpSession session) {
+		public String login(SuitUpCustomerVO vo, HttpSession session,HttpServletResponse response) {
 			SuitUpCustomerVO result = suitupService.userIdCheck(vo);
 			String message ="아이디 또는 비밀번호를 확인하세요.";
 			if(result != null) {
 				message="로그인성공";
 				session.setAttribute("SuitUpid", result.getMemId());
 			}
+			Cookie cookie = new Cookie("SuitUpidCookie", result.getMemId());
+			if(vo.getMemCookie().equals("cookieOn")) {
+				cookie.setMaxAge(60*60*24);
+				cookie.setPath("/");
+			}else {
+				cookie.setMaxAge(0);
+			}
+			response.addCookie(cookie);
 			return message;
 		}
 		
