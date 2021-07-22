@@ -206,7 +206,16 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>
+								<c:choose>   
+								
+								<c:when test="${cookie.SuitUpidCookie.value != null}">
+                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								</c:when>
+								
+								<c:otherwise>
+                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
+								</c:otherwise>
+								
+                               </c:choose>
                             </ul>
                         </div>
                     </div>

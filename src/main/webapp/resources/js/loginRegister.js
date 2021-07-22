@@ -2,13 +2,21 @@
 //====================================로그인====================================
 
 function id_check(){
+
+	//쿠키 저장 
+	var cookie = $(":input:checkbox[name=cookieOn]:checked").val() ;
+	if( cookie != "cookieOn"){
+		cookie = "cookieOff"
+	}
+	
 	$.ajax({
 		type:"post",
 		url:"login.do",
 		//한글처리
 		contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 		data:{ memId : $('#memId').val()
-			,memPass : $('#memPass').val()},
+			,memPass : $('#memPass').val()
+			,memCookie : cookie},
 		success:function(result){
 			$('#idResult').text(result);
 			if(result=="로그인성공"){
@@ -17,7 +25,7 @@ function id_check(){
 			
 		}	
 	})
-//document.getElementById("loginForm").submit();
+
 }
 //====================================회원가입====================================
 //회원가입 변수 regi 안쓰면 로그인id랑 충돌

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -50,7 +49,7 @@
                     <div class="row">
                         <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
                             <div class="logo">
-                                <a href="index.jsp">
+                                <a href="index.do">
                                     <img src="resources/images/logo/logo.png" alt="logo">
                                 </a>
                             </div>
@@ -59,7 +58,7 @@
                         <div class="col-md-8 col-lg-8 col-sm-6 col-xs-6">
                             <nav class="mainmenu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu">
-                                    <li class="drop"><a href="index.jsp">홈</a></li>
+                                    <li class="drop"><a href="index.do">홈</a></li>
                                     <li class="drop"><a href="#">인기상품</a>
                                         <ul class="dropdown">
                                             <li><a href="#">아우터</a></li>
@@ -157,7 +156,7 @@
                             <div class="mobile-menu clearfix visible-xs visible-sm">
                                 <nav id="mobile_dropdown">
                                     <ul>
-                                        <li><a href="index.jsp">홈</a></li>
+                                        <li><a href="index.do">홈</a></li>
                                         <li><a href="#">인기상품</a>
                                             <ul>
                                                 <li><a href="#">아우터</a></li>
@@ -187,18 +186,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                               	<c:choose>   
-								<c:when test="${sessionScope.SuitUpid != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>
-								</c:when>
-								<c:when test="${cookie.SuitUpidCookie.value != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								</c:when>
-								
-								<c:otherwise>
-                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
-								</c:otherwise>
-								
-                               </c:choose>
+                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -238,10 +226,14 @@
         <div class="htc__login__register bg__white ptb--130" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/5.jpg) no-repeat scroll center center / cover ;">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <ul class="login__register__menu" role="tablist">
-                            <li role="presentation" class="login active"><a href="#login" role="tab" data-toggle="tab">Login</a></li>
-                            <li role="presentation" class="register"><a href="#register" role="tab" data-toggle="tab">Register</a></li>
+                    <div class="col-md-6 col-md-offset-3" >
+                        <ul class="login__register__menu" style="max-width: 800px;" role="tablist">
+                            <li role="presentation" class="login active">
+                                
+                                <p style="color: black;font-size: 28px;">${id}</p><br/>
+                                <p style="color: black;font-size: 28px;">님의 가입을 축하합니다.</p>
+                            </li>
+                        
                         </ul>
                     </div>
                 </div>
@@ -251,39 +243,16 @@
                         <div class="htc__login__register__wrap">
                             <!-- Start Single Content -->
                             <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
-                                <form class="login" method="post" id="loginForm" action="login.do" >
-                                    <input type="text"  placeholder="User Name*" id="memId" name="memId">
-                                    <input type="password" placeholder="Password*" id="memPass" name="memPass">
-                                    <span id="idResult" style="width:150px;color:red"></span>
-                                </form>
-                                <div class="tabs__checkbox">
-                                    <input type="checkbox" name="cookieOn" value="cookieOn">
-                                    <span> 로그인 상태 유지</span>
-                                    <span class="forget"><a href="#">비밀번호 찾기</a></span>
-                                </div>
-                                <div class="htc__login__btn mt--30">
-                                    <a href="#" onclick="id_check();">Login</a>
-                                </div>
+                            
                              
+                                <div class="htc__login__btn mt--30">
+                                    <a href="login-register.do" style="width: 300px;">로그인 페이지로 이동</a>
+                                </div>
+                                
                             </div>
                             <!-- End Single Content -->
                             <!-- Start Single Content -->
-                            <div id="register" role="tabpanel" class="single__tabs__panel tab-pane fade">
-                                <form class="login" method="post" id="registerForm" action="register.do">
-                                    <input type="text" placeholder="아이디*" id="regiMemId" name="memId">
-                                    <span id="idCheckResult" style="width:150px;color:red"></span>
-                                    <input type="hidden"/>
-                                    <input type="password" placeholder="비밀번호*" id="regiMemPass" name="memPass">
-                                    <input type="password" placeholder="비밀번호 재확인*" id="regiMemPassConfirm">
-                                    <input type="text" placeholder="이름*" id="regiMemName" name="memName">
-                                    <input type="text" placeholder="주소" id="regiMemAddr" name="memAddr">
-                                    <input type="text" placeholder="휴대폰 번호" id="regiMemPhone" name="memPhone">
-                                <div class="htc__login__btn">
-                                    <a href='#'  onclick="register_check();">register</a>
-                                </div>
-                                </form>
-                             
-                            </div>
+                            
                             <!-- End Single Content -->
                         </div>
                     </div>
@@ -301,7 +270,7 @@
                         <div class="col-md-3 col-lg-3 col-sm-6">
                             <div class="ft__widget">
                                 <div class="ft__logo">
-                                    <a href="index.jsp">
+                                    <a href="index.do">
                                         <img src="resources/images/logo/logo.png" alt="footer logo">
                                     </a>
                                 </div>
@@ -363,7 +332,7 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="index.jsp">홈</a></li>
+                                    <li><a href="index.do">홈</a></li>
                                     <li><a href="#">인기상품</a></li>
                                     <li><a href="cart.do">장바구니</a></li>
                                 </ul>
