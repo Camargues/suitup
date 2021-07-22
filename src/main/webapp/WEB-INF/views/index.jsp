@@ -68,7 +68,7 @@
                                         <c:set var="cateName" value=""/>
                                         <c:forEach items="${categoryList }" var="list">
                                         <c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>
@@ -178,7 +178,7 @@
                                                    <c:set var="cateName" value=""/>
                                        		 <c:forEach items="${categoryList }" var="list">
                                        		 <c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>

@@ -75,4 +75,15 @@
 		</where>
 	</select>
 	
+	<!-- 인기상품 불러오기 -->
+	<select id="getPopularList" parameterType="SuitUpProductVO" resultType="SuitUpProductVO">
+	<![CDATA[
+		SELECT SU_PRO.* FROM SU_PRO, (SELECT PRO_NUM FROM(
+			SELECT ROWNUM, PRO_NUM FROM (SELECT ROW_NUMBER() OVER(ORDER BY SUM(ORDER_COUNT) DESC) AS NUM, PRO_NUM, SUM(ORDER_COUNT)AS SUM
+			FROM SU_ORDER
+			WHERE CATE_NUM = #{cateNum}
+			GROUP BY PRO_NUM ORDER BY SUM DESC) WHERE ROWNUM <= 10)) A
+			WHERE SU_PRO.PRO_NUM = A.PRO_NUM
+			]]>
+	</select>
 </mapper>

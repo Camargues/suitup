@@ -288,4 +288,19 @@ public class SuitUpController {
 		
 		return "redirect:index.jsp";
 		}
+		
+		// 인기상품 페이지
+		@RequestMapping("popularity-shop.do")
+		public void popular(Model m, String cateNum) {
+			// 카테고리 번호가 없을시 1번으로 지정
+			SuitUpProductVO vo = new SuitUpProductVO();
+			
+			if(cateNum == null)
+				cateNum = "1";
+			
+			vo.setCateNum(Integer.parseInt(cateNum));			
+			
+			m.addAttribute("categoryList", suitupService.getCategoryList());
+			m.addAttribute("popularList", suitupService.getPopularList(vo));
+		}
 }

@@ -27,6 +27,8 @@ public interface SuitUpDAO {
 	public List<SuitUpCategoryVO> getCategoryList();
 	
 	public List<SuitUpProductVO> getProductList(SuitUpProductVO vo);
+	
+	public List<SuitUpProductVO> getPopularList(SuitUpProductVO vo);
 
 	
 }

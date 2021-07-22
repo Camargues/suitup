@@ -62,4 +62,9 @@ public class SuitUpServiceImpl implements SuitUpService {
 		return suitupDAO.getProductList(vo);
 	}
 
+	// 인기상품목록 검색하기
+	public List<SuitUpProductVO> getPopularList(SuitUpProductVO vo) {
+		return suitupDAO.getPopularList(vo);
+	}
+
 }

@@ -72,4 +72,8 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		return mybatis.selectList("SuitUpDAO.getProductList", vo);
 	}
 
+	public List<SuitUpProductVO> getPopularList(SuitUpProductVO vo){
+		System.out.println("===> Mybatis getPopularList() 호출");
+		return mybatis.selectList("SuitUpDAO.getPopularList", vo);
+	}
 }

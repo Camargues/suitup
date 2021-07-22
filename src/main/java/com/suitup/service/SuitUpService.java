@@ -31,4 +31,6 @@ public interface SuitUpService {
 	
 	public List<SuitUpProductVO> getProductList(SuitUpProductVO vo);
 	
+	public List<SuitUpProductVO> getPopularList(SuitUpProductVO vo);
+	
 }
