@@ -278,7 +278,7 @@
                                             <td class="product-price"><span class="amount">${order.proPrice }</span></td>
                                             <td class="product-size"><span class="amount">${order.dtproSize }</span></td>
                                             <td class="product-color"><span class="amount">${order.dtproColor }</span></td>
-                                            <td class="product-quantity"><input type="number" value="${order.orderCount }" /></td>
+                                            <td class="product-quantity"><input type="number" value="${order.orderCount }" readonly/></td>
                                             <td class="product-subtotal">${order.proPrice * order.orderCount }</td>
                                             <td class="product-remove">${order.orderStatus }</td>
                                             <td class="product-remove">${order.orderMemo }</td>

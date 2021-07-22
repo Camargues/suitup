@@ -157,8 +157,7 @@
                                     <li><a href="cart.do">장바구니</a></li>
                                     <li><a href="checkout.do">결제하기</a></li>
                                     <li><a href="history.do">주문내역</a></li>
-                                    <c:if test="${cookie.SuitUpidCookie.value != null}">
-                                    <c:if test="${cookie.admin.value eq 1}">
+                                    <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -167,7 +166,6 @@
                                             <li><a href="#">상품 수정</a></li>
                                         </ul>
                                     </li>
-                                    </c:if>
                                     </c:if>
                                 </ul>
                             </nav>
@@ -210,18 +208,19 @@
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
 								<c:choose>   
-								
-								<c:when test="${cookie.SuitUpidCookie.value != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								</c:when>
-								
+								<c:when test="${cookie.SuitUpidCookie.value != null }">
+								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
+								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								</c:when>
+								<c:when test="${sessionScope.SuitUpid  != null}">
+                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								
+								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								</c:when>
 								<c:otherwise>
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
-								
-                               </c:choose>
-                               <c:if test="${cookie.SuitUpidCookie.value != null}">
-                                <li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
-                                </c:if>
+								</c:choose>
+                            
                             </ul>
                         </div>
                     </div>

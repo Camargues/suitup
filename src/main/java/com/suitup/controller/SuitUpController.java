@@ -3,6 +3,7 @@ package com.suitup.controller;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -36,29 +37,81 @@ public class SuitUpController {
 	
 	// 장바구니 진입시
 	@RequestMapping("cart.do")
-	public void cart(Model m) {
+	public String cart(Model m, HttpServletRequest request, HttpSession session ) {
+		
+		// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+		String id = null;
+		// 쿠키 가져오기
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("SuitUpidCookie"))
+				id = cookie.getValue();
+		}
+		// 쿠키가 null 이면 세션 가져오기
+		if(id == null)
+		id = (String) session.getAttribute("SuitUpid");
+		if(id != null) {
 		SuitUpCartVO vo = new SuitUpCartVO();
-		// 테스트용으로 admin 계정 카트 목록 불러오기
-		// 세션값 넣는걸로 변경 예정
-		vo.setMemId("admin");
+		vo.setMemId(id);
+		
+		// 쿠키에서 가져온 id 값으로 장바구니 검색
 		m.addAttribute("cartList", suitupService.getCartList(vo));
 		m.addAttribute("categoryList", suitupService.getCategoryList());
+		
+		return "cart";
+		
+		}
+		// id값이 없을시 로그인 페이지로
+		else
+			return "login-register";
+			
 	}
 	
 	// 주문하러 가기
 	@RequestMapping("checkout.do")
-	public void checkout(Model m) {
-		SuitUpCartVO vo = new SuitUpCartVO();
-		// 테스트용으로 admin 계정 카트 목록 불러오기
-		// 세션값 넣는걸로 변경 예정
-		vo.setMemId("admin");
-		m.addAttribute("cartList", suitupService.getCartList(vo));
-		m.addAttribute("categoryList", suitupService.getCategoryList());
+	public String checkout(Model m, HttpServletRequest request, HttpSession session) {
+		
+		// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+				String id = null;
+				// 쿠키 가져오기
+				Cookie[] cookies = request.getCookies();
+				for(Cookie cookie : cookies) {
+					if(cookie.getName().equals("SuitUpidCookie"))
+						id = cookie.getValue();
+				}
+				// 쿠키가 null 이면 세션 가져오기
+				if(id == null)
+				id = (String) session.getAttribute("SuitUpid");
+				
+				if(id != null) {
+					SuitUpCartVO vo = new SuitUpCartVO();
+					vo.setMemId(id);
+			
+					m.addAttribute("cartList", suitupService.getCartList(vo));
+					m.addAttribute("categoryList", suitupService.getCategoryList());
+					return "checkout";
+		
+				}
+				// id값이 없을시 로그인 페이지로
+				else
+					return "login-register";
 	}
 	
 	// 주문하기
 	@RequestMapping("insertOrder.do")
-	public String insertOrder(String receiver, String phone, String address, String memo, Model m) {
+	public String insertOrder(String receiver, String phone, String address, String memo, Model m, HttpServletRequest request, HttpSession session) {
+		
+		// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+		String id = null;
+		// 쿠키 가져오기
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("SuitUpidCookie"))
+				id = cookie.getValue();
+			}
+		// 쿠키가 null 이면 세션 가져오기
+			if(id == null)
+				id = (String) session.getAttribute("SuitUpid");
 		
 		// 몇건 주문 들어가는지 받아올 result 변수 선언
 		int result = 0;
@@ -67,37 +120,42 @@ public class SuitUpController {
 			memo = "";
 		
 		SuitUpCartVO cartvo = new SuitUpCartVO();
-		// 테스트용으로 admin 계정 카트 목록 불러오기
-		// 세션값 넣는걸로 변경 예정
-		cartvo.setMemId("admin");		
 		
-		List<SuitUpCartVO> list = suitupService.getCartList(cartvo);
-		for(SuitUpCartVO vo : list) {
-			SuitUpOrderVO ordervo = new SuitUpOrderVO();
-			ordervo.setMemId(vo.getMemId());
-			ordervo.setProNum(vo.getProNum());
-			ordervo.setDtproSize(vo.getDtproSize());
-			ordervo.setDtproColor(vo.getDtproColor());
-			ordervo.setOrderCount(vo.getCartCount());
-			ordervo.setOrderAddress(address);
-			ordervo.setOrderReceiver(receiver);
-			ordervo.setOrderPhone(phone);
-			ordervo.setOrderMemo(memo);
-			ordervo.setProPrice(vo.getProPrice());
-			ordervo.setProName(vo.getProName());
+		if(id != null) {
+			cartvo.setMemId(id);		
+		
+			List<SuitUpCartVO> list = suitupService.getCartList(cartvo);
+			for(SuitUpCartVO vo : list) {
+				SuitUpOrderVO ordervo = new SuitUpOrderVO();
+				ordervo.setMemId(vo.getMemId());
+				ordervo.setProNum(vo.getProNum());
+				ordervo.setDtproSize(vo.getDtproSize());
+				ordervo.setDtproColor(vo.getDtproColor());
+				ordervo.setOrderCount(vo.getCartCount());
+				ordervo.setOrderAddress(address);
+				ordervo.setOrderReceiver(receiver);
+				ordervo.setOrderPhone(phone);
+				ordervo.setOrderMemo(memo);
+				ordervo.setProPrice(vo.getProPrice());
+				ordervo.setProName(vo.getProName());
 			
-			result = result + suitupService.insertOrder(ordervo);
-		}
+				result = result + suitupService.insertOrder(ordervo);
+			}
 		
-		// 주문 완료 후 장바구니 비우기
-		suitupService.deleteCartList(cartvo);
-		m.addAttribute("categoryList", suitupService.getCategoryList());
-		// 주문 성공시
-		if(result > 0)
-		// 주문내역 페이지 만들면 주문내역 페이지로 넘어감
-		return "redirect:history.do";
-		// 주문 실패시
-		return "redirect:checkout.do";
+			// 주문 완료 후 장바구니 비우기
+			suitupService.deleteCartList(cartvo);
+			m.addAttribute("categoryList", suitupService.getCategoryList());
+			// 주문 성공시
+			if(result > 0)
+				// 주문내역 페이지 만들면 주문내역 페이지로 넘어감
+				return "redirect:history.do";
+			else
+				// 주문 실패시
+				return "redirect:checkout.do";
+			}
+		// id값이 없을시 로그인 페이지로
+		else
+			return "login-register";
 		
 	}
 	
@@ -113,13 +171,35 @@ public class SuitUpController {
 	
 	// 주문내역 진입시
 		@RequestMapping("history.do")
-		public void history(Model m) {
-			SuitUpOrderVO vo = new SuitUpOrderVO();
+		public String history(Model m, HttpServletRequest request, HttpSession session) {
+			
+			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+			String id = null;
+			// 쿠키 가져오기
+			Cookie[] cookies = request.getCookies();
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("SuitUpidCookie"))
+					id = cookie.getValue();
+			}
+			
+			// 쿠키가 null 이면 세션 가져오기
+			if(id == null)
+			id = (String) session.getAttribute("SuitUpid");
+			
+			if(id != null) {
+				SuitUpOrderVO vo = new SuitUpOrderVO();
+				vo.setMemId(id);
+			
+			
+			
 			// 테스트용으로 admin 계정 카트 목록 불러오기
 			// 세션값 넣는걸로 변경 예정
 			vo.setMemId("admin");
 			m.addAttribute("orderList", suitupService.getOrderList(vo));
 			m.addAttribute("categoryList", suitupService.getCategoryList());
+			return "history";
+			}
+			return "login-register";
 		}
 		
 		// 회원가입 진입시
@@ -149,38 +229,36 @@ public class SuitUpController {
 		}
 		
 		//로그인시 ajax
-		@RequestMapping(value="login.do",  produces="application/text;charset=UTF-8")
-		@ResponseBody
-		public String login(SuitUpCustomerVO vo, HttpSession session,HttpServletResponse response) {
-			SuitUpCustomerVO result = suitupService.userIdCheck(vo);
-			String message ="아이디 또는 비밀번호를 확인하세요.";
-			if(result != null) {
-				message="로그인성공";
-				session.setAttribute("SuitUpid", result.getMemId());
-			}
-			
-			Cookie cookie = new Cookie("SuitUpidCookie", result.getMemId());
-			
-			
-			
-
-			
-			if(vo.getMemCookie().equals("cookieOn")) {
-				cookie.setMaxAge(60*60*24);
-				cookie.setPath("/");
-			}else {
-				cookie.setMaxAge(0);
-			}
-			response.addCookie(cookie);
-			
-			// admin 값이 1인 경우에만 admin 쿠키 생성
-			if(result.getMemAdmin().equals("1") ) {
-				Cookie admin = new Cookie("admin", result.getMemAdmin());
-				response.addCookie(admin);
+				@RequestMapping(value="login.do",  produces="application/text;charset=UTF-8")
+				@ResponseBody
+				public String login(SuitUpCustomerVO vo, HttpSession session,HttpServletResponse response) {
+					SuitUpCustomerVO result = suitupService.userIdCheck(vo);
+					Cookie cookie = new Cookie("SuitUpidCookie", result.getMemId());
+					Cookie admin = new Cookie("admin", result.getMemAdmin());
+					String message ="아이디 또는 비밀번호를 확인하세요.";
+					if(result != null) {
+						message="로그인성공";
+						session.setAttribute("SuitUpid", result.getMemId());
+							if(vo.getMemCookie().equals("cookieOn")) {
+								cookie.setMaxAge(60*60*24);
+								admin.setMaxAge(60*60*24);
+								
+							}else {
+								cookie.setMaxAge(0);
+								
+							}
+							// 어드민 값이 1인 경우에만 세션에 저장
+						if(result.getMemAdmin().equals("1"))
+							session.setAttribute("admin", result.getMemAdmin());
+					}
+					// 어드민 값이 1일때만 어드민 쿠키 생성
+					
+					response.addCookie(cookie);
+					
+					if(result.getMemAdmin().equals("1"))
+					response.addCookie(admin);
+					return message;
 				}
-			
-			return message;
-		}
 		
 		// 상품목록 페이지
 		@RequestMapping("shop.do")
@@ -191,12 +269,11 @@ public class SuitUpController {
 		
 		// 로그 아웃 눌렀을때 쿠키 삭제
 		@RequestMapping(value="logout.do")
-		public String logout(HttpServletResponse response){
+		public String logout(HttpServletResponse response, HttpSession session){
 
 		Cookie cookie = new Cookie("SuitUpidCookie", null); // 쿠키에 대한 값을 null로 지정
 		
-		cookie.setPath("/SuitUp");
-		
+
 		cookie.setMaxAge(0); // 유효시간을 0으로 설정
 
 		response.addCookie(cookie); // 응답 헤더에 추가해서 없어지도록 함
@@ -206,6 +283,8 @@ public class SuitUpController {
 		admin.setMaxAge(0); // 유효시간을 0으로 설정
 
 		response.addCookie(admin); // 응답 헤더에 추가해서 없어지도록 함
+		
+		session.invalidate();
 		
 		return "redirect:index.jsp";
 		}

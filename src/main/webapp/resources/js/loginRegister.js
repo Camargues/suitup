@@ -20,13 +20,17 @@ function id_check(){
 		success:function(result){
 			$('#idResult').text(result);
 			if(result=="로그인성공"){
-				location.href="index.jsp";
-			}	
+				location.href="index.do";
+			}
+		},
+		error:function(result){
+			$('#idResult').text("아이디 또는 비밀번호를 확인하세요.");
+		}
 			
-		}	
 	})
 
 }
+
 //====================================회원가입====================================
 //회원가입 변수 regi 안쓰면 로그인id랑 충돌
 var rid = document.getElementById("regiMemId");
