@@ -3,7 +3,7 @@ package com.suitup.domain;
 public class SuitUpCustomerVO {
 
 	private String memId;
-	private String memAdimin;
+	private String memAdmin;
 	private String memPass;
 	private String memName;
 	private String memAddr;
@@ -11,11 +11,11 @@ public class SuitUpCustomerVO {
 	private String memCookie;
 	
 	
-	public String getMemAdimin() {
-		return memAdimin;
+	public String getMemAdmin() {
+		return memAdmin;
 	}
-	public void setMemAdimin(String memAdimin) {
-		this.memAdimin = memAdimin;
+	public void setMemAdmin(String memAdmin) {
+		this.memAdmin = memAdmin;
 	}
 	public String getMemCookie() {
 		return memCookie;

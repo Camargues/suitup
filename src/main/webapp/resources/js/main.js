@@ -688,6 +688,15 @@ $('.image-popup').magnificPopup({
     	
     });
     
+    $('li#logout img').hover(function(){
+    	$(this).attr("src", "resources/images/icons/logout_over.png");
+    },function(){
+    	$(this).attr("src", "resources/images/icons/logout.png");
+    });
+    
+    
+    
+    
     
 })(jQuery);
 

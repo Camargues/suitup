@@ -95,7 +95,7 @@ public class SuitUpController {
 		// 주문 성공시
 		if(result > 0)
 		// 주문내역 페이지 만들면 주문내역 페이지로 넘어감
-		return "redirect:index.jsp";
+		return "redirect:history.do";
 		// 주문 실패시
 		return "redirect:checkout.do";
 		
@@ -158,7 +158,13 @@ public class SuitUpController {
 				message="로그인성공";
 				session.setAttribute("SuitUpid", result.getMemId());
 			}
+			
 			Cookie cookie = new Cookie("SuitUpidCookie", result.getMemId());
+			
+			
+			
+
+			
 			if(vo.getMemCookie().equals("cookieOn")) {
 				cookie.setMaxAge(60*60*24);
 				cookie.setPath("/");
@@ -166,6 +172,13 @@ public class SuitUpController {
 				cookie.setMaxAge(0);
 			}
 			response.addCookie(cookie);
+			
+			// admin 값이 1인 경우에만 admin 쿠키 생성
+			if(result.getMemAdmin().equals("1") ) {
+				Cookie admin = new Cookie("admin", result.getMemAdmin());
+				response.addCookie(admin);
+				}
+			
 			return message;
 		}
 		
@@ -174,5 +187,26 @@ public class SuitUpController {
 		public void shop(Model m, SuitUpProductVO vo) {
 			m.addAttribute("categoryList", suitupService.getCategoryList());
 			m.addAttribute("productList", suitupService.getProductList(vo));
+		}
+		
+		// 로그 아웃 눌렀을때 쿠키 삭제
+		@RequestMapping(value="logout.do")
+		public String logout(HttpServletResponse response){
+
+		Cookie cookie = new Cookie("SuitUpidCookie", null); // 쿠키에 대한 값을 null로 지정
+		
+		cookie.setPath("/SuitUp");
+		
+		cookie.setMaxAge(0); // 유효시간을 0으로 설정
+
+		response.addCookie(cookie); // 응답 헤더에 추가해서 없어지도록 함
+		
+		Cookie admin = new Cookie("admin", null); // 쿠키에 대한 값을 null로 지정
+
+		admin.setMaxAge(0); // 유효시간을 0으로 설정
+
+		response.addCookie(admin); // 응답 헤더에 추가해서 없어지도록 함
+		
+		return "redirect:index.jsp";
 		}
 }

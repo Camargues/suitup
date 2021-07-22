@@ -375,13 +375,13 @@
                                 <div class="product foo">
                                     <div class="product__inner">
                                         <div class="pro__thumb">
-                                            <a href="#">
+                                            <a href="product.do?proNum=${list.proNum }">
                                                 <img src="resources/images/product/${list.cateNum }/${list.cateDtnum}/${list.proNum}" alt="${list.proName }">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="product__details">
-                                        <h2><a href="product.do?proNum=${proNum }">${list.proName }</a></h2>
+                                        <h2><a href="product.do?proNum=${list.proNum }">${list.proName }</a></h2>
                                         <ul class="product__price">
                                             <li class="new__price">${list.proPrice } 원</li>
                                         </ul>

@@ -157,7 +157,9 @@
                                     <li><a href="cart.do">장바구니</a></li>
                                     <li><a href="checkout.do">결제하기</a></li>
                                     <li><a href="history.do">주문내역</a></li>
-                                    <!-- mem_admin 쿼리값이 1일때만 노출 -->
+                                    <c:if test="${cookie.SuitUpidCookie.value != null}">
+                                    <c:if test="${cookie.admin.value eq 1}">
+                                    
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
                                             <li><a href="#">상품 등록</a></li>
@@ -165,7 +167,8 @@
                                             <li><a href="#">상품 수정</a></li>
                                         </ul>
                                     </li>
-                                    
+                                    </c:if>
+                                    </c:if>
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix visible-xs visible-sm">
@@ -216,6 +219,9 @@
 								</c:otherwise>
 								
                                </c:choose>
+                               <c:if test="${cookie.SuitUpidCookie.value != null}">
+                                <li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>
