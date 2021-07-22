@@ -36,15 +36,21 @@ public class SuitUpController {
 	}
 	
 	@RequestMapping("index.do")
-	public String index(Model m) {
+	public String index(Model m, String cateNum) {
+		
 		
 		SuitUpProductVO vo = new SuitUpProductVO();
-		
-		vo.setCateNum(1);
+		if(cateNum == null)
+			vo.setCateNum(1);
+		else
+			vo.setCateNum(Integer.parseInt(cateNum));
 		
 		// 카테고리 불러오기 위해 모든 페이지에 이 태그 넣기
 		m.addAttribute("categoryList", suitupService.getCategoryList());
+		// 인기 상품 불러오기
 		m.addAttribute("popularList", suitupService.getPopularList(vo));
+		// 신상품 불러오기
+		m.addAttribute("newList", suitupService.getNewList());
 		return "index";
 	}
 	
