@@ -35,6 +35,19 @@ public class SuitUpController {
 		return url;
 	}
 	
+	@RequestMapping("index.do")
+	public String index(Model m) {
+		
+		SuitUpProductVO vo = new SuitUpProductVO();
+		
+		vo.setCateNum(1);
+		
+		// 카테고리 불러오기 위해 모든 페이지에 이 태그 넣기
+		m.addAttribute("categoryList", suitupService.getCategoryList());
+		m.addAttribute("popularList", suitupService.getPopularList(vo));
+		return "index";
+	}
+	
 	// 장바구니 진입시
 	@RequestMapping("cart.do")
 	public String cart(Model m, HttpServletRequest request, HttpSession session ) {
@@ -245,16 +258,18 @@ public class SuitUpController {
 								
 							}else {
 								cookie.setMaxAge(0);
+								admin.setMaxAge(0);
 								
 							}
 							// 어드민 값이 1인 경우에만 세션에 저장
 						if(result.getMemAdmin().equals("1"))
 							session.setAttribute("admin", result.getMemAdmin());
 					}
-					// 어드민 값이 1일때만 어드민 쿠키 생성
+					
 					
 					response.addCookie(cookie);
 					
+					// 어드민 값이 1일때만 어드민 쿠키 생성
 					if(result.getMemAdmin().equals("1"))
 					response.addCookie(admin);
 					return message;

@@ -315,7 +315,7 @@
                                                     <c:set var="cateName" value=""/>
                                         <c:forEach items="${categoryList }" var="list">
                                         <c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>
@@ -331,7 +331,7 @@
                                                     <c:set var='cateNum' value='1'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                 </ul>
@@ -352,7 +352,7 @@
                                                         <c:set var='cateNum' value='2'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                     </ul>
@@ -369,7 +369,7 @@
                                                         <c:set var='cateNum' value='3'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                     </ul>
@@ -391,7 +391,7 @@
                                                         <c:set var='cateNum' value='4'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                     </ul>
@@ -408,7 +408,7 @@
                                                         <c:set var='cateNum' value='5'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                     </ul>
@@ -425,13 +425,7 @@
             </div>
         </section>
         <!-- End Feature Product -->
-        <div class="only-banner ptb--100 bg__white">
-            <div class="container">
-                <div class="only-banner-img">
-                    <a href="shop-sidebar.html"><img src="resources/images/new-product/3.jpg" alt="new product"></a>
-                </div>
-            </div>
-        </div>
+
         <!-- Start Our Product Area -->
         <section class="htc__product__area bg__white">
             <div class="container">
@@ -439,15 +433,15 @@
                     <div class="col-md-3">
                         <div class="product-categories-all">
                             <div class="product-categories-title">
-                                <h3>ㅇㅇㅇㅇ</h3>
+                                <h3>인기 상품</h3>
                             </div>
                             <div class="product-categories-menu">
                                 <ul>
-                                    <li><a href="#">1111</a></li>
-                                    <li><a href="#">2222</a></li>
-                                    <li><a href="#">3333</a></li>
-                                    <li><a href="#">4444</a></li>
-                                    <li><a href="#">5555</a></li>
+                                    <li><a href="#">아우터</a></li>
+                                    <li><a href="#">상의</a></li>
+                                    <li><a href="#">하의</a></li>
+                                    <li><a href="#">신발</a></li>
+                                    <li><a href="#">모자</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -459,22 +453,40 @@
                                 <ul class="tab-style" role="tablist">
                                 
                                  <!-- forEach 들어갈자리 -->
-                                    <li class="active">
-                                        <a href="#home1" data-toggle="tab">
+                                 <c:set var="i" value="1"/>
+                                 <c:forEach items="${categoryList }" var="list">
+                                 <c:if test="${popularList[0].cateNum == list.cateNum}">
+                                
+                                
+                                <c:if test="${i ne '1' }">
+                                    <li>
+                                        <a href="#${list.cateDtnum }" data-toggle="tab">
                                             <div class="tab-menu-text">
-                                                <h4>latest </h4>
+                                                <h4>${list.cateDtname } </h4>
                                             </div>
                                         </a>
                                     </li>
+                                    </c:if>
+                                
+                                 <c:if test="${i eq '1' }">
+                                 
+                                 
+                                    <li class="active">
+                                        <a href="#${list.cateDtnum }" data-toggle="tab">
+                                            <div class="tab-menu-text">
+                                                <h4>${list.cateDtname } </h4>
+                                            </div>
+                                        </a>
+                                    </li>
+                                     <c:set var="i" value="i+1"/>
+                                    </c:if>
+                                    
+                                    </c:if>
+                                    
+                                    </c:forEach>
                                     <!-- forEach 끝나는자리 -->
                                     
-                                    <li>
-                                        <a href="#home2" data-toggle="tab">
-                                            <div class="tab-menu-text">
-                                                <h4>best sale </h4>
-                                            </div>
-                                        </a>
-                                    </li>
+                                   
                                     <li>
                                         <a href="#home3" data-toggle="tab">
                                             <div class="tab-menu-text">
@@ -491,8 +503,10 @@
                                     </li>
                                 </ul>
                             </div>
+                            
+                            <c:forEach items="${categoryList }" var="list">
                             <div class="tab-content another-product-style jump">
-                                <div class="tab-pane active" id="home1">
+                                <div class="tab-pane active" id="">
                                     <div class="row">
                                         <div class="product-slider-active owl-carousel">
                                             <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-12">
@@ -505,16 +519,23 @@
                                                         </div>
                                                         
                                                     </div>
-                                                    <!-- forEach 들어갈자리 -->
+                                                   
                                                     <div class="product__details">
-                                                        <h2><a href="product-details.html">Simple Black Clock</a></h2>
+                                                        <h2><a href="product-details.html">무스탕</a></h2>
                                                         <ul class="product__price">
                                                             <li>$10.00</li>
                                                         </ul>
                                                     </div>
-                                                    <!-- forEach 끝나는자리 -->
+                                                    
                                                 </div>
                                             </div>
+                                          </div>
+                                          </div>
+                                          </div>
+                                          </div>
+					</c:forEach>
+                                            
+                                            
                                             <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-12">
                                                 <div class="product">
                                                     <div class="product__inner">

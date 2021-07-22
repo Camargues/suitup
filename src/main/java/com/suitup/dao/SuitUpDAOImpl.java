@@ -72,8 +72,15 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		return mybatis.selectList("SuitUpDAO.getProductList", vo);
 	}
 
+	// 인기 상품목록 불러오기
 	public List<SuitUpProductVO> getPopularList(SuitUpProductVO vo){
 		System.out.println("===> Mybatis getPopularList() 호출");
 		return mybatis.selectList("SuitUpDAO.getPopularList", vo);
+	}
+
+	// 신제품 불러오기
+	public List<SuitUpProductVO> getNewList() {
+		System.out.println("===> Mybatis getNewList() 호출");
+		return mybatis.selectList("SuitUpDAO.getNewList");
 	}
 }

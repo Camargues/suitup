@@ -33,4 +33,6 @@ public interface SuitUpService {
 	
 	public List<SuitUpProductVO> getPopularList(SuitUpProductVO vo);
 	
+	public List<SuitUpProductVO> getNewList();
+	
 }
