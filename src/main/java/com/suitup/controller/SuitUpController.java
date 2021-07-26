@@ -57,7 +57,7 @@ public class SuitUpController {
 	}
 	
 	// 장바구니 진입시
-	@RequestMapping("cart.do")
+	@RequestMapping("my-page-cart.do")
 	public String cart(Model m, HttpServletRequest request, HttpSession session ) {
 		
 		// 쿠키에서 가져올 id값을 저장할 변수 id 선언
@@ -79,7 +79,7 @@ public class SuitUpController {
 		m.addAttribute("cartList", suitupService.getCartList(vo));
 		m.addAttribute("categoryList", suitupService.getCategoryList());
 		
-		return "cart";
+		return "my-page-cart";
 		
 		}
 		// id값이 없을시 로그인 페이지로
