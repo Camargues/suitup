@@ -41,5 +41,10 @@ public interface SuitUpDAO {
 	//회원정보 수정
 	public int memberModify(SuitUpCustomerVO vo);
 
+	//상품 상세 페이지
+	public SuitUpProductVO getProductDetails(SuitUpProductVO vo);
 	
+	public int insertCart(SuitUpCartVO vo);
+	
+	public int updateProduct(SuitUpProductVO vo);
 }

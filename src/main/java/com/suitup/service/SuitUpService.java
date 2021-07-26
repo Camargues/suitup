@@ -43,5 +43,12 @@ public interface SuitUpService {
 
 	// 정보수정
     public int memModifiy(SuitUpCustomerVO vo);
+    
+    // 상품 상세 페이지
+    public SuitUpProductVO getProductDetails(SuitUpProductVO vo);
+    
+    public int insertCart(SuitUpCartVO vo);
+    
+    public int updateProduct(SuitUpProductVO vo);
 	
 }

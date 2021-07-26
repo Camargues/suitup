@@ -42,6 +42,7 @@ public class SuitUpProductVO {
 //	            }
 //	        }
 //	    }
+	    
 	public int getDtproCount() {
 		return dtproCount;
 	}

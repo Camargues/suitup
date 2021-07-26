@@ -102,5 +102,23 @@ public class SuitUpDAOImpl implements SuitUpDAO {
         return mybatis.update("SuitUpDAO.memberModify",vo);
 
     }
+
+	// 상품 상세 페이지
+	public SuitUpProductVO getProductDetails(SuitUpProductVO vo) {
+		System.out.println("==> Mybatis getProductDetails() 호출");
+		return mybatis.selectOne("SuitUpDAO.getProductDetails", vo);
+	}
+	
+	// 상품 장바구니에 담기
+	public int insertCart(SuitUpCartVO vo) {
+		System.out.println("==> Mybatis insertCart() 호출");
+		return mybatis.insert("SuitUpDAO.insertCart", vo);
+	}
+
+	// 상품 수정
+	public int updateProduct(SuitUpProductVO vo) {
+		System.out.println("==> Mybatis updateProduct() 호출");
+		return mybatis.update("SuitUpDAO.updateProduct", vo);
+	}
     
 }

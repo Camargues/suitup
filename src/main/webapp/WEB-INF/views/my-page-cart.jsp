@@ -158,17 +158,18 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                    <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="checkout.do">결제하기</a></li>
-                                    <li><a href="history.do">주문내역</a></li>
+                                    <li><a href="my-page-cart.do">장바구니</a></li>
+                                 
                                     <!-- mem_admin 쿼리값이 1일때만 노출 -->
+                                   <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
+                                    
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">상품 등록</a></li>
-                                            <li><a href="#">상품 삭제</a></li>
-                                            <li><a href="#">상품 수정</a></li>
+                                            <li><a href="product-insert.do">상품 등록</a></li>
+                                            <li><a href="product-list.do">상품 목록</a></li>
                                         </ul>
                                     </li>
+                                    </c:if>
                                     
                                 </ul>
                             </nav>
@@ -210,17 +211,19 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-								<c:choose>   
-								<c:when test="${sessionScope.SuitUpid != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>
-								</c:when> 
-								<c:when test="${cookie.SuitUpidCookie.value != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								</c:when>
+								   	<c:choose>   
+								<c:when test="${cookie.SuitUpidCookie.value != null }">
+								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
+								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								</c:when>
+								<c:when test="${sessionScope.SuitUpid  != null}">
+                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								
+								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								</c:when>
 								<c:otherwise>
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
-								
-                               </c:choose>
+								</c:choose>
                             </ul>
                         </div>
                     </div>
@@ -303,13 +306,13 @@
                                    
                                         <tr>
                                             <td class="product-thumbnail"><a href="#"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
-                                            <td class="product-name"><a href="#">${cart.proName }</a></td>
+                                            <td class="product-name"><a href="product.do?proNum=${cart.proNum }">${cart.proName }</a></td>
                                             <td class="product-price"><span class="amount">${cart.proPrice }</span></td>
                                             <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
                                             <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
                                             <td class="product-quantity"><input type="number" value="${cart.cartCount }" id="${cart.cartNum }"/></td>
                                             <td class="product-subtotal">${cart.proPrice * cart.cartCount }</td>
-                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cart.cartNum }">X</a></td>
+                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cart.cartNum }&pro_num=${cart.proNum}&count=${cart.cartCount}">X</a></td>
                                         </tr>
                                         <c:set var= "sum" value="${sum + (cart.proPrice * cart.cartCount)}"/>
                                         </c:forEach>

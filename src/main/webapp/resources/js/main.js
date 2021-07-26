@@ -695,7 +695,7 @@ $('.image-popup').magnificPopup({
     });
     
     
-    
+   
     
     
 })(jQuery);

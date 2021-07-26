@@ -87,4 +87,19 @@ public class SuitUpServiceImpl implements SuitUpService {
         return suitupDAO.memberModify(vo);
     }
 
+	// 상품 상세 페이지
+	public SuitUpProductVO getProductDetails(SuitUpProductVO vo) {
+		return suitupDAO.getProductDetails(vo);
+	}
+
+	// 장바구니 추가하기
+	public int insertCart(SuitUpCartVO vo) {
+		return suitupDAO.insertCart(vo);
+	}
+
+	// 상품 재고 수정
+	public int updateProduct(SuitUpProductVO vo) {
+		return suitupDAO.updateProduct(vo);
+	}
+
 }

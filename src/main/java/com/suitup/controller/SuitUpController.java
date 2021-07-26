@@ -161,6 +161,8 @@ public class SuitUpController {
 				ordervo.setProName(vo.getProName());
 			
 				result = result + suitupService.insertOrder(ordervo);
+			
+				
 			}
 		
 			// 주문 완료 후 장바구니 비우기
@@ -169,7 +171,7 @@ public class SuitUpController {
 			// 주문 성공시
 			if(result > 0)
 				// 주문내역 페이지 만들면 주문내역 페이지로 넘어감
-				return "redirect:history.do";
+				return "redirect:my-page.do";
 			else
 				// 주문 실패시
 				return "redirect:checkout.do";
@@ -182,12 +184,19 @@ public class SuitUpController {
 	
 	// 장바구니 한품목 삭제
 	@RequestMapping("dropCart.do")
-	public String deleteCart(String cart_num, Model m) {
-		System.out.println(cart_num);
+	public String deleteCart(String cart_num, String pro_num, String count, Model m) {
 		
+		// 장바구니 삭제
 		suitupService.deleteCart(cart_num);
+		
+		// 장바구니 추가한 만큼 재고 줄이기
+		SuitUpProductVO vo = new SuitUpProductVO();
+		vo.setProNum(Integer.parseInt(pro_num));
+		vo.setDtproCount(Integer.parseInt(count));
+		suitupService.updateProduct(vo);
+		
 		m.addAttribute("categoryList", suitupService.getCategoryList());
-		return "redirect:cart.do";
+		return "redirect:my-page-cart.do";
 	}
 	
 	// 주문내역 진입시
@@ -215,7 +224,7 @@ public class SuitUpController {
 			
 			// 테스트용으로 admin 계정 카트 목록 불러오기
 			// 세션값 넣는걸로 변경 예정
-			vo.setMemId("admin");
+			
 			m.addAttribute("orderList", suitupService.getOrderList(vo));
 			m.addAttribute("categoryList", suitupService.getCategoryList());
 			return "my-page";
@@ -404,5 +413,59 @@ public class SuitUpController {
 			        }
 			        m.addAttribute("mem",suitupService.userIdCheck(vo));
 			    }
+			    
+		// 상품 상세 페이지
+		@RequestMapping("product.do")
+		public String productDetails(SuitUpProductVO vo,Model m) {
+			SuitUpProductVO product = suitupService.getProductDetails(vo);
+			
+			// 잘못된 상품일 경우 에러페이지로 연결 예정
+			if(product.getProName() == null) {
+				return "index";
+			}
+			
+			m.addAttribute("productDetails", product);
+			m.addAttribute("categoryList", suitupService.getCategoryList());
+			return "product";
+		}
+		
+		// 장바구니 담기
+		@RequestMapping("insertCart.do")
+		public String insertCart(SuitUpCartVO vo, HttpServletRequest request,HttpSession session) {
+			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+			String id = null;
+			// 쿠키 가져오기
+			Cookie[] cookies = request.getCookies();
+				for(Cookie cookie : cookies) {
+						if(cookie.getName().equals("SuitUpidCookie"))
+							id = cookie.getValue();
+						}
+						
+			// 쿠키가 null 이면 세션 가져오기
+			if(id == null)
+				id = (String) session.getAttribute("SuitUpid");
+			
+			if(id != null) {				
+				vo.setMemId(id);
+				
+				// 장바구니에 추가
+				int result = suitupService.insertCart(vo);
+				
+				// 장바구니 추가한 만큼 재고 줄이기
+				SuitUpProductVO product = new SuitUpProductVO();
+				product.setProNum(vo.getProNum());
+				product.setDtproCount(vo.getCartCount() * -1);
+				suitupService.updateProduct(product);
+			
+					return "redirect:my-page-cart.do";
+				
+				}
+				// id값이 없을시 로그인 페이지로
+				else
+					return "login-register";
+				
+						
+				
+		}
 		
 }

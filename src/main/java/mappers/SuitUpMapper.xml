@@ -106,4 +106,29 @@
 	UPDATE su_mem SET mem_name = #{memName},mem_addr=#{memAddr},mem_phone=#{memPhone} WHERE mem_id = #{memId}
 	</update>
 	
+	<!-- 상품 상세 페이지 불러오기 -->
+	<select id="getProductDetails" parameterType="SuitUpProductVO" resultType="SuitUpProductVO">
+		SELECT * FROM SU_PRO WHERE PRO_NUM=#{proNum}
+	</select>
+	
+	<!-- 상품 장바구니 담기 -->
+	<insert id="insertCart" parameterType="SuitUpCartVO">
+	INSERT INTO SU_CART VALUES(#{proNum}, #{proName},#{memId},#{dtproSize}, #{dtproColor},#{cartCount}, #{proPrice}, CART_NUM_SEQUENCE.NEXTVAL)
+	</insert>
+	
+	<!-- 상품 수정 -->
+	<update id="updateProduct" parameterType="SuitUpProductVO">
+	UPDATE SU_PRO
+	<set>
+	<if test="dtproCount != null">
+	DTPRO_COUNT = DTPRO_COUNT - #{dtproCount}
+	</if>
+	</set>
+	<where>
+	<if test="#{proNum} != null">
+	PRO_NUM = #{proNum}
+	</if>
+	</where>
+	</update>
+	
 </mapper>

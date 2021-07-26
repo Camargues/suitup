@@ -134,4 +134,3 @@ function jusoCallBack(roadFullAddr){
 		document.registerForm.memAddr.value = roadFullAddr;		
 	
 }
-

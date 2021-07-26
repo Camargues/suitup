@@ -2566,19 +2566,41 @@ select.select-color {
 }
 .pro__choose__color li i {
     color: #000;
-    font-size: 22px;
+    font-size: 25px;
 }
 .pro__choose__color li.red i {
+	
     color: #ff5d42;
+	
 }
 .pro__choose__color li.blue i {
+
     color: #425dff;
+
 }
 .pro__choose__color li.perpal i {
+
     color: #fd42ff;
+
 }
 .pro__choose__color li.yellow i {
+
     color: #ffd542;
+
+}
+.pro__choose__color li.white i{
+
+    color: #FFFFFF;
+    border: 1px solid black;
+    width:25px;
+	height:25px;
+    border-radius:50%;
+}
+.pro__choose__color li.grey i{
+
+    color: #808080;
+
+    
 }
 .product-action-wrap {
     align-items: center;

@@ -38,6 +38,7 @@
 </head>
 
 <body>
+
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
@@ -153,8 +154,9 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                    <li><a href="my-page-cart.do">장바구니</a></li>
-                          
+                                    <li><a href="cart.do">장바구니</a></li>
+                                    <li><a href="checkout.do">결제하기</a></li>
+                                    <li><a href="history.do">주문내역</a></li>
                                     <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
@@ -204,7 +206,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-								   	<c:choose>   
+								<c:choose>   
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
@@ -250,293 +252,267 @@
                     </div>
                 </div>
             </div>
-            <!-- End Search Popap -->
-		</div>
-        <!-- Start Feature Product -->
-        <section class="categories-slider-area bg__white">
-            <div class="container">
-                <div class="row">
-                    <!-- Start Left Feature -->
-                    <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12 float-left-style">
-                        <!-- Start Slider Area -->
-                        <div class="slider__container slider--one">
-                            <div class="slider__activation__wrap owl-carousel owl-theme">
-                            
-                                <!-- Start Single Slide -->
-                                 <c:forEach items="${newList }" var="list">
-                                <div class="slide slider__full--screen slider-height-inherit slider-text-right" style="background: rgba(0, 0, 0, 0) url(resources/images/product/${list.proNum}) no-repeat scroll center center / cover ;">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-10 col-lg-8 col-md-offset-2 col-lg-offset-4 col-sm-12 col-xs-12">
-                                                <div class="slider__inner">
-                                                    <h1><span class="text--theme">New</span></h1>
-                                                    <div class="slider__btn">
-                                                        <a class="htc__btn" href="${list.proNum}">shop now</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </c:forEach>
-                                <!-- End Single Slide -->
+            <!-- End Search Popap -->         
+        </div>
+        <!-- End Offset Wrapper -->
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/2.jpg) no-repeat scroll center center / cover ;">
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner text-center">
+                                <h2 class="bradcaump-title">${productDetails.proName }</h2>
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="index.html">홈</a>
+                                  <span class="brd-separetor">/</span>
+                                  <span class="breadcrumb-item active">${productDetails.proName }</span>
+                                </nav>
                             </div>
                         </div>
-                        <!-- Start Slider Area -->
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12 float-right-style">
-                        <div class="categories-menu mrg-xs">
-                            <div class="category-heading">
-                               <h3> 카테고리</h3>
-                            </div>
-                            <div class="category-menu-list">
-                                <ul>
-                                    <li><a href="#"><img alt="" src="images/icons/thum2.png"> 인기 상품 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
-                                            <div class="category-part-1 category-common mb--30">
-                                                <h4 class="categories-subtitle"> 인기 상품</h4>
-                                                <ul>
-                                                    <c:set var="cateName" value=""/>
-                                        <c:forEach items="${categoryList }" var="list">
-                                        <c:if test="${cateName != list.cateName}">
-                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
-                                            <c:set var="cateName" value="${list.cateName }"/>
-                                            </c:if>
-                                            </c:forEach>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li><a href="#"><img alt="" src="images/icons/thum3.png"> 아우터 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
-                                            <div class="category-part-1 category-common2 mb--30">
-                                                <h4 class="categories-subtitle"> 아우터</h4>
-                                                <ul>
-                                                    <c:set var='cateNum' value='1'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                                </ul>
-                                            </div>
-                                            <div class="mega-banner-img">
-                                                <a href="single-product.html">
-                                                    <img src="images/feature-img/5.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li><a href="#"><img alt="" src="images/icons/thum4.png"> 상의 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
-                                            <div class="category-menu-dropdown-top">
-                                                <div class="category-part-1 category-common2 mb--30">
-                                                    <h4 class="categories-subtitle"> 상의</h4>
-                                                    <ul>
-                                                        <c:set var='cateNum' value='2'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li><a href="#"><img alt="" src="images/icons/thum5.png"> 하의 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
-                                            <div class="category-menu-dropdown-left">
-                                                <div class="category-part-1 category-common mb--30">
-                                                    <h4 class="categories-subtitle"> 하의</h4>
-                                                    <ul>
-                                                        <c:set var='cateNum' value='3'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                                    </ul>
-                                                </div>
-                                                </div>
-                                            <div class="category-menu-dropdown-right">
-                                                <div class="menu-right-img">
-                                                    <a href="#"><img src="images/feature-img/2.png" alt=""></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li><a href="#"><img alt="" src="images/icons/thum6.png"> 신발 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
-                                            <div class="category-menu-dropdown-left">
-                                                <div class="category-part-1 category-common">
-                                                    <h4 class="categories-subtitle"> 신발</h4>
-                                                    <ul>
-                                                        <c:set var='cateNum' value='4'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                                    </ul>
-                                                </div>
-                                               </div>
-                                            </div>
-                                    </li>
-                                    <li><a href="#"><img alt="" src="images/icons/thum6.png"> 모자 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
-                                            <div class="category-menu-dropdown-left">
-                                                <div class="category-part-1 category-common">
-                                                    <h4 class="categories-subtitle"> 모자</h4>
-                                                    <ul>
-                                                        <c:set var='cateNum' value='5'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                                    </ul>
-                                                </div>
-                                                </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Left Feature -->
-                </div>
-            </div>
-        </section>
-        <!-- End Feature Product -->
-
-        <!-- Start Our Product Area -->
-        <section class="htc__product__area bg__white">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="product-categories-all">
-                    <div class="product-categories-title">
-                        <h3>인기 상품</h3>
-                    </div>
-                    <div class="product-categories-menu">
-                        <ul>
-                            <li><a href="index.do?cateNum=1">아우터</a></li>
-                            <li><a href="index.do?cateNum=2">상의</a></li>
-                            <li><a href="index.do?cateNum=3">하의</a></li>
-                            <li><a href="index.do?cateNum=4">신발</a></li>
-                            <li><a href="index.do?cateNum=5">모자</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="product-style-tab">
-                    <div class="product-tab-list">
-                        <!-- Nav tabs -->
-                        <ul class="tab-style" role="tablist">
-                        
-                        
-                        <c:set var="i" value="1"/>
-                        <c:forEach items="${categoryList }" var="list">
-                        <c:if test="${popularList[0].cateNum == list.cateNum}">
-                        <c:if test="${i ne '1' }">
-                            <li>
-                                <a href="#home${list.cateDtnum }" data-toggle="tab">
-                                    <div class="tab-menu-text">
-                                        <h4>${list.cateDtname } </h4>
-                                    </div>
-                                </a>
-                            </li>
-                        </c:if>
-                        <c:if test="${i eq '1' }">
-                            <li class="active">
-                                <a href="#home${list.cateDtnum }" data-toggle="tab">
-                                    <div class="tab-menu-text">
-                                        <h4>${list.cateDtname } </h4>
-                                    </div>
-                                </a>
-                            </li>
-                            <c:set var="i" value="i+1"/>
-                        </c:if>
-                        </c:if>
-                        </c:forEach>
-                        </ul>
-                    </div>
-                    <c:set var="i" value="1"/>
-                    <div class="tab-content another-product-style jump">
-                        <c:forEach begin="1" end="5">
-                        <c:if test="${i eq '1'}">
-                        <div class="tab-pane active" id="home${i }">
-                            <div class="row">
-                                <div class="product-slider-active owl-carousel">
-                                    <c:forEach items="${popularList }" var="list">
-                                    <c:if test="${list.cateDtnum eq i }">
-                                    <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-12">
-                                        <div class="product">
-                                            <div class="product__inner">
-                                                <div class="pro__thumb">
-                                                <!-- 상세 페이지 링크 -->
-                                                    <a href="#">
-                                                        <img src="resources/images/product/1.png" alt="product images">
-                                                    </a>
-                                                </div>                                                        
-                                            </div>                                                   
-                                            <div class="product__details">
-                                                <h2><a href="product.do?proNum=${list.proNum }">${list.proName }</a></h2>
-                                                <ul class="product__price">
-                                                    <li>${list.proPrice }</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </c:if>
-                                   </c:forEach>
-                                    <c:set var="i" value="${i + 1 }"/>
-                                </div>
-                            </div>
-                        </div>
-                        </c:if>
-                        <c:if test="${i ne '1'}">
-                        <div class="tab-pane" id="home${i }">
-                            <div class="row">
-                                <div class="product-slider-active owl-carousel">
-                                    <c:forEach items="${popularList }" var="list">
-                                    <c:if test="${list.cateDtnum eq i }">
-                                    <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-12">
-                                        <div class="product">
-                                            <div class="product__inner">
-                                                <div class="pro__thumb">
-                                                <!-- 상세 페이지 링크 -->
-                                                    <a href="#">
-                                                        <img src="resources/images/product/4.png" alt="product images">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product__details">
-                                                <h2><a href="product.do?proNum=${list.proNum }">${list.proName }</a></h2>
-                                                <ul class="product__price">
-                                                    <li>${list.proPrice }</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </c:if>
-                                    </c:forEach>
-                                    <c:set var="i" value="${i + 1 }"/>
-                                </div>
-                            </div>
-                         </div>
-                        </c:if>
-                        </c:forEach>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-        <!-- End Our Product Area -->
-        <!-- Start Footer Area -->
+        <!-- End Bradcaump area -->
+        <!-- Start Product Details -->
+        <section class="htc__product__details pt--120 pb--100 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                        <div class="product__details__container">
+                            <div class="product__big__images">
+                                <div class="portfolio-full-image tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active product-video-position" id="img-tab-1">
+                                        <img src="resources/images/product/${productDetails.cateNum }/${productDetails.cateDtnum}/${productDetails.proNum}" alt="${productDetails.proName }">
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="insertCart.do" method="post">
+                    
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 smt-30 xmt-30">
+                        <div class="htc__product__details__inner">
+                            <div class="pro__detl__title">
+                                <h2>${productDetails.proName }</h2>
+                                <input type="hidden" value="${productDetails.proName }" name="proName"/>
+                            </div>
+                            
+                            <!-- 리뷰 완성되면 별점 보이게 할거 -->
+                            <!-- <div class="pro__dtl__rating">
+                                <ul class="pro__rating">
+                                    <li><span class="ti-star"></span></li>
+                                    <li><span class="ti-star"></span></li>
+                                    <li><span class="ti-star"></span></li>
+                                    <li><span class="ti-star"></span></li>
+                                    <li><span class="ti-star"></span></li>
+                                </ul>
+                                <span class="rat__qun">(Based on 0 Ratings)</span>
+                            </div> -->
+                            
+                            
+                           
+                            <ul class="pro__dtl__prize">
+                                <li>${productDetails.proPrice } 원</li>
+                                <input type="hidden" value="${productDetails.proPrice }" name="proPrice"/>
+                            </ul>
+                            <div class="pro__dtl__color">
+                                <h2 class="title__5">색상</h2>
+                                
+                                <ul class="pro__choose__color">
+                                <div>
+                               		 <input type="radio" name="dtproColor" value="BLACK" style="display: none" id="color1"> <label for="color1" style="cursor: pointer;"><li class="black"><i class="zmdi zmdi-circle"></i></li></label></input>
+                               		 &nbsp;<input type="radio" name="dtproColor" value="WHITE" style="display: none" id="color2"> <label for="color2" style="cursor: pointer;"><li class="white"><i class="zmdi zmdi-circle"></i></li></label></input>
+                               		 &nbsp;<input type="radio" name="dtproColor" value="GREY" style="display: none" id="color3"> <label for="color3" style="cursor: pointer;"><li class="grey"><i class="zmdi zmdi-circle"></i></li></label></input>
+                                   &nbsp; <input type="radio" name="dtproColor" value="RED" style="display: none" id="color4"> <label for="color4" style="cursor: pointer;"><li class="red"><i class="zmdi zmdi-circle"></i></li></label></input>
+                                   &nbsp; <input type="radio" name="dtproColor" value="BLUE" style="display: none" id="color5"> <label for="color5" style="cursor: pointer;"><li class="blue"><i class="zmdi zmdi-circle"></i></li></label></input>
+                                    </div>                                  
+                                </ul>
+                            </div>
+                            <div class="pro__dtl__size">
+                                <h2 class="title__5">사이즈</h2>
+                                <ul class="	">
+                                <table>
+                                <tr>
+                                    <td><input type="radio" name="dtproSize" value="XS" style="display: none" id="size1"><label for="size1" style="cursor: pointer;"><li><h6>XS&nbsp;&nbsp;</h6></li></label></input>
+                                    <input type="radio" name="dtproSize" value="S" style="display: none" id="size2"><label for="size2" style="cursor: pointer;"><li><h6>S&nbsp;&nbsp;</h6></li></label></input>
+                                    <input type="radio" name="dtproSize" value="M" style="display: none" id="size3"><label for="size3" style="cursor: pointer;"><li><h6>M&nbsp;&nbsp;</h6></li></label></input>
+                                    <input type="radio" name="dtproSize" value="L" style="display: none" id="size4"><label for="size4" style="cursor: pointer;"><li><h6>L&nbsp;&nbsp;</h6></li></label></input>
+                                    <input type="radio" name="dtproSize" value="XL" style="display: none" id="size5"><label for="size5" style="cursor: pointer;"><li><h6>XL&nbsp;&nbsp;</h6></li></label></input></tr>
+                               </tr>
+                                </table>
+                                </ul>
+                            </div>
+                            <div class="product-action-wrap">
+                                <div class="prodict-statas"><span>수량 :</span></div>
+                                <div class="product-quantity">
+                                        <div class="product-quantity">
+                                            <div class="cart-plus-minus" style="cursor: pointer;">
+                                                <input type="text" class="cart-plus-minus-box"  name="cartCount" value="1"  style="cursor: pointer;" >
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                </div>
+                               
+                                <div class="prodict-statas"><span>재고 : ${productDetails.dtproCount }</span>
+                                            </div>
+                                            
+                            </div>
+                            <ul class="pro__dtl__btn">
+                                <li class="buy__now__btn"><input type="image" src="resources/images/icons/cartdo.png"></li>
+                                
+                                <!-- 시간 남으면 찜목록 만들기 -->
+                                <!-- <li><a href="#"><span class="ti-heart"></span></a></li> -->
+                                
+                            </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Product Details -->
+        <!-- Start Product tab -->
+        <section class="htc__product__details__tab bg__white pb--120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <ul class="product__deatils__tab mb--60" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#description" role="tab" data-toggle="tab">Description</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#sheet" role="tab" data-toggle="tab">Data sheet</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product__details__tab__content">
+                            <!-- Start Single Content -->
+                            <div role="tabpanel" id="description" class="product__tab__content fade in active">
+                                <div class="product__description__wrap">
+                                    <div class="product__desc">
+                                        <h2 class="title__6">Details</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis noexercit ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id.</p>
+                                    </div>
+                                    <div class="pro__feature">
+                                        <h2 class="title__6">Features</h2>
+                                        <ul class="feature__list">
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Content -->
+                            <!-- Start Single Content -->
+                            <div role="tabpanel" id="sheet" class="product__tab__content fade">
+                                <div class="pro__feature">
+                                        <h2 class="title__6">Data sheet</h2>
+                                        <ul class="feature__list">
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
+                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <!-- End Single Content -->
+                            <!-- Start Single Content -->
+                            <div role="tabpanel" id="reviews" class="product__tab__content fade">
+                                <div class="review__address__inner">
+                                    <!-- Start Single Review -->
+                                    <div class="pro__review">
+                                        <div class="review__thumb">
+                                            <!-- 상품이미지 이름 -->
+                                            <img src="images/review/1.jpg" alt="review images">
+                                        </div>
+                                        <div class="review__details">
+                                            <div class="review__info">
+                                                <!-- 아이디값 -->
+                                                <h4><a href="#">Gerald Barnes</a></h4>
+                                                <ul class="rating">
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                                    <li><i class="zmdi zmdi-star-half"></i></li>
+                                                </ul>
+                                                <div class="rating__send">
+                                                    <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="review__date">
+                                                <span>27 Jun, 2016 at 2:30pm</span>
+                                            </div>
+                                            <!-- COM_CONTENT 리뷰 내용 -->
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                        </div>
+                                    </div>
+                                    <!-- End Single Review -->                           
+                                </div>
+                                <!-- Start RAting Area -->
+                                <div class="rating__wrap">
+                                    <hr/>
+                                    <h2 class="rating-title">Write  A review</h2>
+                                    <h4 class="rating-title-2">Your Rating</h4>
+                                    <div class="rating__list">
+                                        <!-- Start Single List -->
+                                     <ul class="rating" style="cursor: pointer;">
+                                            <li><i id='star1' onclick="star1();" class="zmdi zmdi-star"></i></li>
+                                            <li><i id='star2' onclick="star2();" class="zmdi zmdi-star"></i></li>
+                                            <li><i id='star3' onclick="star3();" class="zmdi zmdi-star"></i></li>
+                                            <li><i id='star4' onclick="star4();" class="zmdi zmdi-star"></i></li>
+                                            <li><i id='star5' onclick="star5();" class="zmdi zmdi-star"></i></li>
+                                        
+                                                                                    
+                                          </ul>
+                                        <!-- End Single List -->
+                                    </div>
+                                </div>
+                                <!-- End RAting Area -->
+                                <div class="review__box">
+                                    <form id="review-form">
+                                        <div class="single-review-form">
+                                            <div class="review-box name">
+                                                <input type="text" placeholder="아이디값" readonly>
+                                                <!-- placeholder 에 사용자 아이디 받아올 때 subString-->
+                                                </div>
+                                        </div>
+                                        <div class="single-review-form">
+                                            <div class="review-box message">
+                                                <textarea placeholder="Write your review"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="review-btn">
+                                            <a class="fv-btn" href="#">submit review</a>
+                                        </div>
+                                        <input type="hidden" id='starCount' value="5">
+
+                                    </form>                                
+                                </div>
+                            </div>
+                            <!-- End Single Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Product tab -->
+       <!-- Start Footer Area -->
         <footer class="htc__foooter__area gray-bg">
             <div class="container">
                 <div class="row">
@@ -636,7 +612,60 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
+    <script src="resources/js/product-details.js"></script>
+<script type="text/javascript">
 
+	
+
+    var s1 = document.getElementById('star1');
+    var s2 = document.getElementById('star2');
+    var s3 = document.getElementById('star3');
+    var s4 = document.getElementById('star4');
+    var s5 = document.getElementById('star5');
+    var starCount = document.getElementById('starCount');
+
+  function star1() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star-outline";
+        s3.className = "zmdi zmdi-star-outline";
+        s4.className = "zmdi zmdi-star-outline";
+        s5.className = "zmdi zmdi-star-outline";
+        starCount.setAttribute("value","1");
+    }
+    function star2() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star";
+        s3.className = "zmdi zmdi-star-outline";
+        s4.className = "zmdi zmdi-star-outline";
+        s5.className = "zmdi zmdi-star-outline";
+        starCount.setAttribute("value","2");
+    }
+    function star3() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star";
+        s3.className = "zmdi zmdi-star";
+        s4.className = "zmdi zmdi-star-outline";
+        s5.className = "zmdi zmdi-star-outline";
+        starCount.setAttribute("value","3");
+    }
+    function star4() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star";
+        s3.className = "zmdi zmdi-star";
+        s4.className = "zmdi zmdi-star";
+        s5.className = "zmdi zmdi-star-outline";
+        starCount.setAttribute("value","4");
+    }
+    function star5() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star";
+        s3.className = "zmdi zmdi-star";
+        s4.className = "zmdi zmdi-star";
+        s5.className = "zmdi zmdi-star";
+        starCount.setAttribute("value","5");
+    }
+
+    </script>
 </body>
 
 </html>
