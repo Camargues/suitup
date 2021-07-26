@@ -477,7 +477,7 @@
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
                                                 <!-- 상세 페이지 링크 -->
-                                                    <a href="#">
+                                                    <a href="product.do?proNum=${list.proNum }">
                                                         <img src="resources/images/product/1.png" alt="product images">
                                                     </a>
                                                 </div>                                                        

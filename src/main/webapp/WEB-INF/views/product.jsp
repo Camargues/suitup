@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+     	
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -299,17 +301,64 @@
                                 <input type="hidden" value="${productDetails.proName }" name="proName"/>
                             </div>
                             
-                            <!-- 리뷰 완성되면 별점 보이게 할거 -->
-                            <!-- <div class="pro__dtl__rating">
-                                <ul class="pro__rating">
-                                    <li><span class="ti-star"></span></li>
-                                    <li><span class="ti-star"></span></li>
-                                    <li><span class="ti-star"></span></li>
-                                    <li><span class="ti-star"></span></li>
-                                    <li><span class="ti-star"></span></li>
+                           
+                            <div class="pro__dtl__rating">
+                            
+                                 <ul class="pro__rating">
+                                 
+                                <c:choose>
+            <c:when test="${reviewAvg eq 0}">
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+            </c:when>
+
+            <c:when test="${reviewAvg le 1 }">
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+            </c:when>
+
+            <c:when test="${reviewAvg le 2 }">
+               <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                 <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+            </c:when>
+
+            <c:when test="${reviewAvg le 3 }">
+               <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="ti-star"></span></li>
+                <li><span class="ti-star"></span></li>
+            </c:when>
+
+            <c:when test="${reviewAvg le 4 }">
+               <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="ti-star"></span></li>
+            </c:when>
+
+            <c:when test="${reviewAvg le 5 }">
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+                <li><span class="zmdi zmdi-star"></span></li>
+            </c:when>
+            </c:choose>
                                 </ul>
-                                <span class="rat__qun">(Based on 0 Ratings)</span>
-                            </div> -->
+                                <span class="rat__qun">${reviewCount }개의 상품평이 있습니다</span>
+                                
+                            </div>
                             
                             
                            
@@ -381,13 +430,11 @@
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <ul class="product__deatils__tab mb--60" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#description" role="tab" data-toggle="tab">Description</a>
+                                <a href="#description" role="tab" data-toggle="tab">상세설명</a>
                             </li>
+                            
                             <li role="presentation">
-                                <a href="#sheet" role="tab" data-toggle="tab">Data sheet</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
+                                <a href="#reviews" role="tab" data-toggle="tab">상품평</a>
                             </li>
                         </ul>
                     </div>
@@ -399,76 +446,118 @@
                             <div role="tabpanel" id="description" class="product__tab__content fade in active">
                                 <div class="product__description__wrap">
                                     <div class="product__desc">
-                                        <h2 class="title__6">Details</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis noexercit ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id.</p>
+                                        <h2 class="title__6">상세설명</h2>
+                                        
                                     </div>
-                                    <div class="pro__feature">
-                                        <h2 class="title__6">Features</h2>
-                                        <ul class="feature__list">
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit esse</a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
-                                        </ul>
+                                    <div class="pro__feature" align="center">
+                                       <img alt="상세설명" src="resources/images/product/${productDetails.proNum }review">
                                     </div>
                                 </div>
-                            </div>
-                            <!-- End Single Content -->
-                            <!-- Start Single Content -->
-                            <div role="tabpanel" id="sheet" class="product__tab__content fade">
-                                <div class="pro__feature">
-                                        <h2 class="title__6">Data sheet</h2>
-                                        <ul class="feature__list">
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit in voluptate velit esse</a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate velit esse</a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore et </a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
-                                        </ul>
-                                    </div>
                             </div>
                             <!-- End Single Content -->
                             <!-- Start Single Content -->
                             <div role="tabpanel" id="reviews" class="product__tab__content fade">
                                 <div class="review__address__inner">
+                                
                                     <!-- Start Single Review -->
-                                    <div class="pro__review">
-                                        <div class="review__thumb">
-                                            <!-- 상품이미지 이름 -->
-                                            <img src="images/review/1.jpg" alt="review images">
-                                        </div>
-                                        <div class="review__details">
-                                            <div class="review__info">
-                                                <!-- 아이디값 -->
-                                                <h4><a href="#">Gerald Barnes</a></h4>
-                                                <ul class="rating">
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star"></i></li>
-                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                                </ul>
-                                                <div class="rating__send">
-                                                    <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="review__date">
-                                                <span>27 Jun, 2016 at 2:30pm</span>
-                                            </div>
-                                            <!-- COM_CONTENT 리뷰 내용 -->
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Review -->                           
+                                    <c:choose>
+<c:when test="${reviewList != null}">
+<c:forEach items="${reviewList }" var="list">
+<div class="pro__review">
+    <div class="review__thumb">
+        <img src="resources/images/product/${productDetails.proNum }" alt="리뷰 이미지">
+    </div>
+    <div class="review__details" style="width: 100vw; margin: auto;">
+    <div class="review__date">
+    		<c:set var="userId" value="${list.memId}"/>
+            <span>${fn:substring(userId,0,3) }******</span>
+        </div>
+        <div class="review__info">
+            <h4><a href="#">${list.comTitle }</a></h4>
+            <ul class="rating">
+            <c:choose>
+            <c:when test="${list.comAvg eq 0}">
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+            </c:when>
+
+            <c:when test="${list.comAvg le 1 }">
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+            </c:when>
+
+            <c:when test="${list.comAvg le 2 }">
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+            </c:when>
+
+            <c:when test="${list.comAvg le 3 }">
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+            </c:when>
+
+            <c:when test="${list.comAvg le 4 }">
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star-outline"></i></li>
+            </c:when>
+
+            <c:when test="${list.comAvg le 5 }">
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+                <li><i class="zmdi zmdi-star"></i></li>
+            </c:when>
+            </c:choose>
+            </ul>
+            <div class="rating__send">
+                <!-- 리뷰 작성자가 본인일 경우 수정 가능 -->
+            <c:if test="${sessionScope.SuitUpid eq list.memId || cookie.SuitUpidCookie.value eq list.memId}">
+            <a href="modifyComment.do?comSeq=${list.comSeq }"><img src="resources/images/icons/edit-button.png"/></a>
+            </c:if>
+            <!-- 관리자 계정이거나 본인 계정일 경우 삭제 가능 -->
+            <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null || sessionScope.SuitUpid eq list.memId || cookie.SuitUpidCookie.value eq list.memId}">
+            <a href="deleteComment.do?proNum=${list.proNum }"><i class="zmdi zmdi-close"></i></a>
+            </c:if>
+            
+            </div>
+        </div>
+        <div class="review__date">
+            <span>${list.comDate }</span>
+        </div>
+        <p>${list.comContent }</p>
+    </div>
+</div>
+<hr/>
+</c:forEach>
+</c:when>
+<c:otherwise>
+<hr/>
+</c:otherwise>
+</c:choose>
+<!-- End Single Review -->
+                                                             
                                 </div>
                                 <!-- Start RAting Area -->
                                 <div class="rating__wrap">
-                                    <hr/>
-                                    <h2 class="rating-title">Write  A review</h2>
-                                    <h4 class="rating-title-2">Your Rating</h4>
+                                    
+                                    <h2 class="rating-title">상품평 작성하기 </h2>
+                                    <h4 class="rating-title-2">구매만족도</h4>
                                     <div class="rating__list">
                                         <!-- Start Single List -->
                                      <ul class="rating" style="cursor: pointer;">
@@ -485,23 +574,38 @@
                                 </div>
                                 <!-- End RAting Area -->
                                 <div class="review__box">
-                                    <form id="review-form">
+                                    <form action="insertReview.do" method="post">
+                                    
+                                      
+                                            <c:choose> 
+								  
+								<c:when test="${cookie.SuitUpidCookie.value != null }">
+								<input type="hidden" value="${cookie.SuitUpidCookie.value}" name="memId"/>
+								</c:when>
+								
+								<c:when test="${sessionScope.SuitUpid  != null}">
+                               <input type="hidden" value="${sessionScope.SuitUpid}" name="memId"/>
+								</c:when>
+								</c:choose>
+                                              <input type="hidden" value="${productDetails.proNum}" name="proNum"/>  
+                                                <!-- placeholder 에 사용자 아이디 받아올 때 subString-->
+                                              
+                                        
                                         <div class="single-review-form">
                                             <div class="review-box name">
-                                                <input type="text" placeholder="아이디값" readonly>
-                                                <!-- placeholder 에 사용자 아이디 받아올 때 subString-->
-                                                </div>
+                                                <input type="text" placeholder="상품평 제목을 입력해주세요" name="comTitle"></input>
+                                            </div>
                                         </div>
                                         <div class="single-review-form">
                                             <div class="review-box message">
-                                                <textarea placeholder="Write your review"></textarea>
+                                                <textarea placeholder="상품평 내용을 입력해주세요" name="comContent"></textarea>
                                             </div>
                                         </div>
-                                        <div class="review-btn">
-                                            <a class="fv-btn" href="#">submit review</a>
+                                        
+                                        <input type="hidden" id='starCount' name="comAvg" value="5">
+										<div class="review-btn">
+                                            <input type="image" src="resources/images/icons/reviewSubmit.png">
                                         </div>
-                                        <input type="hidden" id='starCount' value="5">
-
                                     </form>                                
                                 </div>
                             </div>

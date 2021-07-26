@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
+import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
@@ -120,5 +121,39 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("==> Mybatis updateProduct() 호출");
 		return mybatis.update("SuitUpDAO.updateProduct", vo);
 	}
+
+	// 리뷰 불러오기
+	public List<SuitUpCommentVO> getCommentList(SuitUpCommentVO vo) {
+		System.out.println("==> Mybatis getCommentList() 호출");
+		return mybatis.selectList("SuitUpDAO.getCommentList", vo);
+	}
+
+	// 리뷰 작성하기
+	public int insertComment(SuitUpCommentVO vo) {
+		System.out.println("==> Mybatis insertComment() 호출");
+		return mybatis.insert("SuitUpDAO.insertComment", vo);
+	}
+
+	// 리뷰 삭제하기
+	public int deleteComment(SuitUpCommentVO vo) {
+		System.out.println("==> Mybatis deleteComment() 호출");
+		return mybatis.delete("SuitUpDAO.deleteComment", vo);
+	}
+
+	// 리뷰 수정하기
+	public int updateComment(SuitUpCommentVO vo) {
+		System.out.println("==> Mybatis updateComment() 호출");
+		return mybatis.update("SuitUpDAO.updateComment", vo);
+	}
     
+	// 상품 별점 가져오기
+	public long getReviewAvg(SuitUpCommentVO vo) {
+		System.out.println("==> Mybatis getReviewAvg() 호출");
+		return mybatis.selectOne("SuitUpDAO.getReviewAvg", vo);
+	}
+
+	// 리뷰 갯수 가져오기
+	public int getReviewCount(SuitUpCommentVO vo) {
+		return mybatis.selectOne("SuitUpDAO.getReviewCount", vo);
+	}
 }

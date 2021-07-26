@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
+import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
@@ -47,4 +48,16 @@ public interface SuitUpDAO {
 	public int insertCart(SuitUpCartVO vo);
 	
 	public int updateProduct(SuitUpProductVO vo);
+	
+	public List<SuitUpCommentVO> getCommentList(SuitUpCommentVO vo);
+	
+	public int insertComment(SuitUpCommentVO vo);
+	
+	public int deleteComment(SuitUpCommentVO vo);
+	
+	public int updateComment(SuitUpCommentVO vo);
+	
+	public long getReviewAvg(SuitUpCommentVO vo);
+	
+	public int getReviewCount(SuitUpCommentVO vo);
 }

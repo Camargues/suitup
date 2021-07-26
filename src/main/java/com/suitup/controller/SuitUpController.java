@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
+import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
@@ -424,9 +425,64 @@ public class SuitUpController {
 				return "index";
 			}
 			
+			// 리뷰 불러오기
+			SuitUpCommentVO comment = new SuitUpCommentVO();
+			
+			comment.setProNum(vo.getProNum());
+			
+			long avg = 0;
+			
+			int count = suitupService.getReviewCount(comment);
+			if(count != 0)
+				avg = suitupService.getReviewAvg(comment);
+			
+			// 리뷰 갯수 불러오기
+			m.addAttribute("reviewCount", count);		
+			// 상품 별점 불러오기
+			m.addAttribute("reviewAvg", avg);
+			// 리뷰 불러오기
+			m.addAttribute("reviewList", suitupService.getCommentList(comment));
+			// 상품 설명 불러오기
 			m.addAttribute("productDetails", product);
+			// 카테고리 불러오기
 			m.addAttribute("categoryList", suitupService.getCategoryList());
 			return "product";
+		}
+		
+		// 리뷰 등록하기
+		@RequestMapping("insertReview.do")
+		public String insertReview(SuitUpCommentVO vo, HttpServletRequest request,HttpSession session) {
+			
+			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+			String id = null;
+			// 쿠키 가져오기
+			Cookie[] cookies = request.getCookies();
+				for(Cookie cookie : cookies) {
+						if(cookie.getName().equals("SuitUpidCookie"))
+							id = cookie.getValue();
+						}
+									
+			// 쿠키가 null 이면 세션 가져오기
+			if(id == null)
+				id = (String) session.getAttribute("SuitUpid");
+						
+			if(id != null) {				
+				vo.setMemId(id);
+			}
+			// 로그인이 안되있을경우 로그인 페이지로 리턴
+			if(id == null)
+				return "login-register";
+				
+			System.out.println(vo.getComAvg());
+			System.out.println(vo.getComContent());
+			System.out.println(vo.getComTitle());
+			System.out.println(vo.getMemId());
+			System.out.println(vo.getProNum());
+			
+			suitupService.insertComment(vo);
+			
+			return "redirect:product.do?proNum=" + vo.getProNum();
+			
 		}
 		
 		// 장바구니 담기

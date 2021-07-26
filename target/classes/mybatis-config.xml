@@ -22,6 +22,8 @@
 			<typeAlias alias="SuitUpCategoryVO" type="com.suitup.domain.SuitUpCategoryVO" />
 			<!-- 상품 테이블 -->
 			<typeAlias alias="SuitUpProductVO" type="com.suitup.domain.SuitUpProductVO" />
+			<!-- 리뷰 테이블 -->
+			<typeAlias alias="SuitUpCommentVO" type="com.suitup.domain.SuitUpCommentVO"/>
 	</typeAliases>
 
 

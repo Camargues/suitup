@@ -131,4 +131,34 @@
 	</where>
 	</update>
 	
+	<!-- 리뷰 불러오기 -->
+	<select id="getCommentList" parameterType="SuitUpCommentVO" resultType="SuitUpCommentVO">
+		SELECT * FROM SU_COMMENT WHERE PRO_NUM = #{proNum}
+	</select>
+	<!-- 리뷰  작성 -->
+	<insert id="insertComment" parameterType="SuitUpCommentVO">
+		INSERT INTO SU_COMMENT VALUES (#{proNum}, #{memId}, #{comTitle}, #{comContent}, SYSDATE, 0,#{comAvg} ,COMMENT_NUM_SEQ.NEXTVAL)
+	</insert>
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteComment" parameterType="SuitUpCommentVO">
+		DELETE INTO SU_COMMENT WHERE PRO_NUM = #{proNum}
+	</delete>
+	<!-- 리뷰 수정 -->
+	<update id="updateComment" parameterType="SuitUpCommentVO">
+		UPDATE SU_COMMENT
+		SET COM_TITLE = #{comTitle},
+			COM_CONTENT = #{comContent}
+		WHERE PRO_NUM = #{proNum}
+	</update>
+	
+	<!-- 리뷰 평점 가져오기 -->
+	<select id="getReviewAvg" parameterType="SuitUpCommentVO" resultType="long">
+	SELECT AVG(COM_AVG) FROM SU_COMMENT WHERE PRO_NUM = #{proNum}
+	</select>
+	
+	<!-- 리뷰 갯수 가져오기 -->
+	<select id="getReviewCount" parameterType="SuitUpCommentVO" resultType="int">
+	SELECT COUNT(COM_AVG) FROM SU_COMMENT WHERE PRO_NUM = #{proNum}
+	</select>
+	
 </mapper>

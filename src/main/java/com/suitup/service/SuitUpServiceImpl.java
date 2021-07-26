@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.suitup.dao.SuitUpDAO;
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
+import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
@@ -100,6 +101,36 @@ public class SuitUpServiceImpl implements SuitUpService {
 	// 상품 재고 수정
 	public int updateProduct(SuitUpProductVO vo) {
 		return suitupDAO.updateProduct(vo);
+	}
+
+	// 리뷰 불러오기
+	public List<SuitUpCommentVO> getCommentList(SuitUpCommentVO vo) {
+		return suitupDAO.getCommentList(vo);
+	}
+
+	// 리뷰 등록하기
+	public int insertComment(SuitUpCommentVO vo) {
+		return suitupDAO.insertComment(vo);
+	}
+
+	// 리뷰 삭제하기
+	public int deleteComment(SuitUpCommentVO vo) {
+		return suitupDAO.deleteComment(vo);
+	}
+
+	// 리뷰 수정하기
+	public int updateComment(SuitUpCommentVO vo) {
+		return suitupDAO.updateComment(vo);
+	}
+
+	// 상품 별점 가져오기
+	public long getReviewAvg(SuitUpCommentVO vo) {
+		return suitupDAO.getReviewAvg(vo);
+	}
+
+	// 상품 리뷰 갯수 가져오기
+	public int getReviewCount(SuitUpCommentVO vo) {
+		return suitupDAO.getReviewCount(vo);
 	}
 
 }
