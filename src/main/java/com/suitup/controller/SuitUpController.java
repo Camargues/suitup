@@ -191,7 +191,7 @@ public class SuitUpController {
 	}
 	
 	// 주문내역 진입시
-		@RequestMapping("history.do")
+		@RequestMapping("my-page.do")
 		public String history(Model m, HttpServletRequest request, HttpSession session) {
 			
 			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
@@ -218,7 +218,7 @@ public class SuitUpController {
 			vo.setMemId("admin");
 			m.addAttribute("orderList", suitupService.getOrderList(vo));
 			m.addAttribute("categoryList", suitupService.getCategoryList());
-			return "history";
+			return "my-page";
 			}
 			return "login-register";
 		}
