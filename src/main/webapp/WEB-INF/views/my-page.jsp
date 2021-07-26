@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
      <c:if test="${cookie.SuitUpidCookie.value == null}">
-	     <c:if test="${sessionScope.SuitUpid == null}">
-	     	<c:redirect url="login-register.do"/>
-	     </c:if>
+     <c:if test="${sessionScope.SuitUpid == null}">
+   	<c:redirect url="login-register.do"/>
+     </c:if>
      </c:if>
 
 <!DOCTYPE html>
@@ -37,8 +37,6 @@
     <link rel="stylesheet" href="resources/css/responsive.css">
     <!-- User style -->
     <link rel="stylesheet" href="resources/css/custom.css">
-
-
     <!-- Modernizr JS -->
     <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -258,55 +256,76 @@
             <!-- End Search Popap -->
 		</div>
         <!-- Start Feature Product -->
-       <section class="categories-slider-area bg__white">
-            <div class="container">
-                <div class="row">
+       <div class="container" >
+                <div class="row" >
                     <!-- Start Left Feature -->
-                    <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12 float-left-style">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 " style="display: flex;">
                         <!-- Start Slider Area -->
-                        <div class="slider__container slider--one">
-                            <div class="slider__activation__wrap owl-carousel owl-theme">
-                                <!-- Start Single Slide -->
-                                <div class="slide slider__full--screen slider-height-inherit slider-text-right" style="background: rgba(0, 0, 0, 0) url(images/slider/bg/1.png) no-repeat scroll center center / cover ;">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-10 col-lg-8 col-md-offset-2 col-lg-offset-4 col-sm-12 col-xs-12">
-                                                <div class="slider__inner">
-                                                    <h1>New Product <span class="text--theme">Collection</span></h1>
-                                                    <div class="slider__btn">
-                                                        <a class="htc__btn" href="cart.html">shop now</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-md-3 col-lg-3 col-sm-4 col-xs-4 float-right-style">
+                            <div class="categories-menu mrg-xs">
+                                <div class="category-heading" style="width: 200px;">
+                                   <h3> 카테고리</h3>
                                 </div>
-                               
-                                <!-- End Single Slide -->
-                            </div>
-                        </div>
-                        <!-- Start Slider Area -->
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12 float-right-style">
-                        <div class="categories-menu mrg-xs">
-                            <div class="category-heading">
-                               <h3> 카테고리</h3>
-                            </div>
-                            <div class="category-menu-list">
-                                <ul>
-                                    <li><a href="#"><img alt="" src="images/icons/thum2.png"> 회원 정보 변경 <i class="zmdi zmdi-chevron-right"></i></a></li>
-                                    <li><a href="#"><img alt="" src="images/icons/thum2.png"> 주문내역 <i class="zmdi zmdi-chevron-right"></i></a></li>
-                                    <li><a href="#"><img alt="" src="images/icons/thum2.png"> 장바구니 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                <div class="category-menu-list" style="width: 200px;">
+                                    <ul>
+                                        <li><a href="my-page.do"><img alt="" src="images/icons/thum2.png"> 
+                                    		<span class="ti-notepad"></span>&emsp;주문내역 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    <li><a href="my-page-cart.do"><img alt="" src="images/icons/thum2.png"> 
+                                    		<span class="ti-shopping-cart"></span>&emsp;장바구니 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    <li><a href="my-page-modify.do"><img alt="" src="images/icons/thum2.png"> 
+                                    		<span class="ti-user"></span>&emsp;회원 정보 변경 <i class="zmdi zmdi-chevron-right"></i></a></li>
                                      
-                                    </li>
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                                            <div class="table-content " style="width: 1200px;padding-left:50px;" >
+									       	<h1 style="display:flex;    justify-content: center;">주문내역</h1></br>
+                                                <table >
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="product-thumbnail" >주문번호</th>
+                                                            <th class="product-name" >상품명</th>
+                                                            <th class="product-price">가격</th>
+                                                            <th class="product-size">사이즈</th>
+                                                            <th class="product-color" >색상</th>
+                                                            <th class="product-quantity" >수량</th>
+                                                            <th class="product-subtotal">합계</th>
+                                                            <th class="product-remove" >주문상태</th>
+                                                            <th class="product-remove" >요청사항</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <!-- 장바구니 합계 구할 sum 함수 선언 -->
+                                                    <c:if test="${not empty orderList }">
+                                                   
+                                                    <c:forEach items="${orderList }" var="order">
+                                                   
+                                                        <tr>
+                                                            <td class="product-thumbnail" ><span class="amount">${order.orderNum }</span></td>
+                                                            <td class="product-name"><a href="#">${order.proName }</a></td>
+                                                            <td class="product-price" ><span class="amount">${order.proPrice }</span></td>
+                                                            <td class="product-size" ><span class="amount">${order.dtproSize }</span></td>
+                                                            <td class="product-color" ><span class="amount">${order.dtproColor }</span></td>
+                                                            <td class="product-quantity" ><input type="number" value="${order.orderCount }" readonly/></td>
+                                                            <td class="product-subtotal" >${order.proPrice * order.orderCount }</td>
+                                                            <td class="product-remove" >${order.orderStatus }</td>
+                                                            <td class="product-remove">${order.orderMemo }</td>
+                                                        </tr>
+                                                        
+                                                        </c:forEach>
+                                                        </c:if>
+                                                    </tbody>
+                                                </table>
+                                            </div> 
+                                        </div>                        
+                                 
+                        <!-- End Slider Area -->
                     </div>
+                   
                     <!-- End Left Feature -->
                 </div>
             </div>
-        </section>
         <!-- End Feature Product -->
       
         <!-- Start Footer Area -->
@@ -409,6 +428,8 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
+  
+  	
 
 </body>
 

@@ -35,4 +35,13 @@ public interface SuitUpService {
 	
 	public List<SuitUpProductVO> getNewList();
 	
+	// 관리자 상품등록
+	public int Productinsert(SuitUpProductVO vo);
+		
+	// 관리자 상품 목록		
+	public List<SuitUpProductVO> getAdminList();
+
+	// 정보수정
+    public int memModifiy(SuitUpCustomerVO vo);
+	
 }

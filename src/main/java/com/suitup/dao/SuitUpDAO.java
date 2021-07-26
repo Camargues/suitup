@@ -31,6 +31,15 @@ public interface SuitUpDAO {
 	public List<SuitUpProductVO> getPopularList(SuitUpProductVO vo);
 	
 	public List<SuitUpProductVO> getNewList();
+	
+	//관리자 상품등록
+	public int Productinsert(SuitUpProductVO vo);
+		
+	//관리자 상품목록
+	public List<SuitUpProductVO> getAdminList();
+	
+	//회원정보 수정
+	public int memberModify(SuitUpCustomerVO vo);
 
 	
 }

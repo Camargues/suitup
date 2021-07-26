@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<!doctype html>
-<html lang="ko">
+     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+     <c:if test="${cookie.SuitUpidCookie.value == null}">
+     <c:if test="${sessionScope.SuitUpid == null}">
+   	<c:redirect url="login-register.do"/>
+     </c:if>
+     </c:if>
+
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,6 +24,9 @@
     <!-- All css files are included here. -->
     <!-- Bootstrap fremwork main css -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <!-- Owl Carousel main css -->
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="resources/css/owl.theme.default.min.css">
     <!-- This core.css file contents all plugings css file. -->
     <link rel="stylesheet" href="resources/css/core.css">
     <!-- Theme shortcodes/elements style -->
@@ -28,14 +37,12 @@
     <link rel="stylesheet" href="resources/css/responsive.css">
     <!-- User style -->
     <link rel="stylesheet" href="resources/css/custom.css">
-
-
     <!-- Modernizr JS -->
     <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-1.7.1.js"></script>
 </head>
 
 <body>
+
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
@@ -62,11 +69,13 @@
                                     <li class="drop"><a href="index.jsp">홈</a></li>
                                     <li class="drop"><a href="#">인기상품</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">아우터</a></li>
-                                            <li><a href="#">상의</a></li>
-                                            <li><a href="#">하의</a></li>
-                                            <li><a href="#">신발</a></li>
-                                            <li><a href="#">모자</a></li>
+                                        <c:set var="cateName" value=""/>
+                                        <c:forEach items="${categoryList }" var="list">
+                                        <c:if test="${cateName != list.cateName}">
+                                            <li><a href="#">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                         </ul>
                                     </li>
                                     <li class="drop"><a href="#">카테고리</a>
@@ -85,43 +94,52 @@
                                             <!-- Start Single Mega MEnu -->
                                             <li id="tabUl1" style="display: block;"><a class="mega__title" href="#" >아우터</a>
                                                 <ul class="mega__item">
-                                                    <li><a href="#">아우터 1</a></li>
-                                                    <li><a href="#">아우터 2</a></li>
-                                                    <li><a href="#">아우터 3</a></li>
+                                                <c:set var='cateNum' value='1'/>
+                                        		<c:forEach items='${categoryList }' var='list'>
+                                        		<c:if test='${list.cateNum eq cateNum}'>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
+                                            </c:if>
+                                            </c:forEach>                                               
                                                </ul>
                                             </li>
                                             <li id="tabUl2" style="display: block;"><a class="mega__title" href="#" >상의</a>
                                                 <ul class="mega__item">
-                                                    <li><a href="#">상의 1</a></li>
-                                                    <li><a href="#">상의 2</a></li>
-                                                    <li><a href="#">상의 3</a></li>
+                                                    <c:set var='cateNum' value='2'/>
+                                        		<c:forEach items='${categoryList }' var='list'>
+                                        		<c:if test='${list.cateNum eq cateNum}'>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
+                                            </c:if>
+                                            </c:forEach> 
                                                </ul>
                                             </li>
                                             <li id="tabUl3"><a class="mega__title" href="#" >하의</a>
                                                 <ul class="mega__item">
-                                                    <li><a href="#">하의 1</a></li>
-                                                    <li><a href="#">하의 2</a></li>
-                                                    <li><a href="#">하의 3</a></li>
-                                                    <li><a href="#">하의 4</a></li>
-                                                    <li><a href="#">하의 5</a></li>
+                                                    <c:set var='cateNum' value='3'/>
+                                        		<c:forEach items='${categoryList }' var='list'>
+                                        		<c:if test='${list.cateNum eq cateNum}'>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
+                                            </c:if>
+                                            </c:forEach> 
                                                </ul>
                                             </li>
                                             <li id="tabUl4"><a class="mega__title" href="#" >신발</a>
                                                 <ul class="mega__item">
-                                                    <li><a href="#">신발 1</a></li>
-                                                    <li><a href="#">신발 2</a></li>
-                                                    <li><a href="#">신발 3</a></li>
-                                                    <li><a href="#">신발 4</a></li>
-                                                    <li><a href="#">신발 5</a></li>
+                                                    <c:set var='cateNum' value='4'/>
+                                        		<c:forEach items='${categoryList }' var='list'>
+                                        		<c:if test='${list.cateNum eq cateNum}'>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
+                                            </c:if>
+                                            </c:forEach> 
                                                </ul>
                                             </li>
                                             <li id="tabUl5"><a class="mega__title" href="#" >모자</a>
                                                 <ul class="mega__item">
-                                                    <li><a href="#">모자 1</a></li>
-                                                    <li><a href="#">모자 2</a></li>
-                                                    <li><a href="#">모자 3</a></li>
-                                                    <li><a href="#">모자 4</a></li>
-                                                    <li><a href="#">모자 5</a></li>
+                                                    <c:set var='cateNum' value='5'/>
+                                        		<c:forEach items='${categoryList }' var='list'>
+                                        		<c:if test='${list.cateNum eq cateNum}'>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
+                                            </c:if>
+                                            </c:forEach> 
                                                </ul>
                                             </li>
                                             <!-- End Single Mega MEnu -->
@@ -140,7 +158,7 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                     <li><a href="cart.do">장바구니</a></li>
+                                    <li><a href="cart.do">장바구니</a></li>
                                     <li><a href="checkout.do">결제하기</a></li>
                                     <li><a href="history.do">주문내역</a></li>
                                     <!-- mem_admin 쿼리값이 1일때만 노출 -->
@@ -160,25 +178,30 @@
                                         <li><a href="index.jsp">홈</a></li>
                                         <li><a href="#">인기상품</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                   <c:set var="cateName" value=""/>
+                                       		 <c:forEach items="${categoryList }" var="list">
+                                       		 <c:if test="${cateName != list.cateName}">
+                                            <li><a href="#">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
+                                     
                                         <li><a href="#">카테고리별</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                <c:set var="cateName" value=""/>
+                                       			 <c:forEach items="${categoryList }" var="list">
+                                        		<c:if test="${cateName != list.cateName}">
+                                            <li><a href="shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
                                         <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="checkout.do">결제하기</a></li>
-                                    <li><a href="history.do">주문내역</a></li>
+                                        <li><a href="checkout.do">결제하기</a></li>
+                                        <li><a href="history.do">주문내역</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -187,13 +210,12 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                               	<c:choose>   
+								<c:choose>   
 								<c:when test="${sessionScope.SuitUpid != null}">
                                 <li><a href="my-page.do"><span class="ti-user"></span></a></li>
-								</c:when>
+								</c:when> 
 								<c:when test="${cookie.SuitUpidCookie.value != null}">
                                 <li><a href="my-page.do"><span class="ti-user"></span></a></li>								</c:when>
-								
 								<c:otherwise>
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
@@ -232,68 +254,143 @@
                 </div>
             </div>
             <!-- End Search Popap -->
-        </div>
-        <!-- End Offset Wrapper -->
-        <!-- Start Login Register Area -->
-        <div class="htc__login__register bg__white ptb--130" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/5.jpg) no-repeat scroll center center / cover ;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <ul class="login__register__menu" role="tablist">
-                            <li role="presentation" class="login active"><a href="#login" role="tab" data-toggle="tab">Login</a></li>
-                            <li role="presentation" class="register"><a href="#register" role="tab" data-toggle="tab">Register</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Start Login Register Content -->
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="htc__login__register__wrap">
-                            <!-- Start Single Content -->
-                            <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
-                                <form class="login" method="post" id="loginForm" action="login.do" >
-                                    <input type="text"  placeholder="User Name*" id="memId" name="memId">
-                                    <input type="password" placeholder="Password*" id="memPass" name="memPass">
-                                    <span id="idResult" style="width:150px;color:red"></span>
-                                </form>
-                                <div class="tabs__checkbox">
-                                    <input type="checkbox" name="cookieOn" value="cookieOn">
-                                    <span> 로그인 상태 유지</span>
-                                    <span class="forget"><a href="#">비밀번호 찾기</a></span>
+		</div>
+        <!-- Start Feature Product -->
+       <div class="container" >
+                <div class="row" >
+                    <!-- Start Left Feature -->
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 " style="display: flex;">
+                        <!-- Start Slider Area -->
+                        <div class="col-md-3 col-lg-3 col-sm-4 col-xs-4 float-right-style">
+                            <div class="categories-menu mrg-xs">
+                                <div class="category-heading" style="width: 200px;">
+                                   <h3> 카테고리</h3>
                                 </div>
-                                <div class="htc__login__btn mt--30">
-                                    <a href="#" onclick="id_check();">Login</a>
+                                <div class="category-menu-list" style="width: 200px;">
+                                    <ul>
+                                      <li><a href="my-page.do"><img alt="" src="images/icons/thum2.png"> 
+                                    		<span class="ti-notepad"></span>&emsp;주문내역 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    <li><a href="my-page-cart.do"><img alt="" src="images/icons/thum2.png"> 
+                                    		<span class="ti-shopping-cart"></span>&emsp;장바구니 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    <li><a href="my-page-modify.do"><img alt="" src="images/icons/thum2.png"> 
+                                    		<span class="ti-user"></span>&emsp;회원 정보 변경 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                     
+                                    </ul>
                                 </div>
-                             
                             </div>
-                            <!-- End Single Content -->
-                            <!-- Start Single Content -->
-                            <div id="register" role="tabpanel" class="single__tabs__panel tab-pane fade">
-                                <form class="login" method="post" id="registerForm" name="registerForm"action="register.do">
-                                    <input type="text" placeholder="아이디*" id="regiMemId" name="memId">
-                                    <span id="idCheckResult" style="width:150px;color:red"></span>
-                                    <input type="hidden"/>
-                                    <input type="password" placeholder="비밀번호*" id="regiMemPass" name="memPass">
-                                    <input type="password" placeholder="비밀번호 재확인*" id="regiMemPassConfirm">
-                                    <input type="text" placeholder="이름*" id="regiMemName" name="memName">
-                                    <input type="text" placeholder="주소" id="regiMemAddr" name="memAddr">
-                                    <a href="#" onclick="goPopup();">> 주소찾기</a>
-                                    <input type="hidden"/>
-                                    <input type="text" placeholder="휴대폰 번호" id="regiMemPhone" name="memPhone">
-                                <div class="htc__login__btn">
-                                  <a href='#'  onclick="register_check();">register</a>
-                                  </div>
-                                </form>
-                             
-                            </div>
-                            <!-- End Single Content -->
                         </div>
+                                            <div class="table-content " style="width: 1200px;padding-left:50px;" >
+									       	<h1 style="display:flex;    justify-content: center;">장바구니</h1></br>
+                                          <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">상품이미지</th>
+                                            <th class="product-name">상품명</th>
+                                            <th class="product-price">가격</th>
+                                            <th class="product-size">사이즈</th>
+                                            <th class="product-color">색상</th>
+                                            <th class="product-quantity">수량</th>
+                                            <th class="product-subtotal">합계</th>
+                                            <th class="product-remove">상품삭제</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- 장바구니 합계 구할 sum 함수 선언 -->
+                                    <c:set var = "sum" value = "0" />
+                                    <c:if test="${not empty cartList }">
+                                   
+                                    <c:forEach items="${cartList }" var="cart">
+                                   
+                                        <tr>
+                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
+                                            <td class="product-name"><a href="#">${cart.proName }</a></td>
+                                            <td class="product-price"><span class="amount">${cart.proPrice }</span></td>
+                                            <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
+                                            <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
+                                            <td class="product-quantity"><input type="number" value="${cart.cartCount }" id="${cart.cartNum }"/></td>
+                                            <td class="product-subtotal">${cart.proPrice * cart.cartCount }</td>
+                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cart.cartNum }">X</a></td>
+                                        </tr>
+                                        <c:set var= "sum" value="${sum + (cart.proPrice * cart.cartCount)}"/>
+                                        </c:forEach>
+                                        </c:if>
+                                    </tbody>
+                                </table>
+                                
+                                <div class="cart_totals">
+                                        <h2>장바구니 합계</h2>
+                                        <table>
+                                            <tbody>
+                                                <tr class="cart-subtotal">
+                                                    <th>합계</th>
+                                                    <td style="width:200px"><span class="amount">${sum } 원</span></td>
+                                                </tr>
+                                                <tr class="shipping">
+                                                    <th>배송비</th>
+                                                    <td style="width:200px">
+                                                        <ul id="shipping_method">
+                                                            <li>
+                                                            <!-- 10만원 미만시 2500원 -->
+                                                                <label>
+                                                                 <c:choose>
+                                                                 <c:when test="${empty cartList or sum < 100000}">
+                                                                    <span class="amount">2500 원</span>
+                                                                    <c:set var= "sum" value="${sum + 2500}"/>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                    <span class="amount">무료</span>
+                                                                    </c:otherwise>
+                                                                    </c:choose>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                        </ul>
+                                                        <p class="shipping-calculator-button">10만원 이상 구매시 배송비 무료</p>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr class="order-total">
+                                                    <th>합계</th>
+                                                    <td style="width:200px">
+                                                    <c:if test="${sum <= 2500}">
+                                                    <c:set var="sum" value="0"/>
+                                                    </c:if>
+                                                        <strong><span class="amount">${sum }&nbsp;원</span></strong>
+                                                    </td>
+                                                </tr>                                           
+                                                <tr><th><td></td></th></tr>
+                                            	<tr>
+                                            	<th>
+                                            	<div class="buttons-cart">
+			                                        <a href="index.do">쇼핑 계속하기</a>
+			                                   </div>
+                                            	</th>
+                                            	 <td style="padding:0">
+                                            	    <div class="buttons-cart" style="justify-content:right;align-items:right;padding-left:150px">
+			                                        <a href="checkout.do">상품 결제하기</a>
+			                                  		  </div>
+		                                       	
+                                            	 </td>
+                                            	 
+                                            	</tr>
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                    
+                                  </div> 
+                              </div>                        
+                       
+                               
+                        <!-- End Slider Area -->
+                        
                     </div>
+                   
+                    <!-- End Left Feature -->
                 </div>
-                <!-- End Login Register Content -->
             </div>
-        </div>
-        <!-- End Login Register Area -->
+        <!-- End Feature Product -->
+      
         <!-- Start Footer Area -->
         <footer class="htc__foooter__area gray-bg">
             <div class="container">
@@ -365,7 +462,7 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="index.jsp">홈</a></li>
+                                    <li><a href="#">홈</a></li>
                                     <li><a href="#">인기상품</a></li>
                                     <li><a href="cart.do">장바구니</a></li>
                                 </ul>
@@ -379,6 +476,7 @@
         <!-- End Footer Area -->
     </div>
     <!-- Body main wrapper end -->
+    
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!-- jquery latest version -->
@@ -393,7 +491,8 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
-    <script src="resources/js/loginRegister.js"></script>
+  
+  	
 
 </body>
 

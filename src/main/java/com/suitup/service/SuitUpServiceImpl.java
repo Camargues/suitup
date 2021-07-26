@@ -71,5 +71,20 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public List<SuitUpProductVO> getNewList() {
 		return suitupDAO.getNewList();
 	}
+	
+	// 상품등록
+			public int Productinsert(SuitUpProductVO vo) {
+				return suitupDAO.Productinsert(vo);
+	}
+		
+	// 관리자 상품 목록 불러오기
+	public List<SuitUpProductVO> getAdminList(){
+		System.out.println("--------------service-----------------");
+		return suitupDAO.getAdminList();
+	}
+	//정보수정
+    public int memModifiy(SuitUpCustomerVO vo) {
+        return suitupDAO.memberModify(vo);
+    }
 
 }

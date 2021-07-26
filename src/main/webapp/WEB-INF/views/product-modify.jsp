@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+    
 <!doctype html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Suit Up</title>
+    <title>장바구니 | Suit up</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -18,6 +19,9 @@
     <!-- All css files are included here. -->
     <!-- Bootstrap fremwork main css -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <!-- Owl Carousel main css -->
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="resources/css/owl.theme.default.min.css">
     <!-- This core.css file contents all plugings css file. -->
     <link rel="stylesheet" href="resources/css/core.css">
     <!-- Theme shortcodes/elements style -->
@@ -32,7 +36,6 @@
 
     <!-- Modernizr JS -->
     <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-1.7.1.js"></script>
 </head>
 
 <body>
@@ -140,9 +143,9 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                     <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="checkout.do">결제하기</a></li>
-                                    <li><a href="history.do">주문내역</a></li>
+                                      <li><a href="cart.do">장바구니</a></li>
+                                        <li><a href="checkout.do">결제하기</a></li>
+                                        <li><a href="history.do">주문내역</a></li>
                                     <!-- mem_admin 쿼리값이 1일때만 노출 -->
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -177,8 +180,8 @@
                                             </ul>
                                         </li>
                                         <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="checkout.do">결제하기</a></li>
-                                    <li><a href="history.do">주문내역</a></li>
+                                        <li><a href="checkout.do">결제하기</a></li>
+                                        <li><a href="history.do">주문내역</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -187,18 +190,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                               	<c:choose>   
-								<c:when test="${sessionScope.SuitUpid != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>
-								</c:when>
-								<c:when test="${cookie.SuitUpidCookie.value != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								</c:when>
-								
-								<c:otherwise>
-                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
-								</c:otherwise>
-								
-                               </c:choose>
+                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -232,69 +224,105 @@
                 </div>
             </div>
             <!-- End Search Popap -->
-        </div>
+		</div>
         <!-- End Offset Wrapper -->
-        <!-- Start Login Register Area -->
-        <div class="htc__login__register bg__white ptb--130" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/5.jpg) no-repeat scroll center center / cover ;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <ul class="login__register__menu" role="tablist">
-                            <li role="presentation" class="login active"><a href="#login" role="tab" data-toggle="tab">Login</a></li>
-                            <li role="presentation" class="register"><a href="#register" role="tab" data-toggle="tab">Register</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Start Login Register Content -->
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="htc__login__register__wrap">
-                            <!-- Start Single Content -->
-                            <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
-                                <form class="login" method="post" id="loginForm" action="login.do" >
-                                    <input type="text"  placeholder="User Name*" id="memId" name="memId">
-                                    <input type="password" placeholder="Password*" id="memPass" name="memPass">
-                                    <span id="idResult" style="width:150px;color:red"></span>
-                                </form>
-                                <div class="tabs__checkbox">
-                                    <input type="checkbox" name="cookieOn" value="cookieOn">
-                                    <span> 로그인 상태 유지</span>
-                                    <span class="forget"><a href="#">비밀번호 찾기</a></span>
-                                </div>
-                                <div class="htc__login__btn mt--30">
-                                    <a href="#" onclick="id_check();">Login</a>
-                                </div>
-                             
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/2.jpg) no-repeat scroll center center / cover ;">
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner text-center">
+                                <h2 class="bradcaump-title">상품수정</h2>
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="index.jsp">홈</a>
+                                  <span class="brd-separetor">/</span>
+                                  <span class="breadcrumb-item active">상품수정</span>
+                                </nav>
                             </div>
-                            <!-- End Single Content -->
-                            <!-- Start Single Content -->
-                            <div id="register" role="tabpanel" class="single__tabs__panel tab-pane fade">
-                                <form class="login" method="post" id="registerForm" name="registerForm"action="register.do">
-                                    <input type="text" placeholder="아이디*" id="regiMemId" name="memId">
-                                    <span id="idCheckResult" style="width:150px;color:red"></span>
-                                    <input type="hidden"/>
-                                    <input type="password" placeholder="비밀번호*" id="regiMemPass" name="memPass">
-                                    <input type="password" placeholder="비밀번호 재확인*" id="regiMemPassConfirm">
-                                    <input type="text" placeholder="이름*" id="regiMemName" name="memName">
-                                    <input type="text" placeholder="주소" id="regiMemAddr" name="memAddr">
-                                    <a href="#" onclick="goPopup();">> 주소찾기</a>
-                                    <input type="hidden"/>
-                                    <input type="text" placeholder="휴대폰 번호" id="regiMemPhone" name="memPhone">
-                                <div class="htc__login__btn">
-                                  <a href='#'  onclick="register_check();">register</a>
-                                  </div>
-                                </form>
-                             
-                            </div>
-                            <!-- End Single Content -->
                         </div>
                     </div>
                 </div>
-                <!-- End Login Register Content -->
             </div>
         </div>
-        <!-- End Login Register Area -->
-        <!-- Start Footer Area -->
+        <!-- End Bradcaump area -->
+        <!-- cart-main-area start -->
+        <div class="cart-main-area ptb--120 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div>
+                            <h2> 상품 수정 </h2>
+
+<form role="form" method="post" autocomplete="off">
+
+<div class="inputArea"> 
+ <label>1차 분류</label>
+ <select class="category1">
+  <option value="">전체</option>
+ </select>
+
+ <label>2차 분류</label>
+ <select class="category2" name="cateCode">
+  <option value="">전체</option>
+ </select>
+</div>
+
+<div class="inputArea">
+ <label for="proName">상품명</label>
+ <input type="text" id="proName" name="proName" />
+</div>
+
+<div class="inputArea">
+ <label for="proPrice">상품가격</label>
+ <input type="text" id="proPrice" name="proPrice" />
+</div>
+
+<div class="inputArea">
+ <label for="dtproCount">상품수량</label>
+ <input type="text" id="dtproCount" name="dtproCount" />
+</div>
+
+<div class="inputArea">
+ <label for="proDetail">상품소개</label>
+ <textarea rows="5" cols="50" id="proDetail" name="proDetail"></textarea>
+</div>
+ <div class="inputArea">
+           <label for="proimg">이미지<td width="70">    </td>
+           <input type="file" id="proimg" name='proimg' maxlength="60" size="40">
+            </div>
+<div class="inputArea">
+ <button type="submit" id="updateBtn" class="btn btn-primary">완료</button> 
+ <button type="submit" id="backBtn" class="btn btn-warning">취소</button>
+ 
+ 
+ <script>
+ //뒤로가기 기능
+ $("#backBtn").click(function(){
+  history.back();
+  </script>
+  
+</div>
+
+</form>
+                  
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            </div> 
+                    	</div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- cart-main-area end -->
+         <!-- Start Footer Area -->
         <footer class="htc__foooter__area gray-bg">
             <div class="container">
                 <div class="row">
@@ -368,6 +396,7 @@
                                     <li><a href="index.jsp">홈</a></li>
                                     <li><a href="#">인기상품</a></li>
                                     <li><a href="cart.do">장바구니</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -393,7 +422,8 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
-    <script src="resources/js/loginRegister.js"></script>
+    <!-- 카트 개별 삭제 ajax -->
+    <script src="resources/js/cart.js"></script>
 
 </body>
 

@@ -161,9 +161,8 @@
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">상품 등록</a></li>
-                                            <li><a href="#">상품 삭제</a></li>
-                                            <li><a href="#">상품 수정</a></li>
+                                            <li><a href="product-insert.do">상품 등록</a></li>
+                                            <li><a href="product-list.do">상품 목록</a></li>
                                         </ul>
                                     </li>
                                     </c:if>

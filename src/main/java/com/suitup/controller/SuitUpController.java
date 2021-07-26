@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.suitup.domain.SuitUpCartVO;
+import com.suitup.domain.SuitUpCategoryVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
@@ -324,4 +326,83 @@ public class SuitUpController {
 			m.addAttribute("categoryList", suitupService.getCategoryList());
 			m.addAttribute("popularList", suitupService.getPopularList(vo));
 		}
+		
+		//관리자 상품 등록페이지 
+				@RequestMapping("product-insert.do") 
+				public void productinsert(Model m) {
+					
+					List<SuitUpCategoryVO> categoryList=suitupService.getCategoryList();
+					m.addAttribute("categoryList",categoryList);
+				}
+				
+				//관리자 상품 DB에 저장
+				@RequestMapping(value="product-save.do",method=RequestMethod.POST) 
+				public String productSave(Model m,SuitUpProductVO vo,HttpServletRequest request,HttpSession session) {
+					System.out.println("####save######");
+					
+					System.out.println(vo.getProNum()); 	
+					System.out.println(vo.getProName());
+					System.out.println(vo.getProPrice());
+					System.out.println(vo.getProDetail());
+					System.out.println(vo.getCateNum());
+					System.out.println(vo.getCateDtnum());
+					System.out.println(vo.getDtproCount());
+					
+					suitupService.Productinsert(vo);
+					
+					return "redirect:product-insert.do";
+				}
+				// 관리자 상품 목록
+				@RequestMapping("product-list.do") 
+				public void adminlist(Model m) {
+					SuitUpProductVO vo = new SuitUpProductVO();
+					
+					System.out.println("--------------Controller-----------------");
+					
+					List<SuitUpProductVO> adminlist=suitupService.getAdminList();
+			
+					m.addAttribute("adminlist",adminlist);		
+				}
+				// 관리자 상품 수정 
+				
+				//주소 팝업
+			    @RequestMapping("/jusoPopup.do")
+			    public String zipcode() throws Exception {
+			    return "jusoPopup";
+			    }
+
+			    //회원정보 수정
+			    @RequestMapping("memModify.do")
+			    public ModelAndView memModifiy(ModelAndView mv,SuitUpCustomerVO vo) {
+			        int result = suitupService.memModifiy(vo);
+			        
+			        System.out.println(result);
+
+			        mv.setViewName("redirect:my-page-modify.do");
+			        mv.addObject("result", result);
+
+			        return mv;
+			    }
+			    
+			  //회원가입 수정 정보 내보낼때
+			    @RequestMapping("my-page-modify.do")
+			    public void memberModify(Model m , HttpServletRequest request,HttpSession session) {
+			        // 쿠키에서 가져올 id값을 저장할 변수 id 선언
+			        SuitUpCustomerVO vo = new SuitUpCustomerVO();
+			        String id = null;
+			        // 쿠키 가져오기
+			        Cookie[] cookies = request.getCookies();
+			        for(Cookie cookie : cookies) {
+			            if(cookie.getName().equals("SuitUpidCookie"))
+			                id = cookie.getValue();
+			        }
+			        // 쿠키가 null 이면 세션 가져오기
+			        if(id == null)
+			        id = (String) session.getAttribute("SuitUpid");
+			        if(id != null) {
+			        vo.setMemId(id);
+			        }
+			        m.addAttribute("mem",suitupService.userIdCheck(vo));
+			    }
+		
 }

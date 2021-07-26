@@ -35,23 +35,10 @@
 	</select>
 	
 	<!-- 회원 가입 -->
-	<insert id="userInsert" parameterType="SuitUpCustomerVO">
-		INSERT INTO SU_MEM(MEM_ID,mem_admin,MEM_PASS,MEM_NAME,MEM_ADDR,MEM_PHONE) 
-		values(#{memId},0,#{memPass},#{memName},
-		<choose>
-			<when test="memAddr==null"> 
-				null,#{memPhone})
-			</when>
-
-			<when test="memPhone==null">
-				#{memAddr},null)
-			</when>
-			
-			<otherwise>
-				#{memAddr},#{memPhone})			
-			</otherwise>
-		</choose>
-	</insert>  
+	<insert parameterType="SuitUpCustomerVO" id="userInsert">
+	INSERT INTO SU_MEM(MEM_ID,mem_admin,MEM_PASS,MEM_NAME,MEM_ADDR,MEM_PHONE)
+	values(#{memId},0,#{memPass},#{memName},#{memAddr},#{memPhone})
+	</insert>
 	
 	<!-- 아이디 중복 체크 -->
 	<select id="idCheck" resultType="SuitUpCustomerVO" parameterType="SuitUpCustomerVO">
@@ -97,4 +84,26 @@
 		WHERE A.PRO_NUM = SU_PRO.PRO_NUM
 	]]>
 	</select>
+	
+	<!-- 관리자 상품 등록하기 -->
+	<insert id="Productinsert"  parameterType="SuitUpProductVO" >
+	    
+	       insert into SU_PRO 
+	       (PRO_NUM,PRO_NAME,PRO_PRICE,PRO_DETAIL,CATE_NUM,CATE_DTNUM,DTPRO_COUNT)
+	    
+	       values 
+	       ( SEQ_SU_PRO.NEXTVAL,#{proName},#{proPrice},#{proDetail},#{cateNum},#{cateDtnum},#{dtproCount})
+	
+	</insert>
+	
+	<!--  관리자 상품목록 불러오기 -->
+	<select id="getAdminList" parameterType="SuitUpProductVO" resultType="SuitUpProductVO">
+		SELECT * FROM SU_PRO
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update parameterType="SuitUpCustomerVO" id="memberModify">
+	UPDATE su_mem SET mem_name = #{memName},mem_addr=#{memAddr},mem_phone=#{memPhone} WHERE mem_id = #{memId}
+	</update>
+	
 </mapper>

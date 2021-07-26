@@ -83,4 +83,24 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("===> Mybatis getNewList() 호출");
 		return mybatis.selectList("SuitUpDAO.getNewList");
 	}
+	
+	// 관리자 상품 등록하기
+		public int Productinsert(SuitUpProductVO vo) {
+			System.out.println("===> Mybatis Productinsert() 호출");
+			return mybatis.insert("SuitUpDAO.Productinsert",vo);
+	}
+		
+	// 관리자 상품 목록
+	public List<SuitUpProductVO> getAdminList() {
+		System.out.println("===> Mybatis getAdminList() 호출");
+		return mybatis.selectList("SuitUpDAO.getAdminList");
+	}
+		
+	//정보 수정
+    public int memberModify(SuitUpCustomerVO vo) {
+        System.out.println("===> Mybatis memberModify() 호출");
+        return mybatis.update("SuitUpDAO.memberModify",vo);
+
+    }
+    
 }
