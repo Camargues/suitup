@@ -60,4 +60,6 @@ public interface SuitUpDAO {
 	public long getReviewAvg(SuitUpCommentVO vo);
 	
 	public int getReviewCount(SuitUpCommentVO vo);
+	
+	public SuitUpCommentVO getComment(SuitUpCommentVO vo);
 }

@@ -322,6 +322,8 @@ public class SuitUpController {
 		return "redirect:index.jsp";
 		}
 		
+		
+		
 		// 인기상품 페이지
 		@RequestMapping("popularity-shop.do")
 		public void popular(Model m, String cateNum) {
@@ -472,17 +474,97 @@ public class SuitUpController {
 			// 로그인이 안되있을경우 로그인 페이지로 리턴
 			if(id == null)
 				return "login-register";
-				
-			System.out.println(vo.getComAvg());
-			System.out.println(vo.getComContent());
-			System.out.println(vo.getComTitle());
-			System.out.println(vo.getMemId());
-			System.out.println(vo.getProNum());
 			
 			suitupService.insertComment(vo);
 			
 			return "redirect:product.do?proNum=" + vo.getProNum();
 			
+		}
+		
+		// 리뷰 수정페이지
+		@RequestMapping("modify-review.do")
+		public String modifyReview(SuitUpCommentVO vo, HttpServletRequest request,HttpSession session, Model m) {
+			
+			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+			String id = null;
+			// 쿠키 가져오기
+			Cookie[] cookies = request.getCookies();
+				for(Cookie cookie : cookies) {
+						if(cookie.getName().equals("SuitUpidCookie"))
+							id = cookie.getValue();
+						}
+											
+			// 쿠키가 null 이면 세션 가져오기
+			if(id == null)
+				id = (String) session.getAttribute("SuitUpid");
+								
+			if(id != null) {				
+				vo.setMemId(id);
+			}
+			// 로그인이 안되있을경우 로그인 페이지로 리턴
+			if(id == null)
+				return "login-register";
+					
+			// get방식으로 받아온 seqNum으로 리뷰 내용 가져옴
+			vo = suitupService.getComment(vo);
+			
+			// seqNum으로 찾아온 아이디랑 로그인된 아이디랑 다를 경우 에러페이지로 리턴
+			if(!vo.getMemId().equals(id))
+					return "error";
+			
+			m.addAttribute("comment", vo);
+			return "modify-review";
+					
+			}
+		
+		// 리뷰 수정 버튼
+		@RequestMapping("updateComment.do")
+		public String updateComment(SuitUpCommentVO vo, HttpServletRequest request,HttpSession session) {
+			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+			String id = null;
+			// 쿠키 가져오기
+			Cookie[] cookies = request.getCookies();
+				for(Cookie cookie : cookies) {
+						if(cookie.getName().equals("SuitUpidCookie"))
+							id = cookie.getValue();
+						}
+														
+			// 쿠키가 null 이면 세션 가져오기
+			if(id == null)
+				id = (String) session.getAttribute("SuitUpid");
+											
+			if(id != null) {				
+				vo.setMemId(id);
+			}
+			// 로그인이 안되있을경우 로그인 페이지로 리턴
+			if(id == null)
+				return "login-register";
+			
+			// 로그인 되어있는 아이디와 폼에서 받아온 아이디가 다르면 에러페이지로 리턴
+			if(!id.equals(vo.getMemId()))
+				return "error";
+			
+			System.out.println(vo.getComTitle());
+			System.out.println(vo.getComAvg());
+			System.out.println(vo.getComSeq());
+			System.out.println(vo.getComContent());
+			
+			int result = suitupService.updateComment(vo);
+			
+			// 수정된 결과가 0행이면 에러페이지로 리턴
+			if(result == 0)
+				return "error";
+			
+			
+			
+			return "redirect:product.do?proNum=" + vo.getProNum();
+		}
+		
+		// 리뷰 삭제
+		@RequestMapping("deleteReview.do")
+		public String deleteReview(SuitUpCommentVO vo) {
+			suitupService.deleteComment(vo);
+			return "redirect:product.do?proNum=" + vo.getProNum();
 		}
 		
 		// 장바구니 담기

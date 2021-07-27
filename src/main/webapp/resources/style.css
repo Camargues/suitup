@@ -2619,6 +2619,12 @@ select.select-color {
     padding-left: 25px;
     padding-right: 24px;
 }
+.cart-box {
+    border: 0 none;
+    max-width: 150px;
+    padding-left: 25px;
+    padding-right: 24px;
+}
 .cart-plus-minus {
     position: relative;
 }

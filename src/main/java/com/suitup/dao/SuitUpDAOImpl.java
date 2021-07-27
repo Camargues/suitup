@@ -154,6 +154,13 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 
 	// 리뷰 갯수 가져오기
 	public int getReviewCount(SuitUpCommentVO vo) {
+		System.out.println("==> Mybatis getReviewCount() 호출");
 		return mybatis.selectOne("SuitUpDAO.getReviewCount", vo);
+	}
+
+	// 리뷰 내용 가져오기
+	public SuitUpCommentVO getComment(SuitUpCommentVO vo) {
+		System.out.println("==> Mybatis getComment() 호출");
+		return mybatis.selectOne("SuitUpDAO.getComment", vo);
 	}
 }

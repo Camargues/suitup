@@ -133,4 +133,9 @@ public class SuitUpServiceImpl implements SuitUpService {
 		return suitupDAO.getReviewCount(vo);
 	}
 
+	// 리뷰 내용 불러오기
+	public SuitUpCommentVO getComment(SuitUpCommentVO vo) {
+		return suitupDAO.getComment(vo);
+	}
+
 }

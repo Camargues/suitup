@@ -1,0 +1,94 @@
+// 별점 주는 함수
+
+	var s1 = document.getElementById('star1');
+    var s2 = document.getElementById('star2');
+    var s3 = document.getElementById('star3');
+    var s4 = document.getElementById('star4');
+    var s5 = document.getElementById('star5');
+    var starCount = document.getElementById('starCount');
+
+  function star1() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star-outline";
+        s3.className = "zmdi zmdi-star-outline";
+        s4.className = "zmdi zmdi-star-outline";
+        s5.className = "zmdi zmdi-star-outline";
+        starCount.setAttribute("value","1");
+    }
+    function star2() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star";
+        s3.className = "zmdi zmdi-star-outline";
+        s4.className = "zmdi zmdi-star-outline";
+        s5.className = "zmdi zmdi-star-outline";
+        starCount.setAttribute("value","2");
+    }
+    function star3() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star";
+        s3.className = "zmdi zmdi-star";
+        s4.className = "zmdi zmdi-star-outline";
+        s5.className = "zmdi zmdi-star-outline";
+        starCount.setAttribute("value","3");
+    }
+    function star4() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star";
+        s3.className = "zmdi zmdi-star";
+        s4.className = "zmdi zmdi-star";
+        s5.className = "zmdi zmdi-star-outline";
+        starCount.setAttribute("value","4");
+    }
+    function star5() {
+        s1.className = "zmdi zmdi-star";
+        s2.className = "zmdi zmdi-star";
+        s3.className = "zmdi zmdi-star";
+        s4.className = "zmdi zmdi-star";
+        s5.className = "zmdi zmdi-star";
+        starCount.setAttribute("value","5");
+    }
+
+// 주문하기 유효성 검사
+    function product_check(){
+    	
+    	if ($("input[name=dtproColor]:radio:checked").length < 1) {
+            alert("색상을 선택해주세요");
+            
+            return false;
+          } 
+    	
+    	if ($("input[name=dtproSize]:radio:checked").length < 1) {
+            alert("사이즈를 선택해주세요");
+            return false;
+          } 
+    	if($("input[name=cartCount]").val() > $("input[name=productCount]").val()){
+    		alert("재고가 부족합니다");
+    		return false;
+    	}
+    	
+    	document.getElementById("insertCart").submit();
+    }
+    
+ // 리뷰 작성하기 유효성 검사
+    function review_check(){
+    	
+    	if ($("input[name=comTitle]").val() == "") {
+            alert("제목을 입력해주세요");
+            $("input[name=comTitle]").focus();
+            var offset = $(".rating__wrap").offset();
+            $('html, body').animate({scrollTop : offset.top-250}, 400);
+            return false;
+          } 
+    	
+    	if ($("input[name=comContent]").text() == "") {
+            alert("내용을 입력해주세요");
+            $("input[name=comContent]").focus();
+            var offset = $(".rating__wrap").offset();
+            $('html, body').animate({scrollTop : offset.top-250}, 400);
+            return false;
+          } 
+    	
+    	
+    	document.getElementById("insertReview").submit();
+    }
+    
