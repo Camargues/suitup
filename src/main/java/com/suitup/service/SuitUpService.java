@@ -65,4 +65,6 @@ public interface SuitUpService {
 	public int getReviewCount(SuitUpCommentVO vo);
 	
 	public SuitUpCommentVO getComment(SuitUpCommentVO vo);
+	
+	public SuitUpCustomerVO getUserInfo(SuitUpCustomerVO vo);
 }

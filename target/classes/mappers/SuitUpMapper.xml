@@ -14,7 +14,7 @@
 	
 		INSERT INTO SU_ORDER VALUES(
 		SU_ORDER_NUM_SEQ.NEXTVAL, #{memId}, ${proNum}, #{dtproSize},#{dtproColor},${orderCount},'주문완료',SYSDATE,
-		#{orderAddress}, #{orderReceiver}, #{orderPhone}, #{orderMemo}, ${proPrice}, #{proName}
+		#{orderAddress}, #{orderReceiver}, #{orderPhone}, #{orderMemo}, ${proPrice}, #{proName}, #{cateNum}, #{cateDtnum}
 		)
 
 	</insert>
@@ -31,7 +31,7 @@
 	
 	<!-- 주문 목록 불러오기 -->
 	<select id="orderList" parameterType="SuitUpOrderVO" resultType="SuitUpOrderVO">
-		SELECT * FROM SU_ORDER WHERE MEM_ID = #{memId}
+		SELECT * FROM SU_ORDER WHERE MEM_ID = #{memId} ORDER BY ORDER_NUM DESC
 	</select>
 	
 	<!-- 회원 가입 -->
@@ -46,6 +46,11 @@
 		<if test="memPass != null">
 		AND MEM_PASS=#{memPass}
 		</if>
+	</select>
+	
+	<!-- 회원 정보 불러오기 -->
+	<select id="getUserInfo" resultType="SuitUpCustomerVO" parameterType="SuitUpCustomerVO">
+		SELECT * FROM SU_MEM WHERE MEM_ID = #{memId}
 	</select>
 	
 	<!-- 카테고리 목록 불러오기 -->
@@ -113,7 +118,7 @@
 	
 	<!-- 상품 장바구니 담기 -->
 	<insert id="insertCart" parameterType="SuitUpCartVO">
-	INSERT INTO SU_CART VALUES(#{proNum}, #{proName},#{memId},#{dtproSize}, #{dtproColor},#{cartCount}, #{proPrice}, CART_NUM_SEQUENCE.NEXTVAL)
+	INSERT INTO SU_CART VALUES(#{proNum}, #{proName},#{memId},#{dtproSize}, #{dtproColor},#{cartCount}, #{proPrice}, CART_NUM_SEQUENCE.NEXTVAL, #{cateNum}, #{cateDtnum})
 	</insert>
 	
 	<!-- 상품 수정 -->
@@ -121,7 +126,7 @@
 	UPDATE SU_PRO
 	<set>
 	<if test="dtproCount != null">
-	DTPRO_COUNT = DTPRO_COUNT - #{dtproCount}
+	DTPRO_COUNT = DTPRO_COUNT + #{dtproCount}
 	</if>
 	</set>
 	<where>

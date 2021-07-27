@@ -52,6 +52,11 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public SuitUpCustomerVO userIdCheck(SuitUpCustomerVO vo) {
 		return suitupDAO.idCheck(vo);
 	}
+	
+	// 유저 정보 불러오기
+	public SuitUpCustomerVO getUserInfo(SuitUpCustomerVO vo) {
+		return suitupDAO.getUserInfo(vo);
+	}
 
 	// 카테고리 목록 불러오기
 	public List<SuitUpCategoryVO> getCategoryList() {

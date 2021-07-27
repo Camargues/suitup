@@ -18,6 +18,11 @@ public class SuitUpCartVO {
 	private int proPrice;
 	// 장바구니 번호
 	private int cartNum;
+	// 카테고리 번호
+	private int cateNum;
+	// 세부 카테고리 번호
+	private int cateDtnum;
+	
 	
 	public int getProNum() {
 		return proNum;
@@ -66,6 +71,18 @@ public class SuitUpCartVO {
 	}
 	public void setCartNum(int cartNum) {
 		this.cartNum = cartNum;
+	}
+	public int getCateNum() {
+		return cateNum;
+	}
+	public void setCateNum(int cateNum) {
+		this.cateNum = cateNum;
+	}
+	public int getCateDtnum() {
+		return cateDtnum;
+	}
+	public void setCateDtnum(int cateDtnum) {
+		this.cateDtnum = cateDtnum;
 	}
 	
 	

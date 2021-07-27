@@ -107,8 +107,12 @@ public class SuitUpController {
 				
 				if(id != null) {
 					SuitUpCartVO vo = new SuitUpCartVO();
+					SuitUpCustomerVO user = new SuitUpCustomerVO();
 					vo.setMemId(id);
+					user.setMemId(id);
 			
+					// 유저 정보 넘기기
+					m.addAttribute("userInfo", suitupService.getUserInfo(user));
 					m.addAttribute("cartList", suitupService.getCartList(vo));
 					m.addAttribute("categoryList", suitupService.getCategoryList());
 					return "checkout";
@@ -160,12 +164,13 @@ public class SuitUpController {
 				ordervo.setOrderMemo(memo);
 				ordervo.setProPrice(vo.getProPrice());
 				ordervo.setProName(vo.getProName());
-			
+				ordervo.setCateNum(vo.getCateNum());
+				ordervo.setCateDtnum(vo.getCateDtnum());
 				result = result + suitupService.insertOrder(ordervo);
 			
 				
 			}
-		
+			System.out.println(result);
 			// 주문 완료 후 장바구니 비우기
 			suitupService.deleteCartList(cartvo);
 			m.addAttribute("categoryList", suitupService.getCategoryList());
@@ -355,7 +360,6 @@ public class SuitUpController {
 					System.out.println(vo.getProNum()); 	
 					System.out.println(vo.getProName());
 					System.out.println(vo.getProPrice());
-					System.out.println(vo.getProDetail());
 					System.out.println(vo.getCateNum());
 					System.out.println(vo.getCateDtnum());
 					System.out.println(vo.getDtproCount());
@@ -422,6 +426,7 @@ public class SuitUpController {
 		public String productDetails(SuitUpProductVO vo,Model m) {
 			SuitUpProductVO product = suitupService.getProductDetails(vo);
 			
+			System.out.println(product.getProNum());
 			// 잘못된 상품일 경우 에러페이지로 연결 예정
 			if(product.getProName() == null) {
 				return "index";
@@ -594,7 +599,6 @@ public class SuitUpController {
 				product.setProNum(vo.getProNum());
 				product.setDtproCount(vo.getCartCount() * -1);
 				suitupService.updateProduct(product);
-			
 					return "redirect:my-page-cart.do";
 				
 				}

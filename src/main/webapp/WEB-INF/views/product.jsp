@@ -294,6 +294,9 @@
                             <div class="pro__detl__title">
                                 <h2>${productDetails.proName }</h2>
                                 <input type="hidden" value="${productDetails.proName }" name="proName"/>
+                                <input type="hidden" value="${productDetails.proNum}" name="proNum"/>  
+                                              <input type="hidden" value="${productDetails.cateNum }" name="cateNum"/>
+                                              <input type="hidden" value="${productDetails.cateDtnum }" name="cateDtnum"/>
                             </div>
                             
                            
@@ -583,7 +586,10 @@
                                <input type="hidden" value="${sessionScope.SuitUpid}" name="memId"/>
 								</c:when>
 								</c:choose>
+								
                                               <input type="hidden" value="${productDetails.proNum}" name="proNum"/>  
+                                              <input type="hidden" value="${productDetails.cateNum }" name="cateNum"/>
+                                              <input type="hidden" value="${productDetails.cateDtnum }" name="cateDtnum"/>
                                                 <!-- placeholder 에 사용자 아이디 받아올 때 subString-->
                                               
                                         

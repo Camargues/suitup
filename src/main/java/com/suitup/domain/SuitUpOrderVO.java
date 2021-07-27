@@ -32,7 +32,10 @@ public class SuitUpOrderVO {
 	private int proPrice;
 	// 상품명
 	private String proName;
-	
+	// 카테고리 번호
+	private int cateNum;
+	// 상세 카테고리 번호
+	private int cateDtnum;
 	
 	
 	
@@ -120,5 +123,18 @@ public class SuitUpOrderVO {
 	public void setProName(String proName) {
 		this.proName = proName;
 	}
+	public int getCateNum() {
+		return cateNum;
+	}
+	public void setCateNum(int cateNum) {
+		this.cateNum = cateNum;
+	}
+	public int getCateDtnum() {
+		return cateDtnum;
+	}
+	public void setCateDtnum(int cateDtnum) {
+		this.cateDtnum = cateDtnum;
+	}
+	
 	
 }

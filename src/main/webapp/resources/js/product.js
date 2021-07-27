@@ -48,6 +48,13 @@
         starCount.setAttribute("value","5");
     }
 
+    $("input[name=cartCount]").click(function(){
+    	alert($("input[name=cartCount]").val());
+    })
+    
+    $("input[name=productCount]").click(function(){
+    	alert($("input[name=productCount]").val());
+    })
 // 주문하기 유효성 검사
     function product_check(){
     	
@@ -61,7 +68,7 @@
             alert("사이즈를 선택해주세요");
             return false;
           } 
-    	if($("input[name=cartCount]").val() > $("input[name=productCount]").val()){
+    	if(parseInt($("input[name=cartCount]").val())> parseInt($("input[name=productCount]").val())){
     		alert("재고가 부족합니다");
     		return false;
     	}

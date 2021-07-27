@@ -62,4 +62,6 @@ public interface SuitUpDAO {
 	public int getReviewCount(SuitUpCommentVO vo);
 	
 	public SuitUpCommentVO getComment(SuitUpCommentVO vo);
+	
+	public SuitUpCustomerVO getUserInfo(SuitUpCustomerVO vo);
 }

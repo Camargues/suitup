@@ -60,7 +60,12 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("===> Mybatis idCheck() 호출");
 		return mybatis.selectOne("SuitUpDAO.idCheck",vo);
 	}
-
+	
+	// 유저 정보 불러오기
+	public SuitUpCustomerVO getUserInfo(SuitUpCustomerVO vo) {
+		System.out.println("==> Mybatis getUserInfo() 호출");
+		return mybatis.selectOne("SuitUpDAO.getUserInfo", vo);
+	}
 	// 카테고리 목록 불러오기
 	public List<SuitUpCategoryVO> getCategoryList() {
 		System.out.println("===> Mybatis getCategoryList() 호출");

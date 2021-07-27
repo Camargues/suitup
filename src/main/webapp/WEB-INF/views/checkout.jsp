@@ -304,11 +304,11 @@
                                         <tr>
                                             <td class="product-thumbnail"><a href="#"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
                                             <td class="product-name"><a href="#">${cart.proName }</a></td>
-                                            <td class="product-price"><span class="amount">${cart.proPrice }</span></td>
+                                            <td class="product-price"><span class="amount">${cart.proPrice } 원</span></td>
                                             <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
                                             <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
                                             <td class="product-quantity"><input type="number" value="${cart.cartCount }" readonly/></td>
-                                            <td class="product-subtotal">${cart.proPrice * cart.cartCount }</td>
+                                            <td class="product-subtotal">${cart.proPrice * cart.cartCount } 원</td>
                                         </tr>
                                                           
                                         
@@ -335,17 +335,25 @@
                                 <h2 class="section-title-3">주문 / 결제</h2>
                                 
                                 <div class="checkout-form-inner">
+                                <!-- 배송지 선택하는 라디오 버튼 -->
+                                <div style="width:200px; padding-bottom: 30px">
+  									<input type="radio" name="add" id="new" value="new" checked><label for="new">직접 입력하기</label>
+  									<input type="radio" name="add" id="default" value="default" style="margin-left: 10px"><label for="default">기존 배송지</label>
+								</div>
                                     <div class="single-checkout-box">
                                     <label>수령인</label>
-                                        <input type="text" placeholder="홍길동*" name="receiver" id="receiver">
+                                        <input type="text" placeholder="홍길동*" name="receiver" id="receiver" class="new" style="margin-left: 34px">
+                                        <input type="hidden" name="receiver" id="receiver" class="default" readonly="readonly" disabled="disabled" value="${userInfo.memName }"/>
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>연락처</label>
-                                        <input type="text" placeholder="010-0000-0000*" name="phone" id="phone">
+                                        <input type="text" placeholder="010-0000-0000*" name="phone" id="phone" class="new" style="margin-left: 34px">
+                                        <input type="hidden" name="phone" id="phone" class="default" readonly="readonly" disabled="disabled" value="${userInfo.memPhone }"/>
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>배송지</label>
-                                        <input type="text" placeholder="서울시 금천구*" name="address" id="address">
+                                        <input type="text" placeholder="서울시 금천구*" name="address" id="address" class="new" style="margin-left: 34px"	>
+                                        <input type="hidden" name="address" id="address" class="default" readonly="readonly" disabled="disabled" value="${userInfo.memAddr }"/>
                                     </div>
                                     <div class="single-checkout-box">
                                     <label>배송 요청사항</label>
@@ -433,8 +441,9 @@
                                                 
                                                 <!-- Start Payment Way -->
                                 <div align="right">
-                                <button type="button" class="btm_image" id="img_btn"><img  src="resources/images/icons/checkout.png"></button>
-                                    
+                                <div class="wc-proceed-to-checkout">
+                                            <a href="#" onclick="payment_check()">결제하기</a>
+                                </div>
                                 </div>    
                                 </form>
                                 
@@ -558,6 +567,8 @@
     <script src="resources/js/main.js"></script>
     <!-- 유효성 검사 스크립트 -->
 	<script src="resources/js/paymentCheck.js"></script>
+	
+	
 </body>
 
 </html>
