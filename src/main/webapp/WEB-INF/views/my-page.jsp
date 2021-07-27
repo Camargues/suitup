@@ -6,7 +6,6 @@
    	<c:redirect url="login-register.do"/>
      </c:if>
      </c:if>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,12 +36,13 @@
     <link rel="stylesheet" href="resources/css/responsive.css">
     <!-- User style -->
     <link rel="stylesheet" href="resources/css/custom.css">
+
+
     <!-- Modernizr JS -->
     <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
-
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
@@ -72,7 +72,7 @@
                                         <c:set var="cateName" value=""/>
                                         <c:forEach items="${categoryList }" var="list">
                                         <c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>
@@ -159,8 +159,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="my-page-cart.do">장바구니</a></li>
-                                   
-                                    <!-- mem_admin 쿼리값이 1일때만 노출 -->
+                          
                                     <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
@@ -170,7 +169,6 @@
                                         </ul>
                                     </li>
                                     </c:if>
-                                    
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix visible-xs visible-sm">
@@ -182,7 +180,7 @@
                                                    <c:set var="cateName" value=""/>
                                        		 <c:forEach items="${categoryList }" var="list">
                                        		 <c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>
@@ -200,9 +198,7 @@
                                             </c:forEach>
                                             </ul>
                                         </li>
-                                        <li><a href="cart.do">장바구니</a></li>
-                                        <li><a href="checkout.do">결제하기</a></li>
-                                        <li><a href="history.do">주문내역</a></li>
+                                        <li><a href="my-page-cart.do">장바구니</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -211,7 +207,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-							   	<c:choose>   
+								   	<c:choose>   
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
@@ -224,6 +220,7 @@
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
 								</c:choose>
+                            
                             </ul>
                         </div>
                     </div>

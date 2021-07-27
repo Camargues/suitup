@@ -193,9 +193,7 @@
                                             </c:forEach>
                                             </ul>
                                         </li>
-                                        <li><a href="cart.do">장바구니</a></li>
-                                        <li><a href="checkout.do">결제하기</a></li>
-                                        <li><a href="history.do">주문내역</a></li>
+                                        <li><a href="my-page-cart.do">장바구니</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -607,9 +605,9 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="#">홈</a></li>
-                                    <li><a href="#">인기상품</a></li>
-                                    <li><a href="cart.do">장바구니</a></li>
+                                    <li><a href="index.do">홈</a></li>
+                                    <li><a href="popularity-shop.do?cateNum=1">인기상품</a></li>
+                                    <li><a href="my-page-cart.do">장바구니</a></li>
                                 </ul>
                             </div>
                         </div>

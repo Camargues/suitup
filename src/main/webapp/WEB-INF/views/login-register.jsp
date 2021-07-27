@@ -63,14 +63,16 @@
                                     <li class="drop"><a href="index.jsp">홈</a></li>
                                     <li class="drop"><a href="#">인기상품</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">아우터</a></li>
-                                            <li><a href="#">상의</a></li>
-                                            <li><a href="#">하의</a></li>
-                                            <li><a href="#">신발</a></li>
-                                            <li><a href="#">모자</a></li>
+                                        <c:set var="cateName" value=""/>
+                                        <c:forEach items="${categoryList }" var="list">
+                                        <c:if test="${cateName != list.cateName}">
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                         </ul>
                                     </li>
-                                 <li class="drop"><a href="#">카테고리</a>
+                                    <li class="drop"><a href="#">카테고리</a>
                                         <ul class="dropdown mega_dropdown">
                                             <!-- Start Single Mega MEnu -->
                                             <li><a class="mega__title" href="#">카테고리별</a>
@@ -150,11 +152,17 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                     <li><a href="my-page-cart.do">장바구니</a></li>
-                                >
-                                    <!-- mem_admin 쿼리값이 1일때만 노출 -->
-                                 
+                                    <li><a href="my-page-cart.do">장바구니</a></li>
+                          
+                                    <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
+                                    <li class="drop"><a href="#">관리자 메뉴</a>
+                                        <ul class="dropdown">
+                                            <li><a href="product-insert.do">상품 등록</a></li>
+                                            <li><a href="product-list.do">상품 목록</a></li>
+                                        </ul>
+                                    </li>
+                                    </c:if>
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix visible-xs visible-sm">
@@ -163,25 +171,28 @@
                                         <li><a href="index.jsp">홈</a></li>
                                         <li><a href="#">인기상품</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                   <c:set var="cateName" value=""/>
+                                       		 <c:forEach items="${categoryList }" var="list">
+                                       		 <c:if test="${cateName != list.cateName}">
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
+                                     
                                         <li><a href="#">카테고리별</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                <c:set var="cateName" value=""/>
+                                       			 <c:forEach items="${categoryList }" var="list">
+                                        		<c:if test="${cateName != list.cateName}">
+                                            <li><a href="shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
-                                        <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="checkout.do">결제하기</a></li>
-                                    <li><a href="history.do">주문내역</a></li>
+                                        <li><a href="my-page-cart.do">장바구니</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -190,18 +201,20 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                               	<c:choose>   
-								<c:when test="${sessionScope.SuitUpid != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>
+								   	<c:choose>   
+								<c:when test="${cookie.SuitUpidCookie.value != null }">
+								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
+								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
 								</c:when>
-								<c:when test="${cookie.SuitUpidCookie.value != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								</c:when>
-								
+								<c:when test="${sessionScope.SuitUpid  != null}">
+                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								
+								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								</c:when>
 								<c:otherwise>
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
-								
-                               </c:choose>
+								</c:choose>
+                            
                             </ul>
                         </div>
                     </div>
@@ -235,7 +248,7 @@
                 </div>
             </div>
             <!-- End Search Popap -->
-        </div>
+		</div>
         <!-- End Offset Wrapper -->
         <!-- Start Login Register Area -->
         <div class="htc__login__register bg__white ptb--130" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/5.jpg) no-repeat scroll center center / cover ;">

@@ -38,7 +38,6 @@
 </head>
 
 <body>
-
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
@@ -68,7 +67,7 @@
                                         <c:set var="cateName" value=""/>
                                         <c:forEach items="${categoryList }" var="list">
                                         <c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>
@@ -93,7 +92,7 @@
                                                 <c:set var='cateNum' value='1'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach>                                               
                                                </ul>
@@ -103,7 +102,7 @@
                                                     <c:set var='cateNum' value='2'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                </ul>
@@ -113,7 +112,7 @@
                                                     <c:set var='cateNum' value='3'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                </ul>
@@ -123,7 +122,7 @@
                                                     <c:set var='cateNum' value='4'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                </ul>
@@ -133,7 +132,7 @@
                                                     <c:set var='cateNum' value='5'/>
                                         		<c:forEach items='${categoryList }' var='list'>
                                         		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='#'>${list.cateDtname }</a></li>
+                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
                                             </c:if>
                                             </c:forEach> 
                                                </ul>
@@ -154,10 +153,9 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                    <li><a href=my-page-cart.do>장바구니</a></li>
-                                  
-                                    <!-- mem_admin 쿼리값이 1일때만 노출 -->
-                                   <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
+                                    <li><a href="my-page-cart.do">장바구니</a></li>
+                          
+                                    <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -166,7 +164,6 @@
                                         </ul>
                                     </li>
                                     </c:if>
-                                    
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix visible-xs visible-sm">
@@ -178,7 +175,7 @@
                                                    <c:set var="cateName" value=""/>
                                        		 <c:forEach items="${categoryList }" var="list">
                                        		 <c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>
@@ -190,15 +187,13 @@
                                                 <c:set var="cateName" value=""/>
                                        			 <c:forEach items="${categoryList }" var="list">
                                         		<c:if test="${cateName != list.cateName}">
-                                            <li><a href="#">${list.cateName }</a></li>
+                                            <li><a href="shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
                                             <c:set var="cateName" value="${list.cateName }"/>
                                             </c:if>
                                             </c:forEach>
                                             </ul>
                                         </li>
-                                        <li><a href="cart.do">장바구니</a></li>
-                                        <li><a href="checkout.do">결제하기</a></li>
-                                        <li><a href="history.do">주문내역</a></li>
+                                        <li><a href="my-page-cart.do">장바구니</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -207,7 +202,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                 	<c:choose>   
+								   	<c:choose>   
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
@@ -220,6 +215,7 @@
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
 								</c:choose>
+                            
                             </ul>
                         </div>
                     </div>
@@ -263,11 +259,11 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">상품 목록</h2>
+                                <h2 class="bradcaump-title">인기 상품</h2>
                                 <nav class="bradcaump-inner">
                                   <a class="breadcrumb-item" href="index.html">홈</a>
                                   <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">상품 목록</span>
+                                  <span class="breadcrumb-item active">인기 상품</span>
                                 </nav>
                             </div>
                         </div>
@@ -276,11 +272,14 @@
             </div>
         </div>
         <!-- End Bradcaump area --> 
+        
         <!-- Start Our Product Area -->
         <section class="htc__product__area shop__page ptb--130 bg__white">
+        
             <div class="container">
                 <div class="htc__product__container">
                     <!-- Start Product MEnu -->
+                    
                     <div class="row">
                         <div class="col-md-12">
                             <div class="filter__menu__container">
@@ -378,9 +377,13 @@
                         </div>
                     </div>
                     <!-- End Filter Menu -->
+                    
                     <!-- End Product MEnu -->
                     <div class="row">
+                     <!-- Start Feature Product -->
+       
                         <div class="product__list another-product-style">
+                        
                             <!-- Start Single Product -->
                             <c:forEach items="${popularList }" var="list">
                             

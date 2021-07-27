@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-     	
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +39,6 @@
 </head>
 
 <body>
-
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
@@ -156,9 +154,8 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                    <li><a href="cart.do">장바구니</a></li>
-                                    <li><a href="checkout.do">결제하기</a></li>
-                                    <li><a href="history.do">주문내역</a></li>
+                                    <li><a href="my-page-cart.do">장바구니</a></li>
+                          
                                     <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
@@ -197,9 +194,7 @@
                                             </c:forEach>
                                             </ul>
                                         </li>
-                                        <li><a href="cart.do">장바구니</a></li>
-                                        <li><a href="checkout.do">결제하기</a></li>
-                                        <li><a href="history.do">주문내역</a></li>
+                                        <li><a href="my-page-cart.do">장바구니</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -208,7 +203,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-								<c:choose>   
+								   	<c:choose>   
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
@@ -254,8 +249,8 @@
                     </div>
                 </div>
             </div>
-            <!-- End Search Popap -->         
-        </div>
+            <!-- End Search Popap -->
+		</div>
         <!-- End Offset Wrapper -->
         <!-- Start Bradcaump area -->
         <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/2.jpg) no-repeat scroll center center / cover ;">
