@@ -7,7 +7,22 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
+    labels: [  
+    	$('#day14').val()+"일",
+    	$('#day13').val()+"일",
+    	$('#day12').val()+"일",
+    	$('#day11').val()+"일",
+    	$('#day10').val()+"일",
+    	$('#day9').val()+"일",
+    	$('#day8').val()+"일",
+    	$('#day7').val()+"일",
+    	$('#day6').val()+"일",
+    	$('#day5').val()+"일",
+    	$('#day4').val()+"일",
+    	$('#day3').val()+"일",
+    	$('#day2').val()+"일",
+    	$('#day1').val()+"일"
+    	],
     datasets: [{
       label: "Sessions",
       lineTension: 0.3,
@@ -20,7 +35,22 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [10000, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
+      data: [
+    	  $('#daysum14').val(),
+    	  $('#daysum13').val(),
+    	  $('#daysum12').val(),
+    	  $('#daysum11').val(),
+    	  $('#daysum10').val(),
+    	  $('#daysum9').val(),
+    	  $('#daysum8').val(),
+    	  $('#daysum7').val(),
+    	  $('#daysum6').val(),
+    	  $('#daysum5').val(),
+    	  $('#daysum4').val(),
+    	  $('#daysum3').val(),
+    	  $('#daysum2').val(),
+    	  $('#daysum1').val()    	  
+    	  ],
     }],
   },
   options: {
@@ -33,14 +63,14 @@ var myLineChart = new Chart(ctx, {
           display: false
         },
         ticks: {
-          maxTicksLimit: 7
+          maxTicksLimit: 14
         }
       }],
       yAxes: [{
         ticks: {
           min: 0,
-          max: 40000,
-          maxTicksLimit: 5
+          max: 10000,
+          maxTicksLimit: 10
         },
         gridLines: {
           color: "rgba(0, 0, 0, .125)",

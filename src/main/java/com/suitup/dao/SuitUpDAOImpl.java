@@ -174,4 +174,23 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("==> Mybatis getComment() 호출");
 		return mybatis.selectOne("SuitUpDAO.getComment", vo);
 	}
+	
+	// 회원 정보 가져오기
+	public List<SuitUpCustomerVO> getCustomerList() {
+		System.out.println("==> Mybatis getMemberList() 호출");
+		return mybatis.selectList("SuitUpDAO.getMemberList");	
+	}
+	
+	// 월별 총액
+	public List<Map<String,String>>  getMonthSum() {
+		System.out.println("==> Mybatis getMonthSum() 호출");
+		return mybatis.selectList("SuitUpDAO.getMonthSum");
+	}
+	
+	// 월별 총액
+	public List<Map<String,String>>  getDaySum() {
+		System.out.println("==> Mybatis getDaySum() 호출");
+		return mybatis.selectList("SuitUpDAO.getDaySum");
+	}
+	
 }

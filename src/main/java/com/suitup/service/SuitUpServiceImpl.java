@@ -147,5 +147,19 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public SuitUpCommentVO getComment(SuitUpCommentVO vo) {
 		return suitupDAO.getComment(vo);
 	}
+	// 유저 리스트
+	public List<SuitUpCustomerVO> getCustomerList() {
+		return suitupDAO.getCustomerList();
+	}
+	
+	//월별 총액
+	public List<Map<String, String>> getMonthSum() {
+		return suitupDAO.getMonthSum();
+	}
+	
+	//일별 총액
+	public List<Map<String, String>> getDaySum() {
+		return suitupDAO.getDaySum();
+	}
 
 }

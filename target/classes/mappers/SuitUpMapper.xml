@@ -190,4 +190,36 @@
 		SELECT * FROM SU_COMMENT WHERE COM_SEQ = #{comSeq}
 	</select>
 	
+		<!-- 회원정보 가져오기 -->
+	<select resultType="SuitUpCustomerVO" id="getMemberList">
+	SELECT * FROM SU_MEM WHERE MEM_ADMIN = 0 
+	</select>
+	
+	<!-- 월별 총액 -->
+	<resultMap type="HashMap" id="monthMap">
+		<id column="sum" property="sum"/>
+		<id column="month" property="month"/>
+	</resultMap>
+	<select id="getMonthSum" resultMap="monthMap">
+	SELECT SUM((ORDER_COUNT*PRO_PRICE)/100) AS SUM,
+	TO_CHAR(order_date,'YY-MM') AS MONTH
+	FROM SU_ORDER 
+	GROUP BY TO_CHAR(order_date,'YY-MM')
+	ORDER BY TO_CHAR(order_date,'YY-MM') DESC
+	</select>
+	
+	<!-- 일별 총액 -->
+	<resultMap type="HashMap" id="dayMap">
+		<id column="sum" property="sum"/>
+		<id column="day" property="day"/>
+	</resultMap>
+	<select id="getDaySum" resultMap="dayMap">
+	SELECT SUM((ORDER_COUNT*PRO_PRICE)/100) AS SUM,
+	TO_CHAR(order_date,'YY-MM-DD') AS DAY
+	FROM SU_ORDER 
+	GROUP BY TO_CHAR(order_date,'YY-MM-DD')
+	ORDER BY TO_CHAR(order_date,'YY-MM-DD') DESC
+	</select>
+	
+	
 </mapper>
