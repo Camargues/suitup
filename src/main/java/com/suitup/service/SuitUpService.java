@@ -1,6 +1,7 @@
 package com.suitup.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
@@ -12,7 +13,9 @@ import com.suitup.domain.SuitUpProductVO;
 public interface SuitUpService {
 
 	// 장바구니 목록 가져오기
-	List<SuitUpCartVO> getCartList(SuitUpCartVO vo);
+	List<Map> getCartList(SuitUpCartVO vo);
+	
+	List<SuitUpCartVO> getCartList2(SuitUpCartVO vo);
 	
 	int insertOrder(SuitUpOrderVO vo);
 	

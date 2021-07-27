@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -392,7 +393,7 @@
                                     <div class="product__inner">
                                         <div class="pro__thumb">
                                             <a href="product.do?proNum=${list.proNum }">
-                                                <img src="resources/images/product/${list.cateNum }/${list.cateDtnum}/${list.proNum}" alt="${list.proName }">
+                                                <img src="resources/images/imgUpload/${fn:split(list.proImage,'/')[0]}" alt="${list.proName }">
                                             </a>
                                         </div>
                                     </div>

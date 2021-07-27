@@ -1,6 +1,7 @@
 package com.suitup.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,15 @@ public class SuitUpServiceImpl implements SuitUpService {
 	@Autowired
 	private SuitUpDAO suitupDAO;
 
-	// 장바구니 불러오기
-	public List<SuitUpCartVO> getCartList(SuitUpCartVO vo) {
+	// 장바구니 불러오기(map 타입)
+	public List<Map> getCartList(SuitUpCartVO vo) {
 		return suitupDAO.getCartList(vo);
 	}
-
+	
+	// 장바구니 불러오기(vo 타입)
+	public List<SuitUpCartVO> getCartList2(SuitUpCartVO vo){
+		return suitupDAO.getCartList2(vo);
+	}
 	// 주문 하기
 	public int insertOrder(SuitUpOrderVO vo) {
 		return suitupDAO.insertOrder(vo);

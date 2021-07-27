@@ -87,7 +87,7 @@
             return false;
           } 
     	
-    	if ($("input[name=comContent]").text() == "") {
+    	if ($("input[name=comContent]").val() == "") {
             alert("내용을 입력해주세요");
             $("input[name=comContent]").focus();
             var offset = $(".rating__wrap").offset();

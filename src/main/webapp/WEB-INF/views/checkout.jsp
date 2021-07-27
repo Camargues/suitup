@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -302,7 +303,7 @@
                                     <c:forEach items="${cartList }" var="cart">
                                    
                                         <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/product/3.png" alt="상품이미지가 없습니다" /></a></td>
+                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/imgUpload/${fn:split(cart.proImage,'/')[0]}" alt="${cart.proName }" /></a></td>
                                             <td class="product-name"><a href="#">${cart.proName }</a></td>
                                             <td class="product-price"><span class="amount">${cart.proPrice } 원</span></td>
                                             <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>

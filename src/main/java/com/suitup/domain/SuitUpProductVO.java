@@ -1,23 +1,41 @@
 package com.suitup.domain;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
 
 public class SuitUpProductVO {
 	
+
 	private int proNum;
 	private String proName;
 	private int proPrice;
 	private int cateNum;
 	private int cateDtnum;
-	private String proPname;
 	private int dtproCount;
-	private int dtproSize;
+	private String proImage;
+	private String proDetail;
+	// 상품 이미지
+	List<MultipartFile> image;
+	// 상품 설명 이미지
+	List<MultipartFile> detail;
 	
 	
+	
+	
+	
+	
+	public int getDtproCount() {
+		return dtproCount;
+	}
+	public void setDtproCount(int dtproCount) {
+		this.dtproCount = dtproCount;
+	}
 	public int getProNum() {
 		return proNum;
-	}
+	} 
 	public void setProNum(int proNum) {
 		this.proNum = proNum;
 	}
@@ -45,27 +63,78 @@ public class SuitUpProductVO {
 	public void setCateDtnum(int cateDtnum) {
 		this.cateDtnum = cateDtnum;
 	}
-	public String getProPname() {
-		return proPname;
+	public String getProImage() {
+		return proImage;
 	}
-	public void setProPname(String proPname) {
-		this.proPname = proPname;
+	public void setProImage(String proImage) {
+		this.proImage = proImage;
 	}
-	public int getDtproCount() {
-		return dtproCount;
+	public String getProDetail() {
+		return proDetail;
 	}
-	public void setDtproCount(int dtproCount) {
-		this.dtproCount = dtproCount;
-	}
-	public int getDtproSize() {
-		return dtproSize;
-	}
-	public void setDtproSize(int dtproSize) {
-		this.dtproSize = dtproSize;
+	public void setProDetail(String proDetail) {
+		this.proDetail = proDetail;
 	}
 	
 	
+	public List<MultipartFile> getImage() {
+		return image;
+	}
+	public void setImage(List<MultipartFile> image) {
+		this.image = image;
+		this.proImage = "";
+		// 각자 환경에 맞게 경로 수정
+		String path = "C:\\dev\\suitup\\src\\main\\webapp\\resources\\images\\imgUpload\\";
+		
+		// 업로드 파일 접근
+		if(! image.isEmpty()) {
+				for(MultipartFile mf : image) {
+					// "/" 로 이름 구분
+					this.proImage += System.currentTimeMillis() + mf.getOriginalFilename() + "/";
+						
+						String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+						
+						String safeFile = path + System.currentTimeMillis() + originFileName;
+						
+						try {
+							mf.transferTo(new File(safeFile));
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}	
+				}
+			
+	}
 	
 	
+	public List<MultipartFile> getDetail() {
+		return detail;
+	}
 	
+	public void setDetail(List<MultipartFile> detail) {
+		this.detail = detail;
+		this.proDetail = "";
+		// 각자 환경에 맞게 경로 수정
+		String path = "C:\\dev\\suitup\\src\\main\\webapp\\resources\\images\\imgUpload\\";
+		// 업로드 파일 접근
+		if(! detail.isEmpty()) {
+			for(MultipartFile mf : detail) {
+				// "/" 로 이름 구분
+				this.proDetail += System.currentTimeMillis() + mf.getOriginalFilename() + "/";
+								
+				String originFileName = mf.getOriginalFilename(); // 원본 파일 명	
+				String safeFile = path + System.currentTimeMillis() + originFileName;
+								
+				try {
+					mf.transferTo(new File(safeFile));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}	
+		}
+	}
 }

@@ -272,17 +272,70 @@
             </div>
         </div>
         <!-- End Bradcaump area -->
-        <!-- Start Product Details -->
+        <!-- Start Small images -->
         <section class="htc__product__details pt--120 pb--100 bg__white">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                         <div class="product__details__container">
+                            <ul class="product__small__images" role="tablist">
+                            
+                            <c:forEach items="${fn:split(productDetails.proImage, '/') }" var="image" varStatus="status">
+                                <c:if test="${status.count eq 1}">
+                                
+                                <li role="presentation" class="pot-small-img active">
+                                    <a href="#img-tab-${status.count}" role="tab" data-toggle="tab">
+                                        <img src="resources/images/imgUpload/${image }" alt="${productDetails.proName}" style="max-width: 150px;">
+                                    </a>
+                                </li>
+                                </c:if>
+                                
+                                <c:if test="${status.count eq 2}">
+                                <li role="presentation" class="pot-small-img">
+                                    <a href="#img-tab-${status.count}" role="tab" data-toggle="tab">
+                                        <img src="resources/images/imgUpload/${image }" alt="small-image" style="max-width: 150px;">
+                                    </a>
+                                </li>
+                                </c:if>
+                                
+                                <c:if test="${status.count eq 3}">
+                                <li role="presentation" class="pot-small-img hidden-xs">
+                                    <a href="#img-tab-${status.count}" role="tab" data-toggle="tab">
+                                        <img src="resources/images/imgUpload/${image }" alt="small-image">
+                                    </a>
+                                </li>
+                                </c:if>
+                                
+                                <c:if test="${status.count >= 4}">
+                                <li role="presentation" class="pot-small-img hidden-xs hidden-sm">
+                                    <a href="#img-tab-${status.count}" role="tab" data-toggle="tab">
+                                        <img src="resources/images/imgUpload/${image }" alt="small-image">
+                                    </a>
+                                </li>
+                                </c:if>
+                                
+                                </c:forEach>
+                                
+                            </ul>
+                            <!-- End Small images -->
+       						 <!-- Start Product Details -->
+        
                             <div class="product__big__images">
                                 <div class="portfolio-full-image tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active product-video-position" id="img-tab-1">
-                                        <img src="resources/images/product/${productDetails.cateNum }/${productDetails.cateDtnum}/${productDetails.proNum}" alt="${productDetails.proName }">
-                                    </div>  
+                                
+                                <c:forEach items="${fn:split(productDetails.proImage, '/') }" var="image" varStatus="status">
+                                <c:if test="${status.count eq 1}">
+                                <div role="tabpanel" class="tab-pane fade in active product-video-position" id="img-tab-${status.count }">
+                                    <img src="resources/images/imgUpload/${image }" alt="${productDetails.proName}">
+                                </div>
+                                </c:if>
+                                <c:if test="${status.count ne 1}">
+                               <div role="tabpanel" class="tab-pane fade product-video-position" id="img-tab-${status.count }">
+                                    <img src="resources/images/imgUpload/${image }" alt="${productDetails.proName}">
+                                </div>
+                                </c:if>
+                                </c:forEach>
+                                
                                 </div>
                             </div>
                         </div>
@@ -446,10 +499,12 @@
                                 <div class="product__description__wrap">
                                     <div class="product__desc">
                                         <h2 class="title__6">상세설명</h2>
-                                        
+                                       
                                     </div>
                                     <div class="pro__feature" align="center">
-                                       <img alt="상세설명" src="resources/images/product/${productDetails.proNum }_review">
+                                      <c:forEach items="${fn:split(productDetails.proDetail, '/') }" var="detail" varStatus="status">
+                                    	  <img src="resources/images/imgUpload/${detail }" alt="${productDetails.proName}">
+                               		  </c:forEach>
                                     </div>
                                 </div>
                             </div>
@@ -464,7 +519,7 @@
 <c:forEach items="${reviewList }" var="list">
 <div class="pro__review">
     <div class="review__thumb">
-        <img src="resources/images/product/${productDetails.proNum }" alt="리뷰 이미지">
+       <img src="resources/images/imgUpload/${fn:split(productDetails.proImage,'/')[0]}" alt="${productDetails.proName }" style="max-width: 150px; margin-right: 35px" >
     </div>
     <div class="review__details" style="width: 100vw; margin: auto;">
     <div class="review__date">

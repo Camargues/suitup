@@ -1,6 +1,7 @@
 package com.suitup.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,17 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	// 장바구니 불러오기
-	public List<SuitUpCartVO> getCartList(SuitUpCartVO vo) {
+	// 장바구니 불러오기 (map 타입)
+	public List<Map> getCartList(SuitUpCartVO vo) {
 		System.out.println("===> Mybatis getCartList() 호출");
 		return mybatis.selectList("SuitUpDAO.getCartList", vo);
 	}
-
+	
+	// 장바구니 불러오기 (vo 타입)
+	public List<SuitUpCartVO> getCartList2(SuitUpCartVO vo){
+		System.out.println("==> Mybatis getCartList2() 호출");
+		return mybatis.selectList("SuitUpDAO.getCartList2", vo);
+	}
 	// 주문 완료
 	public int insertOrder(SuitUpOrderVO vo) {
 		System.out.println("===> Mybatis insertOrder() 호출");

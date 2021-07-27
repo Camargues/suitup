@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -385,7 +386,7 @@
                                         <div class="category-menu-dropdown">
                                             <div class="category-menu-dropdown-left">
                                                 <div class="category-part-1 category-common">
-                                                    <h4 class="categories-subtitle"> 모자</h4>
+                                                    <h4 class="categories-subtitle" id="populer"> 모자</h4>
                                                     <ul>
                                                         <c:set var='cateNum' value='5'/>
                                         		<c:forEach items='${categoryList }' var='list'>
@@ -419,11 +420,11 @@
                     </div>
                     <div class="product-categories-menu">
                         <ul>
-                            <li><a href="index.do?cateNum=1">아우터</a></li>
-                            <li><a href="index.do?cateNum=2">상의</a></li>
-                            <li><a href="index.do?cateNum=3">하의</a></li>
-                            <li><a href="index.do?cateNum=4">신발</a></li>
-                            <li><a href="index.do?cateNum=5">모자</a></li>
+                            <li><a href="index.do?cateNum=1#populer">아우터</a></li>
+                            <li><a href="index.do?cateNum=2#populer">상의</a></li>
+                            <li><a href="index.do?cateNum=3#populer">하의</a></li>
+                            <li><a href="index.do?cateNum=4#populer">신발</a></li>
+                            <li><a href="index.do?cateNum=5#populer">모자</a></li>
                         </ul>
                     </div>
                 </div>
@@ -476,7 +477,7 @@
                                                 <div class="pro__thumb">
                                                 <!-- 상세 페이지 링크 -->
                                                     <a href="product.do?proNum=${list.proNum }">
-                                                        <img src="resources/images/product/1.png" alt="product images">
+                                                        <img src="resources/images/imgUpload/${fn:split(list.proImage,'/')[0]}" alt="${list.proName }">
                                                     </a>
                                                 </div>                                                        
                                             </div>                                                   
@@ -507,7 +508,7 @@
                                                 <div class="pro__thumb">
                                                 <!-- 상세 페이지 링크 -->
                                                     <a href="#">
-                                                        <img src="resources/images/product/4.png" alt="product images">
+                                                        <img src="resources/images/imgUpload/${fn:split(list.proImage,'/')[0]}" alt="${list.proName }">
                                                     </a>
                                                 </div>
                                             </div>
@@ -634,6 +635,7 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
+    
 
 </body>
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
      <c:if test="${cookie.SuitUpidCookie.value == null}">
      <c:if test="${sessionScope.SuitUpid == null}">
    	<c:redirect url="login-register.do"/>
@@ -268,11 +269,11 @@
                                 </div>
                                 <div class="category-menu-list" style="width: 200px;">
                                     <ul>
-                                        <li><a href="my-page.do"><img alt="" src="images/icons/thum2.png"> 
+                                        <li><a href="my-page.do">
                                     		<span class="ti-notepad"></span>&emsp;주문내역 <i class="zmdi zmdi-chevron-right"></i></a></li>
-                                    <li><a href="my-page-cart.do"><img alt="" src="images/icons/thum2.png"> 
+                                    <li><a href="my-page-cart.do"> 
                                     		<span class="ti-shopping-cart"></span>&emsp;장바구니 <i class="zmdi zmdi-chevron-right"></i></a></li>
-                                    <li><a href="my-page-modify.do"><img alt="" src="images/icons/thum2.png"> 
+                                    <li><a href="my-page-modify.do"> 
                                     		<span class="ti-user"></span>&emsp;회원 정보 변경 <i class="zmdi zmdi-chevron-right"></i></a></li>
                                      
                                     </ul>

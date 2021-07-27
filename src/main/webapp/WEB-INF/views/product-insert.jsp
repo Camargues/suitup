@@ -101,98 +101,81 @@
 											<li><a href="#">신발</a></li>
 											<li><a href="#">모자</a></li>
 										</ul></li>
-							<li class="drop"><a href="#">카테고리</a>
-                                        <ul class="dropdown mega_dropdown">
-                                            <!-- Start Single Mega MEnu -->
-                                            <li><a class="mega__title" href="#">카테고리별</a>
-                                                <ul class="mega__item" id="tab">
-                                                    <li id="tabLi1"><a href="#">아우터</a></li>
-                                                    <li id="tabLi2"><a href="#">상의</a></li>
-                                                    <li id="tabLi3"><a href="#">하의</a></li>
-                                                    <li id="tabLi4"><a href="#">신발</a></li>
-                                                    <li id="tabLi5"><a href="#">모자</a></li>
-                                                </ul>
-                                            </li>
-                                            <!-- End Single Mega MEnu -->
-                                            <!-- Start Single Mega MEnu -->
-                                            <li id="tabUl1" style="display: block;"><a class="mega__title" href="#" >아우터</a>
-                                                <ul class="mega__item">
-                                                <c:set var='cateNum' value='1'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach>                                               
-                                               </ul>
-                                            </li>
-                                            <li id="tabUl2" style="display: block;"><a class="mega__title" href="#" >상의</a>
-                                                <ul class="mega__item">
-                                                    <c:set var='cateNum' value='2'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                               </ul>
-                                            </li>
-                                            <li id="tabUl3"><a class="mega__title" href="#" >하의</a>
-                                                <ul class="mega__item">
-                                                    <c:set var='cateNum' value='3'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                               </ul>
-                                            </li>
-                                            <li id="tabUl4"><a class="mega__title" href="#" >신발</a>
-                                                <ul class="mega__item">
-                                                    <c:set var='cateNum' value='4'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                               </ul>
-                                            </li>
-                                            <li id="tabUl5"><a class="mega__title" href="#" >모자</a>
-                                                <ul class="mega__item">
-                                                    <c:set var='cateNum' value='5'/>
-                                        		<c:forEach items='${categoryList }' var='list'>
-                                        		<c:if test='${list.cateNum eq cateNum}'>
-                                        	    <li><a href='shop.do?cateNum=${list.cateNum }&cateDtnum=${list.cateDtnum}'>${list.cateDtname }</a></li>
-                                            </c:if>
-                                            </c:forEach> 
-                                               </ul>
-                                            </li>
-                                            <!-- End Single Mega MEnu -->
-                                            <!-- Start Single Mega MEnu -->
-                                            <li>
-                                                <ul class="mega__item">
-                                                    <li>
-                                                        <div class="mega-item-img">
-                                                            <a href="#">
-                                                                <img src="" alt="">
-                                                            </a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <!-- End Single Mega MEnu -->
-                                        </ul>
-                                    </li>
-									<li><a href="my-page-cart.do">장바구니</a></li>
-								
+									<li class="drop"><a href="#">카테고리</a>
+										<ul class="dropdown mega_dropdown">
+											<!-- Start Single Mega MEnu -->
+											<li><a class="mega__title" href="#">카테고리별</a>
+												<ul class="mega__item" id="tab">
+													<li id="tabLi1"><a href="#">아우터</a></li>
+													<li id="tabLi2"><a href="#">상의</a></li>
+													<li id="tabLi3"><a href="#">하의</a></li>
+													<li id="tabLi4"><a href="#">신발</a></li>
+													<li id="tabLi5"><a href="#">모자</a></li>
+												</ul></li>
+											<!-- End Single Mega MEnu -->
+											<!-- Start Single Mega MEnu -->
+											<li id="tabUl1" style="display: block;"><a
+												class="mega__title" href="#">아우터</a>
+												<ul class="mega__item">
+													<li><a href="#">아우터 1</a></li>
+													<li><a href="#">아우터 2</a></li>
+													<li><a href="#">아우터 3</a></li>
+												</ul></li>
+											<li id="tabUl2" style="display: block;"><a
+												class="mega__title" href="#">상의</a>
+												<ul class="mega__item">
+													<li><a href="#">상의 1</a></li>
+													<li><a href="#">상의 2</a></li>
+													<li><a href="#">상의 3</a></li>
+												</ul></li>
+											<li id="tabUl3"><a class="mega__title" href="#">하의</a>
+												<ul class="mega__item">
+													<li><a href="#">하의 1</a></li>
+													<li><a href="#">하의 2</a></li>
+													<li><a href="#">하의 3</a></li>
+													<li><a href="#">하의 4</a></li>
+													<li><a href="#">하의 5</a></li>
+												</ul></li>
+											<li id="tabUl4"><a class="mega__title" href="#">신발</a>
+												<ul class="mega__item">
+													<li><a href="#">신발 1</a></li>
+													<li><a href="#">신발 2</a></li>
+													<li><a href="#">신발 3</a></li>
+													<li><a href="#">신발 4</a></li>
+													<li><a href="#">신발 5</a></li>
+												</ul></li>
+											<li id="tabUl5"><a class="mega__title" href="#">모자</a>
+												<ul class="mega__item">
+													<li><a href="#">모자 1</a></li>
+													<li><a href="#">모자 2</a></li>
+													<li><a href="#">모자 3</a></li>
+													<li><a href="#">모자 4</a></li>
+													<li><a href="#">모자 5</a></li>
+												</ul></li>
+											<!-- End Single Mega MEnu -->
+											<!-- Start Single Mega MEnu -->
+											<li>
+												<ul class="mega__item">
+													<li>
+														<div class="mega-item-img">
+															<a href="#"> <img src="" alt="">
+															</a>
+														</div>
+													</li>
+												</ul>
+											</li>
+											<!-- End Single Mega MEnu -->
+										</ul></li>
+									<li><a href="cart.do">장바구니</a></li>
+									<li><a href="checkout.do">결제하기</a></li>
+									<li><a href="history.do">주문내역</a></li>
 									<!-- mem_admin 쿼리값이 1일때만 노출 -->
-									<c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
-                                    
-                                    <li class="drop"><a href="#">관리자 메뉴</a>
-                                        <ul class="dropdown">
-                                            <li><a href="product-insert.do">상품 등록</a></li>
-                                            <li><a href="product-list.do">상품 목록</a></li>
-                                        </ul>
-                                    </li>
-                                    </c:if>
+									<li class="drop"><a href="#">관리자 메뉴</a>
+										<ul class="dropdown">
+											<li><a href="#">상품 등록</a></li>
+											<li><a href="#">상품 삭제</a></li>
+											<li><a href="#">상품 수정</a></li>
+										</ul></li>
 
 								</ul>
 							</nav>
@@ -228,19 +211,7 @@
 							<ul class="menu-extra">
 								<li class="search search__open hidden-xs"><span
 									class="ti-search"></span></li>
-								   	<c:choose>   
-								<c:when test="${cookie.SuitUpidCookie.value != null }">
-								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
-								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
-								</c:when>
-								<c:when test="${sessionScope.SuitUpid  != null}">
-                                <li><a href="my-page.do"><span class="ti-user"></span></a></li>								
-								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
-								</c:when>
-								<c:otherwise>
-                                <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
-								</c:otherwise>
-								</c:choose>
+								<li><a href="login-register.do"><span class="ti-user"></span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -308,8 +279,10 @@
 							<h2>상품 등록</h2>
 
 
-							<form role="form" method="post" action="product-save.do">
-
+							<form role="form" method="post" action="product-save.do" enctype="multipart/form-data">
+                            
+                            <input type="hidden" name="n" value="${vo.proNum}" />
+                             
 								<div class="inputArea">
 									<label>1차 분류</label> <select id="category" class="category1"
 										name="cateNum">
@@ -352,14 +325,16 @@
 										id="dtproCount" name="dtproCount" required/>
 								</div>
 
+								
 								<div class="inputArea">
-									<label for="proDetail">상품소개</label>
-									<textarea rows="5" cols="50" id="proDetail" name="proDetail"></textarea>
+									<label for="proimg">상품 이미지</label>
+								    <input type="file" multiple="multiple"  id="'image'"	name='image' >
+										
 								</div>
 								<div class="inputArea">
-									<label for="proimg">이미지
-										<td width="70"></td> <input type="file" id="proimg"
-										name='proimg' maxlength="60" size="40">
+									<label for="proimg">상품 설명 이미지</label>
+								    <input type="file" multiple="multiple"  id="detail"	name='detail' >
+										
 								</div>
 								<div class="inputArea">
 									<button type="submit" id="addBtn" class="btn btn-primary">등록</button>
@@ -482,42 +457,9 @@
 	<script src="resources/js/main.js"></script>
 	<!-- 카트 개별 삭제 ajax -->
 	<script src="resources/js/cart.js"></script>
-	<script>
- 
- // 카테고리 이벤트 바인딩 
- 
- $(document).ready(function(){ 
-	 
-	 $("#category").change(function(e) {
-		 console.log("change")
-		 
-		 //2차분류 옵션을 불러와서 1차분류와 다른값은 숨김 처리
-		 document.querySelectorAll("#dtcategory option").forEach(elem=>{
-			 
-			 //1차분류와 2차분류가 같지 않을 때
-			 if(e.target.value != elem.getAttribute("pro-value")){
-				 console.log("hide: ",elem)
-				 
-				 //2차분류의 값이 -1(전체) 일 때는 숨김처리 하지 않음
-				 if(elem.getAttribute("pro-value") == -1){
-					 document.getElementById("dtcategory").value = -1
-				 }
-				 
-				 //2차분류에서 -1(전체)를 제외하고 1차분류와 다른값은 전부 숨김 처리
-				 else{
-					 elem.setAttribute("style","display:none;")
-				 } 
-			 }
-			 
-			 //1차분류와 값이 같은 2차분류는 숨김처리 삭제
-			 else{
-				 elem.removeAttribute("style","display:none;")
-			 }		 
-		})
-	})
- })
- 
- </script>
+	 <script src="resources/js/admin.js"></script>
+
+
 
 </body>
 

@@ -1,6 +1,7 @@
 package com.suitup.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
@@ -11,7 +12,9 @@ import com.suitup.domain.SuitUpProductVO;
 
 public interface SuitUpDAO {
 
-	public List<SuitUpCartVO> getCartList(SuitUpCartVO vo);
+	public List<Map> getCartList(SuitUpCartVO vo);
+	
+	public List<SuitUpCartVO> getCartList2(SuitUpCartVO vo);
 	
 	public int insertOrder(SuitUpOrderVO vo);
 	

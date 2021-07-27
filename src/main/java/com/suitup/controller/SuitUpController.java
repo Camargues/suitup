@@ -1,6 +1,7 @@
 package com.suitup.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -92,7 +93,6 @@ public class SuitUpController {
 	// 주문하러 가기
 	@RequestMapping("checkout.do")
 	public String checkout(Model m, HttpServletRequest request, HttpSession session) {
-		
 		// 쿠키에서 가져올 id값을 저장할 변수 id 선언
 				String id = null;
 				// 쿠키 가져오기
@@ -128,48 +128,48 @@ public class SuitUpController {
 	public String insertOrder(String receiver, String phone, String address, String memo, Model m, HttpServletRequest request, HttpSession session) {
 		
 		// 쿠키에서 가져올 id값을 저장할 변수 id 선언
-		String id = null;
-		// 쿠키 가져오기
-		Cookie[] cookies = request.getCookies();
-		for(Cookie cookie : cookies) {
-			if(cookie.getName().equals("SuitUpidCookie"))
-				id = cookie.getValue();
-			}
-		// 쿠키가 null 이면 세션 가져오기
-			if(id == null)
-				id = (String) session.getAttribute("SuitUpid");
-		
-		// 몇건 주문 들어가는지 받아올 result 변수 선언
-		int result = 0;
-		
-		if(memo == null)
-			memo = "";
-		
-		SuitUpCartVO cartvo = new SuitUpCartVO();
-		
-		if(id != null) {
-			cartvo.setMemId(id);		
-		
-			List<SuitUpCartVO> list = suitupService.getCartList(cartvo);
-			for(SuitUpCartVO vo : list) {
-				SuitUpOrderVO ordervo = new SuitUpOrderVO();
-				ordervo.setMemId(vo.getMemId());
-				ordervo.setProNum(vo.getProNum());
-				ordervo.setDtproSize(vo.getDtproSize());
-				ordervo.setDtproColor(vo.getDtproColor());
-				ordervo.setOrderCount(vo.getCartCount());
-				ordervo.setOrderAddress(address);
-				ordervo.setOrderReceiver(receiver);
-				ordervo.setOrderPhone(phone);
-				ordervo.setOrderMemo(memo);
-				ordervo.setProPrice(vo.getProPrice());
-				ordervo.setProName(vo.getProName());
-				ordervo.setCateNum(vo.getCateNum());
-				ordervo.setCateDtnum(vo.getCateDtnum());
-				result = result + suitupService.insertOrder(ordervo);
-			
+				String id = null;
+				// 쿠키 가져오기
+				Cookie[] cookies = request.getCookies();
+				for(Cookie cookie : cookies) {
+					if(cookie.getName().equals("SuitUpidCookie"))
+						id = cookie.getValue();
+					}
+				// 쿠키가 null 이면 세션 가져오기
+					if(id == null)
+						id = (String) session.getAttribute("SuitUpid");
 				
-			}
+				// 몇건 주문 들어가는지 받아올 result 변수 선언
+				int result = 0;
+				
+				if(memo == null)
+					memo = "";
+				
+				SuitUpCartVO cartvo = new SuitUpCartVO();
+				
+				if(id != null) {
+					cartvo.setMemId(id);		
+				
+					List<SuitUpCartVO> list = suitupService.getCartList2(cartvo);
+					for(SuitUpCartVO vo : list) {
+						SuitUpOrderVO ordervo = new SuitUpOrderVO();
+						ordervo.setMemId(vo.getMemId());
+						ordervo.setProNum(vo.getProNum());
+						ordervo.setDtproSize(vo.getDtproSize());
+						ordervo.setDtproColor(vo.getDtproColor());
+						ordervo.setOrderCount(vo.getCartCount());
+						ordervo.setOrderAddress(address);
+						ordervo.setOrderReceiver(receiver);
+						ordervo.setOrderPhone(phone);
+						ordervo.setOrderMemo(memo);
+						ordervo.setProPrice(vo.getProPrice());
+						ordervo.setProName(vo.getProName());
+					
+						result = result + suitupService.insertOrder(ordervo);
+					
+						
+					}
+					
 			System.out.println(result);
 			// 주문 완료 후 장바구니 비우기
 			suitupService.deleteCartList(cartvo);
@@ -345,29 +345,21 @@ public class SuitUpController {
 		}
 		
 		//관리자 상품 등록페이지 
-				@RequestMapping("product-insert.do") 
-				public void productinsert(Model m) {
+		@RequestMapping("product-insert.do") 
+		public void productinsert(Model m) {
+			
+			List<SuitUpCategoryVO> categoryList=suitupService.getCategoryList();
+			m.addAttribute("categoryList",categoryList);
+		}
+		
+		//관리자 상품 DB에 저장
+		@RequestMapping(value="product-save.do",method=RequestMethod.POST) 
+		public String productSave(Model m,SuitUpProductVO vo,HttpServletRequest request,HttpSession session) {
+						
+			suitupService.Productinsert(vo);
 					
-					List<SuitUpCategoryVO> categoryList=suitupService.getCategoryList();
-					m.addAttribute("categoryList",categoryList);
-				}
-				
-				//관리자 상품 DB에 저장
-				@RequestMapping(value="product-save.do",method=RequestMethod.POST) 
-				public String productSave(Model m,SuitUpProductVO vo,HttpServletRequest request,HttpSession session) {
-					System.out.println("####save######");
-					
-					System.out.println(vo.getProNum()); 	
-					System.out.println(vo.getProName());
-					System.out.println(vo.getProPrice());
-					System.out.println(vo.getCateNum());
-					System.out.println(vo.getCateDtnum());
-					System.out.println(vo.getDtproCount());
-					
-					suitupService.Productinsert(vo);
-					
-					return "redirect:product-insert.do";
-				}
+			return "redirect:product-insert.do";
+		}
 				// 관리자 상품 목록
 				@RequestMapping("product-list.do") 
 				public void adminlist(Model m) {
@@ -426,7 +418,6 @@ public class SuitUpController {
 		public String productDetails(SuitUpProductVO vo,Model m) {
 			SuitUpProductVO product = suitupService.getProductDetails(vo);
 			
-			System.out.println(product.getProNum());
 			// 잘못된 상품일 경우 에러페이지로 연결 예정
 			if(product.getProName() == null) {
 				return "index";
@@ -549,10 +540,6 @@ public class SuitUpController {
 			if(!id.equals(vo.getMemId()))
 				return "error";
 			
-			System.out.println(vo.getComTitle());
-			System.out.println(vo.getComAvg());
-			System.out.println(vo.getComSeq());
-			System.out.println(vo.getComContent());
 			
 			int result = suitupService.updateComment(vo);
 			
