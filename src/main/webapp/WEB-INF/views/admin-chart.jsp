@@ -16,10 +16,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
  <body class="sb-nav-fixed">
-<c:if test="${sessionScope.admin != 1 || cookie.admin.value == null}">
+ <c:if test="${cookie.admin.value == null}">
+<c:if test="${sessionScope.admin != 1}">
 	<c:redirect url="index.do"/>
 </c:if>
- 
+ </c:if> 
 <c:forEach var="list" items="${list }">
 	<c:set var="count" value="${count+1 }"/>
 	<input type="hidden" id="monthsum${count}" value="${list.sum}">
@@ -45,7 +46,7 @@
 
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="admin-chart.do">관리자 페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
