@@ -412,7 +412,7 @@
         <!-- End Feature Product -->
 
         <!-- Start Our Product Area -->
-        <section class="htc__product__area bg__white">
+        <section class="htc__product__area bg__white" style="padding-bottom: 30px">
     <div class="container">
         <div class="row">
             <div class="col-md-3">

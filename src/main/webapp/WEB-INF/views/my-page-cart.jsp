@@ -217,10 +217,12 @@
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								<input type="hidden" value="${cookie.SuitUpidCookie.value}" name="memId"/>
 								</c:when>
 								<c:when test="${sessionScope.SuitUpid  != null}">
                                 <li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								<input type="hidden" value="${sessionScope.SuitUpid}" name="memId"/>
 								</c:when>
 								<c:otherwise>
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
@@ -371,6 +373,7 @@
                                             	<th>
                                             	<div class="buttons-cart">
 			                                        <a href="index.do">쇼핑 계속하기</a>
+			                                        <a href="#" onclick="drop_cartlist()">장바구니 비우기</a>
 			                                   </div>
                                             	</th>
                                             	 <td style="padding:0">

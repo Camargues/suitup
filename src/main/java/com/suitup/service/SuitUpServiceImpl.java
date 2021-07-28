@@ -42,8 +42,8 @@ public class SuitUpServiceImpl implements SuitUpService {
 	}
 
 	// 장바구니 전부 삭제
-	public void deleteCartList(SuitUpCartVO vo) {
-		suitupDAO.deleteCartList(vo);
+	public int deleteCartList(SuitUpCartVO vo) {
+		return suitupDAO.deleteCartList(vo);
 		
 	}
 

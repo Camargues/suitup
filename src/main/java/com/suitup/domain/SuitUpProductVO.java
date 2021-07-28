@@ -85,12 +85,25 @@ public class SuitUpProductVO {
 		this.proImage = "";
 		// 각자 환경에 맞게 경로 수정
 		String path = "C:\\dev\\suitup\\src\\main\\webapp\\resources\\images\\imgUpload\\";
-		
+		File Folder = new File(path);
+
+		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
+		if (!Folder.exists()) {
+			try{
+			    Folder.mkdir(); //폴더 생성합니다.
+			    System.out.println("폴더가 생성되었습니다.");
+		        } 
+		        catch(Exception e){
+			    e.getStackTrace();
+			}        
+	    }
 		// 업로드 파일 접근
 		if(! image.isEmpty()) {
 				for(MultipartFile mf : image) {
 					// "/" 로 이름 구분
-					this.proImage += System.currentTimeMillis() + mf.getOriginalFilename() + "/";
+					String serialNo = ""+System.currentTimeMillis();
+					serialNo = serialNo.substring(5, 12);
+					this.proImage += serialNo + mf.getOriginalFilename() + "/";
 						
 						String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 						
@@ -118,11 +131,25 @@ public class SuitUpProductVO {
 		this.proDetail = "";
 		// 각자 환경에 맞게 경로 수정
 		String path = "C:\\dev\\suitup\\src\\main\\webapp\\resources\\images\\imgUpload\\";
+		File Folder = new File(path);
+
+		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
+		if (!Folder.exists()) {
+			try{
+			    Folder.mkdir(); //폴더 생성합니다.
+			    System.out.println("폴더가 생성되었습니다.");
+		        } 
+		        catch(Exception e){
+			    e.getStackTrace();
+			}        
+	     }
 		// 업로드 파일 접근
 		if(! detail.isEmpty()) {
 			for(MultipartFile mf : detail) {
 				// "/" 로 이름 구분
-				this.proDetail += System.currentTimeMillis() + mf.getOriginalFilename() + "/";
+				String serialNo = ""+System.currentTimeMillis();
+				serialNo = serialNo.substring(5, 12);
+				this.proDetail += serialNo + mf.getOriginalFilename() + "/";
 								
 				String originFileName = mf.getOriginalFilename(); // 원본 파일 명	
 				String safeFile = path + System.currentTimeMillis() + originFileName;

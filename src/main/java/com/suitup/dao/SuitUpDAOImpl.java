@@ -46,9 +46,9 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 	}
 	
 	// 장바구니 전부 비우기
-	public void deleteCartList(SuitUpCartVO vo) {
+	public int deleteCartList(SuitUpCartVO vo) {
 		System.out.println("===> Mybatis deleteCartList() 호출");
-		mybatis.delete("SuitUpDAO.deleteCartList", vo);
+		return mybatis.delete("SuitUpDAO.deleteCartList", vo);
 	}
 	
 	// 장바구니 한품목 삭제
@@ -252,6 +252,9 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 	// 찜 삭제
 	public int deleteWish(SuitUpWishVO vo) {
 		System.out.println("==> Mybatis deleteWish() 호출");
+		System.out.println("아이디 : " + vo.getMemId());
+		System.out.println("상품 번호 : " +  vo.getProNum());
+		System.out.println("찜 번호 : " + vo.getWishNum());
 		return mybatis.delete("SuitUpDAO.deleteWish", vo);
 	}
 

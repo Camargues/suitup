@@ -22,7 +22,7 @@ public interface SuitUpService {
 	
 	int insertOrder(SuitUpOrderVO vo);
 	
-	void deleteCartList(SuitUpCartVO vo);
+	int deleteCartList(SuitUpCartVO vo);
 	
 	void deleteCart(String cart_num);
 	

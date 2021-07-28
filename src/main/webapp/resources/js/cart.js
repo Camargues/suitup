@@ -22,3 +22,29 @@ $(document).ready(function(){
 });
 
 
+function drop_cartlist(){
+	
+	if($('input[name="memId"]').val() == null)
+		alert("로그인을 해주세요");
+	else{
+		if(confirm("장바구니를 전부 비우시겠습니까?") == true){
+		var memId = $('input[name="memId"]').val();
+		
+		$.ajax({
+			type:"post",
+			url:"deleteCartlist.do",
+			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+			data : {memId : memId},
+			success:function(result){
+  				 // 성공시 페이지 리로딩
+  				 alert(result);
+  				location.reload();
+  				
+  			 }
+			
+			
+		})
+		}
+	}
+	
+}

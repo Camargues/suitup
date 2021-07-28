@@ -23,7 +23,7 @@ public interface SuitUpDAO {
 		
 	public void deleteCart(String cart_num);
 	
-	public void deleteCartList(SuitUpCartVO vo);
+	public int deleteCartList(SuitUpCartVO vo);
 	
 	int changeCart(SuitUpCartVO vo);
 	

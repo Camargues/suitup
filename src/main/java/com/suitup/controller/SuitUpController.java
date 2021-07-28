@@ -403,7 +403,7 @@ public class SuitUpController {
 			System.out.println("--------------Controller-----------------");
 			
 			List<SuitUpProductVO> adminlist=suitupService.getAdminList();
-	
+			m.addAttribute("categoryList", suitupService.getCategoryList());
 			m.addAttribute("adminlist",adminlist);		
 		}
        
@@ -451,6 +451,7 @@ public class SuitUpController {
 			System.out.println(vo.getDtproCount());
 			
 			suitupService.productModify(vo);
+			m.addAttribute("categoryList", suitupService.getCategoryList());
 			return "redirect:product-list.do";
 		}
  		// 관리자 상품 삭제
@@ -480,7 +481,7 @@ public class SuitUpController {
 
 			        mv.setViewName("redirect:my-page-modify.do");
 			        mv.addObject("result", result);
-
+			        
 			        return mv;
 			    }
 			    
@@ -525,7 +526,7 @@ public class SuitUpController {
 			
 			// 잘못된 상품일 경우 에러페이지로 연결 예정
 			if(product.getProName() == null) {
-				return "index";
+				return "errorPage";
 			}
 			
 			// 리뷰 불러오기
@@ -623,6 +624,7 @@ public class SuitUpController {
 					return "error";
 			
 			m.addAttribute("comment", vo);
+			m.addAttribute("categoryList", suitupService.getCategoryList());
 			return "modify-review";
 					
 			}
@@ -710,6 +712,7 @@ public class SuitUpController {
 		//관리자페이지 회원정보
 				@RequestMapping("admin-table.do")
 				public String customerInfo(Model m) {
+					m.addAttribute("categoryList", suitupService.getCategoryList());
 					m.addAttribute("customerList", suitupService.getCustomerList());
 					return "admin-table";
 				}
@@ -721,7 +724,7 @@ public class SuitUpController {
 					UrlPathHelper urls = new UrlPathHelper(); 
 					String url = urls.getOriginatingServletPath(request).substring(1);
 					String returnUrl="";
-
+					m.addAttribute("categoryList", suitupService.getCategoryList());
 					if("admin-order.do".equals(url)) {
 						vo.setOrderStatus("주문완료");
 						m.addAttribute("orderList", suitupService.getAdminOrderList(vo));
@@ -749,6 +752,7 @@ public class SuitUpController {
 					m.addAttribute("list",list);
 					m.addAttribute("list2",list2);
 					m.addAttribute("list3",list3);
+					m.addAttribute("categoryList", suitupService.getCategoryList());
 					return "admin-chart" ;
 				}
 				// 배송시작 ajax
@@ -824,14 +828,27 @@ public class SuitUpController {
 			if(memId == null)
 				return "login-register";
 			m.addAttribute("wishList", suitupService.getWishList(memId));
+			m.addAttribute("categoryList", suitupService.getCategoryList());
 				return "my-page-wishlist";
 			
 		}
 		
 		// 찜 삭제 (개별 삭제, 전체 삭제 포함)	
 		@RequestMapping("dropWishlist.do")
+		@ResponseBody
 		public String dropWishlist(SuitUpWishVO vo) {
-			suitupService.deleteWish(vo);
-			return "my-page-wishlist";
+			int result = suitupService.deleteWish(vo);
+			System.out.println("찜 목록 삭제 갯수 : " + result);
+			return "삭제되었습니다";
+		}
+		
+		@RequestMapping(value="deleteCartlist.do", produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public String deleteCartlist(SuitUpCartVO vo) {
+			int result = suitupService.deleteCartList(vo);
+			if(result > 1)
+				return "장바구니가 전부 삭제되었습니다";
+			else
+				return "장바구니가 비어있습니다";
 		}
 }

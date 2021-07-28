@@ -213,10 +213,12 @@
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								<input type="hidden" value="${cookie.SuitUpidCookie.value}" name="memId"/>
 								</c:when>
 								<c:when test="${sessionScope.SuitUpid  != null}">
                                 <li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								<input type="hidden" value="${sessionScope.SuitUpid}" name="memId"/>
 								</c:when>
 								<c:otherwise>
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
@@ -296,7 +298,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <!-- 장바구니 합계 구할 sum 함수 선언 -->
+                                                   
                                                     <c:if test="${not empty wishList }">
                                                    
                                                     <c:forEach items="${wishList }" var="wish">
@@ -313,13 +315,16 @@
                                             				<td class="product-quantity"><span class="amount">재고가 없습니다</span></td>
                                             				</c:otherwise>
                                             				</c:choose>
-                                            				<td class="product-remove"><a href="dropWishlist.do?wish_num=${wish.wishNum }" onclick="if(!confirm('찜목록에서 제거하시겠습니까?')){return false;}">X</a></td>
+                                            				<td class="product-remove"><a href="#" class="remove" id="${wish.wishNum }">X</a></td>
                                                         </tr>
                                                         
                                                         </c:forEach>
                                                         </c:if>
                                                     </tbody>
                                                 </table>
+                                                <div class="buttons-cart">
+			                                        <a href="#" onclick="drop_wishlist()">찜 목록 비우기</a>
+			                                   </div>
                                             </div> 
                                         </div>                        
                                  
@@ -431,6 +436,7 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
+    <script src="resources/js/wishlist.js"></script>
   
   	
 
