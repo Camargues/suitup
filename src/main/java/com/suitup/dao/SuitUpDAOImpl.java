@@ -228,9 +228,6 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 	// 찜 삭제
 	public int deleteWish(SuitUpWishVO vo) {
 		System.out.println("==> Mybatis deleteWish() 호출");
-		System.out.println("상품 번호 : " + vo.getProNum());
-		System.out.println("회원 아이디 : " + vo.getMemId());
-		System.out.println("찜목록 번호 : " + vo.getWishNum());
 		return mybatis.delete("SuitUpDAO.deleteWish", vo);
 	}
 

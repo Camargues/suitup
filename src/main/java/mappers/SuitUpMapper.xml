@@ -129,10 +129,24 @@
 
     </insert>
 
-    <!--  관리자 상품목록 불러오기 -->
-    <select id="getAdminList" parameterType="SuitUpProductVO" resultType="SuitUpProductVO">
-        SELECT * FROM SU_PRO
-    </select>
+   <!--  관리자 상품목록 불러오기 -->
+	<select id="getAdminList" parameterType="SuitUpProductVO" resultType="SuitUpProductVO">
+		SELECT * FROM SU_PRO
+	</select>
+	
+	<!--  관리자 상품목록 수정하기 -->
+	<update id="productModify" parameterType="SuitUpProductVO">
+	UPDATE SU_PRO SET PRO_NAME = #{proName} , PRO_PRICE = #{proPrice},
+	CATE_NUM = #{cateNum} , CATE_DTNUM = #{cateDtnum}, DTPRO_COUNT = #{dtproCount}
+	WHERE PRO_NUM = #{proNum}
+	</update>
+	
+	<!--  관리자 상품목록 삭제하기 -->
+	<delete id="productDelete">
+	       delete
+	             SU_PRO
+	       WHERE PRO_NUM = #{proNum}	
+	</delete>	
 	
 	<!-- 회원정보 수정 -->
 	<update parameterType="SuitUpCustomerVO" id="memberModify">
