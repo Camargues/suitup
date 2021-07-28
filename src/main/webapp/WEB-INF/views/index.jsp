@@ -39,7 +39,7 @@
 </head>
 
 <body>
-<a href="admin-chart.do">@@@@@@@@@@@@@@@@@@2</a>
+
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
@@ -163,6 +163,7 @@
                                         <ul class="dropdown">
                                             <li><a href="product-insert.do">상품 등록</a></li>
                                             <li><a href="product-list.do">상품 목록</a></li>
+                                            <li><a href="admin-chart.do">통계 페이지</a></li>
                                         </ul>
                                     </li>
                                     </c:if>

@@ -175,6 +175,7 @@
 											<li><a href="#">상품 등록</a></li>
 											<li><a href="#">상품 삭제</a></li>
 											<li><a href="#">상품 수정</a></li>
+											<li><a href="admin-chart.do">통계 페이지</a></li>
 										</ul></li>
 
 								</ul>

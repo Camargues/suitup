@@ -167,6 +167,7 @@
                                         <ul class="dropdown">
                                             <li><a href="product-insert.do">상품 등록</a></li>
                                             <li><a href="product-list.do">상품 목록</a></li>
+                                            <li><a href="admin-chart.do">통계 페이지</a></li>
                                         </ul>
                                     </li>
                                     </c:if>
