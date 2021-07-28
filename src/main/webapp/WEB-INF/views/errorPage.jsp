@@ -260,7 +260,25 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">문제가 발생했씁니다</h2>
+                                <c:if test="${requestScope['javax.servlet.error.status_code'] == 400}">
+		<h2 class="bradcaump-title">잘못 된 요청입니다.</h2>   
+	</c:if>	
+	
+	<c:if test="${requestScope['javax.servlet.error.status_code'] == 404}">
+		<h2 class="bradcaump-title">요청하신 페이지를 찾을 수 없습니다.</h2>   
+	</c:if>
+	
+	<c:if test="${requestScope['javax.servlet.error.status_code'] == 405}">
+		<h2 class="bradcaump-title">요청된 메소드가 허용되지 않습니다.</h2>    
+	</c:if>
+	
+	<c:if test="${requestScope['javax.servlet.error.status_code'] == 500}">
+		<h2 class="bradcaump-title">서버에 오류가 발생하여 요청을 수행할 수 없습니다.</h2>
+	</c:if>
+	
+	<c:if test="${requestScope['javax.servlet.error.status_code'] == 503}">
+		<h2 class="bradcaump-title">서비스를 사용할 수 없습니다.</h2>
+	</c:if>
                                 <nav class="bradcaump-inner">
                                   <span class="breadcrumb-item active">3초후 홈으로 돌아갑니다</span>
                                 </nav>

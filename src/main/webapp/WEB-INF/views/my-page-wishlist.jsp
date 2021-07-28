@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-    
-<!doctype html>
+     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <c:if test="${cookie.SuitUpidCookie.value == null}">
+     <c:if test="${sessionScope.SuitUpid == null}">
+   	<c:redirect url="login-register.do"/>
+     </c:if>
+     </c:if>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>상품수정 | Suit up</title>
+    <title>Suit Up</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -65,11 +70,13 @@
                                     <li class="drop"><a href="index.jsp">홈</a></li>
                                     <li class="drop"><a href="#">인기상품</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">아우터</a></li>
-                                            <li><a href="#">상의</a></li>
-                                            <li><a href="#">하의</a></li>
-                                            <li><a href="#">신발</a></li>
-                                            <li><a href="#">모자</a></li>
+                                        <c:set var="cateName" value=""/>
+                                        <c:forEach items="${categoryList }" var="list">
+                                        <c:if test="${cateName != list.cateName}">
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                         </ul>
                                     </li>
                                     <li class="drop"><a href="#">카테고리</a>
@@ -152,10 +159,9 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                      <li><a href="my-page-cart.do">장바구니</a></li>
-                                  
-                                    <!-- mem_admin 쿼리값이 1일때만 노출 -->
-                                   <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
+                                    <li><a href="my-page-cart.do">장바구니</a></li>
+                          
+                                    <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -164,7 +170,6 @@
                                         </ul>
                                     </li>
                                     </c:if>
-                                    
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix visible-xs visible-sm">
@@ -173,25 +178,28 @@
                                         <li><a href="index.jsp">홈</a></li>
                                         <li><a href="#">인기상품</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                   <c:set var="cateName" value=""/>
+                                       		 <c:forEach items="${categoryList }" var="list">
+                                       		 <c:if test="${cateName != list.cateName}">
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
+                                     
                                         <li><a href="#">카테고리별</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                <c:set var="cateName" value=""/>
+                                       			 <c:forEach items="${categoryList }" var="list">
+                                        		<c:if test="${cateName != list.cateName}">
+                                            <li><a href="shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
-                                        <li><a href="cart.do">장바구니</a></li>
-                                        <li><a href="checkout.do">결제하기</a></li>
-                                        <li><a href="history.do">주문내역</a></li>
+                                        <li><a href="my-page-cart.do">장바구니</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -200,7 +208,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                               	<c:choose>   
+								   	<c:choose>   
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
@@ -213,6 +221,7 @@
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
 								</c:choose>
+                            
                             </ul>
                         </div>
                     </div>
@@ -247,133 +256,81 @@
             </div>
             <!-- End Search Popap -->
 		</div>
-        <!-- End Offset Wrapper -->
-        <!-- Start Bradcaump area -->
-        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/2.jpg) no-repeat scroll center center / cover ;">
-            <div class="ht__bradcaump__wrap">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">상품수정</h2>
-                                <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.jsp">홈</a>
-                                  <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">상품수정</span>
-                                </nav>
+        <!-- Start Feature Product -->
+       <div class="container" >
+                <div class="row" >
+                    <!-- Start Left Feature -->
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 " style="display: flex;">
+                        <!-- Start Slider Area -->
+                        <div class="col-md-3 col-lg-3 col-sm-4 col-xs-4 float-right-style">
+                            <div class="categories-menu mrg-xs">
+                                <div class="category-heading" style="width: 200px;">
+                                   <h3> 카테고리</h3>
+                                </div>
+                                <div class="category-menu-list" style="width: 200px;">
+                                    <ul>
+                                        <li><a href="my-page.do">
+                                    		<span class="ti-notepad"></span>&emsp;주문내역 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    <li><a href="my-page-cart.do"> 
+                                    		<span class="ti-shopping-cart"></span>&emsp;장바구니 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    		<li><a href="my-page-wishlist.do">
+                                    		<span class="ti-heart"></span>&emsp;찜 목록 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    <li><a href="my-page-modify.do"> 
+                                    		<span class="ti-user"></span>&emsp;회원 정보 변경 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                     
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                                            <div class="table-content " style="width: 1200px;padding-left:50px;" >
+									       	<h1 style="display:flex;    justify-content: center;">찜 목록</h1></br>
+                                                <table >
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="product-thumbnail">상품이미지</th>
+                                           	 				<th class="product-name">상품명</th>
+                                      	     				<th class="product-price">가격</th>
+                                            				<th class="product-quantity">재고</th>
+                                            				<th class="product-remove">삭제</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <!-- 장바구니 합계 구할 sum 함수 선언 -->
+                                                    <c:if test="${not empty wishList }">
+                                                   
+                                                    <c:forEach items="${wishList }" var="wish">
+                                                   
+                                                        <tr>
+                                                           <td class="product-thumbnail"><a href="product.do?proNum=${wish.proNum }"><img src="resources/images/imgUpload/${fn:split(wish.proImage,'/')[0]}" alt="${wish.proName }" /></a></td>
+                                           	 				<td class="product-name"><a href="product.do?proNum=${wish.proNum }">${wish.proName }</a></td>
+                                      	     				<td class="product-price"><span class="amount">${wish.proPrice }</span></td>
+                                      	     				<c:choose>
+                                      	     				<c:when test="${wish.dtproCount ne 0}">
+                                            				<td class="product-quantity"><span class="amount">${wish.dtproCount }</span></td>
+                                            				</c:when>
+                                            				<c:otherwise>
+                                            				<td class="product-quantity"><span class="amount">재고가 없습니다</span></td>
+                                            				</c:otherwise>
+                                            				</c:choose>
+                                            				<td class="product-remove"><a href="dropWishlist.do?wish_num=${wish.wishNum }" onclick="if(!confirm('찜목록에서 제거하시겠습니까?')){return false;}">X</a></td>
+                                                        </tr>
+                                                        
+                                                        </c:forEach>
+                                                        </c:if>
+                                                    </tbody>
+                                                </table>
+                                            </div> 
+                                        </div>                        
+                                 
+                        <!-- End Slider Area -->
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Bradcaump area -->
-        <!-- cart-main-area start -->
-        <div class="cart-main-area ptb--120 bg__white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div>
-                            <h2> 상품 수정 </h2>
                    
-
-                               <form role="form" method="post" action="productModify"  enctype="multipart/form-data">
-    								<input type="hidden" name="proNum" value="${proNum}" /> 
-    								
-								
-								<div class="inputArea">
-									<label>1차 분류</label> <select id="category" class="category1"
-										name="cateNum">
-
-										<option value="-1">전체</option>
-
-										<c:set var="prevNum" value="99" />
-										<!-- 
-											CATE_NUM
-											CATE_DTNUM
-											
-											
-										 -->
-
-										<c:forEach items="${categoryList}" var="list">
-										
-											
-											<c:if test='${list.cateNum eq productDetails.cateNum}'>
-												 <c:set var="sec" value="selected" />
-											</c:if>
-											<c:if test='${list.cateNum ne productDetails.cateNum}'>
-												 <c:set var="sec" value="" />
-											</c:if>
-
-											<c:if test='${prevNum ne list.cateNum}'>
-												<option value="${list.cateNum}" ${sec} >${list.cateName}</option>
-												<c:set var="prevNum" value="${list.cateNum}" />
-											</c:if>
-
-										</c:forEach>
-									</select> <label>2차 분류 </label> <select id="dtcategory" class="category2"
-										name="cateDtnum">
-										<option pro-value="-1" value="-1">전체</option>
-										
-										
-										<c:forEach items="${categoryList}" var="list">
-										<c:if test='${list.cateDtnum eq productDetails.cateDtnum}'>
-											 <c:set var="sec" value="selected" />
-										</c:if>
-										
-										<c:if test='${list.cateDtnum ne productDetails.cateDtnum}'>
-											 <c:set var="sec" value="" />
-										</c:if>
-										
-											<option pro-value="${list.cateNum}" value="${list.cateDtnum}" ${sec}>${list.cateDtname}</option>
-										</c:forEach>
-
-									</select>
-								</div>
-
-                                <!-- required(필수처리) 사용해서 값 지정 안할시 페이지 이동 x -->
-								
-								
-								
-								<div class="inputArea">
-									<label for="proName">상품명</label> <input type="text"	
-									    id="proName" name="proName" value="${productDetails.proName }" required/>
-								</div>
-
-			 					<div class="inputArea"> 
-									<label for="proPrice">상품가격</label> <input type="text"
-										id="proPrice" name="proPrice" value="${productDetails.proPrice}" required/>
-								</div>
-
-								<div class="inputArea">
-									<label for="dtproCount">상품수량</label> <input type="text"
-										id="dtproCount" name="dtproCount" value="${productDetails.dtproCount}" required/>
-								</div>
-
-								
-								<div class="inputArea">
-									<label for="proimg">이미지</label>
-								    <input type="file" multiple="multiple"  id="file"	name='file' >
-								</div>
-
-								<div class="inputArea">
-									 <button type="submit" id="updateBtn" class="btn btn-primary">완료</button> 
-									 <button type="submit" id="backBtn" class="btn btn-warning">취소</button>									 
-								</div>
-								
-							
- 								</form>
-
-</div>
-                
-                            </div> 
-                    	</div>                        
-                    </div>
+                    <!-- End Left Feature -->
                 </div>
             </div>
-        </div>
-        <!-- cart-main-area end -->
-         <!-- Start Footer Area -->
+        <!-- End Feature Product -->
+      
+        <!-- Start Footer Area -->
         <footer class="htc__foooter__area gray-bg">
             <div class="container">
                 <div class="row">
@@ -444,10 +401,9 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="index.jsp">홈</a></li>
+                                    <li><a href="#">홈</a></li>
                                     <li><a href="#">인기상품</a></li>
                                     <li><a href="cart.do">장바구니</a></li>
-                                    
                                 </ul>
                             </div>
                         </div>
@@ -459,6 +415,7 @@
         <!-- End Footer Area -->
     </div>
     <!-- Body main wrapper end -->
+    
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!-- jquery latest version -->
@@ -474,7 +431,7 @@
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
   
-    <script src="resources/js/admin.js"></script>
+  	
 
 </body>
 

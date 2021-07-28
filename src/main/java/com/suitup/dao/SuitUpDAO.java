@@ -9,6 +9,7 @@ import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
+import com.suitup.domain.SuitUpWishVO;
 
 public interface SuitUpDAO {
 
@@ -16,11 +17,15 @@ public interface SuitUpDAO {
 	
 	public List<SuitUpCartVO> getCartList2(SuitUpCartVO vo);
 	
+	public SuitUpCartVO getCartOne(SuitUpCartVO vo);
+	
 	public int insertOrder(SuitUpOrderVO vo);
+		
+	public void deleteCart(String cart_num);
 	
 	public void deleteCartList(SuitUpCartVO vo);
 	
-	public void deleteCart(String cart_num);
+	int changeCart(SuitUpCartVO vo);
 	
 	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo);
 		
@@ -37,10 +42,16 @@ public interface SuitUpDAO {
 	public List<SuitUpProductVO> getNewList();
 	
 	//관리자 상품등록
-	public int Productinsert(SuitUpProductVO vo);
+		public int Productinsert(SuitUpProductVO vo);
+			
+		//관리자 상품목록
+		public List<SuitUpProductVO> getAdminList();
 		
-	//관리자 상품목록
-	public List<SuitUpProductVO> getAdminList();
+		//관리자 상품삭제
+		public void productDelete(int proNum);
+		
+		//관리자 상품수정
+		public int productModify(SuitUpProductVO vo);
 	
 	//회원정보 수정
 	public int memberModify(SuitUpCustomerVO vo);
@@ -74,4 +85,11 @@ public interface SuitUpDAO {
 
 	public List<Map<String,String>> getDaySum();
 
+	public int insertWish(SuitUpWishVO vo);
+	
+	public int deleteWish(SuitUpWishVO vo);
+	
+	public int overlapWish(SuitUpWishVO vo);
+	
+	public List<Map<String, String>> getWishList(String memId);
 }

@@ -13,6 +13,7 @@ import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
+import com.suitup.domain.SuitUpWishVO;
 
 @Repository("suitupDAO") 
 public class SuitUpDAOImpl implements SuitUpDAO {
@@ -31,6 +32,13 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("==> Mybatis getCartList2() 호출");
 		return mybatis.selectList("SuitUpDAO.getCartList2", vo);
 	}
+	
+	// 장바구니 하나 불러오기(cart_num으로)
+	public SuitUpCartVO getCartOne(SuitUpCartVO vo) {
+		System.out.println("==> Mybatis getCartOne() 호출");
+		return mybatis.selectOne("SuitUpDAO.getCartOne", vo);
+	}
+	
 	// 주문 완료
 	public int insertOrder(SuitUpOrderVO vo) {
 		System.out.println("===> Mybatis insertOrder() 호출");
@@ -49,6 +57,12 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		mybatis.delete("SuitUpDAO.deleteCart", cart_num);
 	}
 
+	// 장바구니 수량 변경
+	
+	public int changeCart(SuitUpCartVO vo) {
+		System.out.println("==> Mybatis changeCart() 호출");
+		return mybatis.update("SuitUpDAO.changeCart", vo);
+	}
 	// 주문내역
 	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo) {
 		System.out.println("===> Mybatis getOrderList() 호출");
@@ -102,11 +116,23 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 			return mybatis.insert("SuitUpDAO.Productinsert",vo);
 	}
 		
-	// 관리자 상품 목록
-	public List<SuitUpProductVO> getAdminList() {
-		System.out.println("===> Mybatis getAdminList() 호출");
-		return mybatis.selectList("SuitUpDAO.getAdminList");
-	}
+		 // 관리자 상품 목록
+		public List<SuitUpProductVO> getAdminList() {
+			System.out.println("===> Mybatis getAdminList() 호출");
+			return mybatis.selectList("SuitUpDAO.getAdminList");
+		}
+		
+		// 관리자 상품 수정하기
+		public int productModify(SuitUpProductVO vo) {
+			System.out.println("==> Mybatis productModify() 호출");
+			return mybatis.update("SuitUpDAO.productModify", vo);
+		}
+		// 관리자 상품 삭제하기 
+	    public void productDelete(int proNum) {
+	    	System.out.println("===> Mybatis productDelete() 호출");
+			mybatis.delete("SuitUpDAO.productDelete", proNum);
+				
+			} 
 		
 	//정보 수정
     public int memberModify(SuitUpCustomerVO vo) {
@@ -193,4 +219,30 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		return mybatis.selectList("SuitUpDAO.getDaySum");
 	}
 	
+	// 찜 추가
+	public int insertWish(SuitUpWishVO vo) {
+		System.out.println("==> Mybatis insertWish() 호출");
+		return mybatis.insert("SuitUpDAO.insertWish", vo);
+	}
+	
+	// 찜 삭제
+	public int deleteWish(SuitUpWishVO vo) {
+		System.out.println("==> Mybatis deleteWish() 호출");
+		System.out.println("상품 번호 : " + vo.getProNum());
+		System.out.println("회원 아이디 : " + vo.getMemId());
+		System.out.println("찜목록 번호 : " + vo.getWishNum());
+		return mybatis.delete("SuitUpDAO.deleteWish", vo);
+	}
+
+	// 찜 중복 체크
+	public int overlapWish(SuitUpWishVO vo) {
+		System.out.println("==> Mybatis overlapWish() 호출");
+		return mybatis.selectOne("SuitUpDAO.overlapWish", vo);
+	}
+
+	// 찜 목록 가져오기
+	public List<Map<String, String>> getWishList(String memId) {
+		System.out.println("==> Mybatis getWishList() 호출");
+		return mybatis.selectList("SuitUpDAO.getWishList", memId);
+	}
 }

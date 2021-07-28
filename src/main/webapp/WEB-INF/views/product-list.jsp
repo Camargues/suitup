@@ -233,7 +233,7 @@
                         <div class="col-md-12" >
                             <div class="search__inner">
                             <!-- 검색창 -->
-                                <form action="#" method="get">
+                                <form method="get">
                                     <input placeholder="" type="text">
                                     <button type="submit"></button>
                                 </form>
@@ -297,18 +297,22 @@
  
  <tbody>
   
+  <form method="post" name="testForm">
+  <input type="hidden" name="mdProNum" id="mdProNum" value="">
+  <c:forEach items="${adminlist}" var="list">
+  <tr> 
+   <td>${list.proNum}</td>
+   <td>${list.proName}</td>
+   <td>${list.cateNum}</td>
+   <td>${list.proPrice}</td>
+   <td>${list.dtproCount}</td>
+   
+   <td><button onclick="javascript:mdBtn(${list.proNum});" id="modify_Btn" class="btn btn-warning">수정</button></td> 
+   <td><button  onclick="javascript:dlBtn(${list.proNum});" id="delete_Btn" class="btn btn-danger">삭제</button></td>   
   
-  <c:forEach items="${adminlist}" var="list1">
-  <tr>
-   <td>${list1.proNum}</td>
-   <td>${list1.proName}</td>
-   <td>${list1.cateNum}</td>
-   <td>${list1.proPrice}</td>
-   <td>${list1.dtproCount}</td>
-   <td><button  id="deleteBtn"  >삭제</button></td> 
-   <td><button value=${list1.proNum} id="modifyBtn" href="product-modify.do">수정</button></td>   
   </tr>   
   </c:forEach>
+   </form>
   
  </tbody>
  
@@ -431,9 +435,32 @@
     <script src="resources/js/main.js"></script>
     <!-- 카트 개별 삭제 ajax -->
     <script src="resources/js/cart.js"></script>
-
-
-
+    <script src="resources/js/amdin.js"></script>
 </body>
+<script type="text/javascript">
+function mdBtn(proNum){
+
+	$('#mdProNum').val(proNum);
+	
+	var modForm = document.testForm;
+	modForm.action = "product-modify.do";
+
+	return;
+
+}
+
+function dlBtn(proNum){
+	 var con = confirm("정말로 삭제하시겠습니까?");
+	 if(con) { 
+		$('#mdProNum').val(proNum);
+		
+		var modForm = document.testForm;
+		modForm.action = "productDelete.do";
+	 }
+	return; 
+
+}
+
+</script>
 
 </html>

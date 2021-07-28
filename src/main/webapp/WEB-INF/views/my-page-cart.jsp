@@ -276,8 +276,11 @@
                                     		<span class="ti-notepad"></span>&emsp;주문내역 <i class="zmdi zmdi-chevron-right"></i></a></li>
                                     <li><a href="my-page-cart.do">
                                     		<span class="ti-shopping-cart"></span>&emsp;장바구니 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    		<li><a href="my-page-wishlist.do">
+                                    		<span class="ti-heart"></span>&emsp;찜목록 <i class="zmdi zmdi-chevron-right"></i></a></li>
                                     <li><a href="my-page-modify.do">
                                     		<span class="ti-user"></span>&emsp;회원 정보 변경 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    		
                                      
                                     </ul>
                                 </div>
@@ -306,12 +309,12 @@
                                     <c:forEach items="${cartList }" var="cart">
                                    
                                         <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/imgUpload/${fn:split(cart.proImage,'/')[0]}" alt="${cart.proName }" /></a></td>
+                                            <td class="product-thumbnail"><a href="product.do?proNum=${cart.proNum }"><img src="resources/images/imgUpload/${fn:split(cart.proImage,'/')[0]}" alt="${cart.proName }" /></a></td>
                                             <td class="product-name"><a href="product.do?proNum=${cart.proNum }">${cart.proName }</a></td>
                                             <td class="product-price"><span class="amount">${cart.proPrice }</span></td>
                                             <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
                                             <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
-                                            <td class="product-quantity"><input type="number" value="${cart.cartCount }" id="${cart.cartNum }"/></td>
+                                            <td class="product-quantity"><input class="cnt" type="number" value="${cart.cartCount }" id="${cart.cartNum }"/></td>
                                             <td class="product-subtotal">${cart.proPrice * cart.cartCount }</td>
                                             <td class="product-remove"><a href="dropCart.do?cart_num=${cart.cartNum }&pro_num=${cart.proNum}&count=${cart.cartCount}" onclick="if(!confirm('리뷰를 삭제하시겠습니까?')){return false;}">X</a></td>
                                         </tr>

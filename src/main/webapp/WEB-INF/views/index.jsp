@@ -263,14 +263,14 @@
                             
                                 <!-- Start Single Slide -->
                                  <c:forEach items="${newList }" var="list">
-                                <div class="slide slider__full--screen slider-height-inherit slider-text-right" style="background: rgba(0, 0, 0, 0) url(resources/images/product/${list.proNum}) no-repeat scroll center center / cover ;">
+                                <div class="slide slider__full--screen slider-height-inherit slider-text-right" style="background: rgba(0, 0, 0, 0) url(resources/images/imgUpload/${fn:split(list.proImage,'/')[0]}) no-repeat scroll center center / cover ;">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-10 col-lg-8 col-md-offset-2 col-lg-offset-4 col-sm-12 col-xs-12">
-                                                <div class="slider__inner">
+                                            	<div class="slider__inner">
                                                     <h1><span class="text--theme">New</span></h1>
                                                     <div class="slider__btn">
-                                                        <a class="htc__btn" href="${list.proNum}">shop now</a>
+                                                        <a class="htc__btn" href="product.do?proNum=${list.proNum}">shop now</a>
                                                     </div>
                                                 </div>
                                             </div>

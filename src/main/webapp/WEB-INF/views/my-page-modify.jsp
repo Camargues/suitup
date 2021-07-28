@@ -273,6 +273,8 @@
                                     		<span class="ti-notepad"></span>&emsp;주문내역 <i class="zmdi zmdi-chevron-right"></i></a></li>
                                     <li><a href="my-page-cart.do"><img alt="" src="images/icons/thum2.png"> 
                                     		<span class="ti-shopping-cart"></span>&emsp;장바구니 <i class="zmdi zmdi-chevron-right"></i></a></li>
+                                    		<li><a href="my-page-wishlist.do">
+                                    		<span class="ti-heart"></span>&emsp;찜목록 <i class="zmdi zmdi-chevron-right"></i></a></li>
                                     <li><a href="my-page-modify.do"><img alt="" src="images/icons/thum2.png"> 
                                     		<span class="ti-user"></span>&emsp;회원 정보 변경 <i class="zmdi zmdi-chevron-right"></i></a></li>
                                      

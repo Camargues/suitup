@@ -29,6 +29,12 @@
 	<select id="getCartList2" resultType="SuitUpCartVO" parameterType="SuitUpCartVO">
 		SELECT * FROM SU_CART WHERE MEM_ID=#{memId}
 	</select>
+	
+	<!-- 카트 하나 불러오기 -->
+	<select id="getCartOne" resultType="SuitUpCartVO" parameterType="SuitUpCartVO">
+		SELECT * FROM SU_CART WHERE CART_NUM=#{cartNum}
+	</select>
+	
 	<!-- 주문하기 -->
 	<insert id="insertOrder" parameterType="SuitUpOrderVO">
 	
@@ -44,9 +50,13 @@
 		DELETE FROM SU_CART WHERE MEM_ID = #{memId}
 	</delete>
 	
-	<!-- 카트 한품목 삭제 -->
+	<!-- 카트 삭제 -->
 	<delete id="deleteCart" parameterType="String">
-		DELETE FROM SU_CART WHERE CART_NUM = #{cart_num}
+		DELETE FROM SU_CART
+		<where>
+		 <if test="cartNum != null">AND CART_NUM = #{cartNum}</if>
+		 <if test="memId != null">AND MEM_ID = #{memId}</if>
+		 </where>
 	</delete>
 	
 	<!-- 주문 목록 불러오기 -->
@@ -139,6 +149,11 @@
 	INSERT INTO SU_CART VALUES(#{proNum}, #{proName},#{memId},#{dtproSize}, #{dtproColor},#{cartCount}, #{proPrice}, CART_NUM_SEQUENCE.NEXTVAL, #{cateNum}, #{cateDtnum})
 	</insert>
 	
+	<!-- 상품 장바구니 담기 -->
+	<insert id="changeCart" parameterType="SuitUpCartVO">
+	UPDATE SU_CART SET CART_COUNT = #{cartCount} WHERE CART_NUM=#{cartNum}
+	</insert>
+	
 	<!-- 상품 수정 -->
 	<update id="updateProduct" parameterType="SuitUpProductVO">
 	UPDATE SU_PRO
@@ -221,5 +236,40 @@
 	ORDER BY TO_CHAR(order_date,'YY-MM-DD') DESC
 	</select>
 	
+	<!-- 찜 등록 -->
+	<insert id="insertWish">
+		INSERT INTO SU_WISH VALUES(SEQ_SU_WISH.NEXTVAL, #{memId}, #{proNum})
+	</insert>
+	
+	<!-- 찜목록 불러오기 -->
+	<resultMap type="HashMap" id="wishMap">
+		<id column="PRO_IMAGE" property="proImage"/>
+		<id column="PRO_NAME" property="proName"/>
+		<id column="PRO_NUM" property="proNum"/>
+		<id column="PRO_PRICE" property="proPrice"/>
+		<id column="DTPRO_COUNT" property="dtproCount"/>
+		<id column="WISH_NUM" property="wishNum"/>
+	</resultMap>
+	<select id="getWishList" resultMap="wishMap" parameterType="String">
+		SELECT SU_WISH.*, SU_PRO.PRO_IMAGE, SU_PRO.PRO_NAME, SU_PRO.PRO_PRICE, SU_PRO.DTPRO_COUNT
+		FROM SU_WISH JOIN SU_PRO
+		ON SU_WISH.PRO_NUM = SU_PRO.PRO_NUM
+		WHERE MEM_ID=#{memId}
+	</select>
+	
+	<!-- 찜 중복 체크 -->
+	<select id="overlapWish" parameterType="SuitUpWishVO" resultType="Integer">
+		SELECT COUNT(*) FROM SU_WISH WHERE MEM_ID = #{memId} AND PRO_NUM = #{proNum}
+	</select>
+	
+	<!-- 찜 삭제 -->
+	<delete id="deleteWish" parameterType="SuitUpWishVO">
+		DELETE FROM SU_WISH
+		<where>
+		<if test="wishNum != '' or wishNum != 0">AND WISH_NUM = #{wishNum}</if>
+		<if test="memId != null">AND MEM_ID = #{memId}</if>
+		<if test="proNum != '' or proNum != 0">AND PRO_NUM = #{proNum}</if>
+		</where>
+	</delete>
 	
 </mapper>

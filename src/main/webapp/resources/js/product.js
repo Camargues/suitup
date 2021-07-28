@@ -99,3 +99,50 @@
     	document.getElementById("insertReview").submit();
     }
     
+    // 찜목록 추가
+    function insert_wish(){
+    	
+    	
+    	if($('input[name="memId"]').val() == null)
+    		alert("로그인을 해주세요");
+    	else{
+    		if(confirm("찜 목록에 추가하시겠습니까?") == true){
+    		var proNum = $('input[name="proNum"]').val();
+    		var memId = $('input[name="memId"]').val();
+    		
+    		$.ajax({
+   			 type : "post",
+   			 url : "insertWish.do",
+   			 contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+   			 data : {proNum : proNum, memId : memId},
+   			 success:function(result){
+   				 // 성공시 페이지 리로딩
+   				 alert(result);
+   				location.reload();
+   				
+   			 }
+   			 
+   		 });
+    	}
+    	}
+    }
+    // 찜 제거
+    function delete_wish(){
+    	if(confirm("찜목록에서 제거하시겠습니까?") == true){
+    		var proNum = $('input[name="proNum"]').val();
+    		var memId = $('input[name="memId"]').val();
+    		
+    		$.ajax({
+      			 type : "post",
+      			 url : "deleteWish.do",
+      			 contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+      			 data : {proNum : proNum, memId : memId},
+      			 success:function(result){
+      				 // 성공시 페이지 리로딩
+      				 alert(result);
+      				location.reload();
+      				
+      			 }
+    		});
+    	}
+    }

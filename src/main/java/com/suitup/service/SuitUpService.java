@@ -9,6 +9,7 @@ import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
+import com.suitup.domain.SuitUpWishVO;
 
 public interface SuitUpService {
 
@@ -17,11 +18,15 @@ public interface SuitUpService {
 	
 	List<SuitUpCartVO> getCartList2(SuitUpCartVO vo);
 	
+	SuitUpCartVO getCartOne(SuitUpCartVO vo);
+	
 	int insertOrder(SuitUpOrderVO vo);
 	
 	void deleteCartList(SuitUpCartVO vo);
 	
 	void deleteCart(String cart_num);
+	
+	int changeCart(SuitUpCartVO vo);
 	
 	List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo);
 
@@ -40,10 +45,16 @@ public interface SuitUpService {
 	public List<SuitUpProductVO> getNewList();
 	
 	// 관리자 상품등록
-	public int Productinsert(SuitUpProductVO vo);
+		public int Productinsert(SuitUpProductVO vo);
+			
+		// 관리자 상품 목록		
+		public List<SuitUpProductVO> getAdminList();
 		
-	// 관리자 상품 목록		
-	public List<SuitUpProductVO> getAdminList();
+		// 관리자 상품 수정
+		public int productModify(SuitUpProductVO vo);
+		
+		// 관리자 상품 삭제
+	    public void productDelete(int proNum);
 
 	// 정보수정
     public int memModifiy(SuitUpCustomerVO vo);
@@ -76,4 +87,12 @@ public interface SuitUpService {
 	public List<Map<String,String>> getMonthSum();
 
 	public List<Map<String,String>> getDaySum();
+	
+	public int insertWish(SuitUpWishVO vo);
+	
+	public int deleteWish(SuitUpWishVO vo);
+	
+	public int overlapWish(SuitUpWishVO vo);
+	
+	public List<Map<String, String>> getWishList(String memId);
 }

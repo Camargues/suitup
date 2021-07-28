@@ -207,10 +207,12 @@
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								<input type="hidden" value="${cookie.SuitUpidCookie.value}" name="memId"/>
 								</c:when>
 								<c:when test="${sessionScope.SuitUpid  != null}">
                                 <li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
+								<input type="hidden" value="${sessionScope.SuitUpid}" name="memId"/>
 								</c:when>
 								<c:otherwise>
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
@@ -301,7 +303,7 @@
                                 <c:if test="${status.count eq 3}">
                                 <li role="presentation" class="pot-small-img hidden-xs">
                                     <a href="#img-tab-${status.count}" role="tab" data-toggle="tab">
-                                        <img src="resources/images/imgUpload/${image }" alt="small-image">
+                                        <img src="resources/images/imgUpload/${image }" alt="small-image" style="max-width: 150px;">
                                     </a>
                                 </li>
                                 </c:if>
@@ -309,7 +311,7 @@
                                 <c:if test="${status.count >= 4}">
                                 <li role="presentation" class="pot-small-img hidden-xs hidden-sm">
                                     <a href="#img-tab-${status.count}" role="tab" data-toggle="tab">
-                                        <img src="resources/images/imgUpload/${image }" alt="small-image">
+                                        <img src="resources/images/imgUpload/${image }" alt="small-image" style="max-width: 150px;">
                                     </a>
                                 </li>
                                 </c:if>
@@ -462,11 +464,14 @@
                             </div>
                             <ul class="pro__dtl__btn">
                             <li class="buy__now__btn" ><a href="#" onclick="product_check()">장바구니 담기</a></li>
-                                <!-- <li class="buy__now__btn"><input type="image" src="resources/images/icons/cartdo.png"></li> -->
-                                
-                                <!-- 시간 남으면 찜목록 만들기 -->
-                                <!-- <li><a href="#"><span class="ti-heart"></span></a></li> -->
-                                
+                                <c:choose>
+                                <c:when test="${wish eq null || wish eq 0}">
+                                <li><a href="#;return false;" onclick="insert_wish()"><span class="ti-heart"></span></a></li>
+                                </c:when>
+                                <c:when test="${wish ne null }">
+                                <li><a href="#;return false;" onclick="delete_wish()" style="background: #ff4136; border: 1px solid #ff4136; color: #fff;"><span class="ti-heart"></span></a></li>
+   								</c:when>
+    							</c:choose>
                             </ul>
                             </form>
                         </div>

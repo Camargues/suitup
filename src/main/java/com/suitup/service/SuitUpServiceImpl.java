@@ -13,6 +13,7 @@ import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
+import com.suitup.domain.SuitUpWishVO;
 @Service("suitupService")
 public class SuitUpServiceImpl implements SuitUpService {
 
@@ -28,6 +29,12 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public List<SuitUpCartVO> getCartList2(SuitUpCartVO vo){
 		return suitupDAO.getCartList2(vo);
 	}
+	
+	// 장바구니 하나 불러오기(cart_num으로 호출)
+	public SuitUpCartVO getCartOne(SuitUpCartVO vo) {
+		return suitupDAO.getCartOne(vo);
+	}
+	
 	// 주문 하기
 	public int insertOrder(SuitUpOrderVO vo) {
 		return suitupDAO.insertOrder(vo);
@@ -45,6 +52,10 @@ public class SuitUpServiceImpl implements SuitUpService {
 		suitupDAO.deleteCart(cart_num);		
 	}
 
+	// 장바구니 수량 변경
+	public int changeCart(SuitUpCartVO vo) {
+		return suitupDAO.changeCart(vo);
+	}
 	// 주문내역 불러오기
 	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo) {
 		return suitupDAO.getOrderList(vo);
@@ -88,11 +99,19 @@ public class SuitUpServiceImpl implements SuitUpService {
 				return suitupDAO.Productinsert(vo);
 	}
 		
-	// 관리자 상품 목록 불러오기
-	public List<SuitUpProductVO> getAdminList(){
-		System.out.println("--------------service-----------------");
-		return suitupDAO.getAdminList();
-	}
+			// 관리자 상품 목록 불러오기
+			public List<SuitUpProductVO> getAdminList(){
+				System.out.println("--------------service-----------------");
+				return suitupDAO.getAdminList();
+			}
+			// 관리자 상품 수정하기
+			public int productModify(SuitUpProductVO vo) {
+				return suitupDAO.productModify(vo);	
+			}
+			// 관리자 상품 삭제하기
+			public void productDelete(int proNum) {
+				suitupDAO.productDelete(proNum);		
+			}
 	//정보수정
     public int memModifiy(SuitUpCustomerVO vo) {
         return suitupDAO.memberModify(vo);
@@ -160,6 +179,25 @@ public class SuitUpServiceImpl implements SuitUpService {
 	//일별 총액
 	public List<Map<String, String>> getDaySum() {
 		return suitupDAO.getDaySum();
+	}
+
+	// 찜 추가
+	public int insertWish(SuitUpWishVO vo) {
+		return suitupDAO.insertWish(vo);
+	}
+
+	// 찜 삭제
+	public int deleteWish(SuitUpWishVO vo) {
+		return suitupDAO.deleteWish(vo);
+	}
+	// 찜 중복 확인
+	public int overlapWish(SuitUpWishVO vo) {
+		return suitupDAO.overlapWish(vo);
+	}
+
+	// 찜목록 리스트 가져오기
+	public List<Map<String, String>> getWishList(String memId) {
+		return suitupDAO.getWishList(memId);
 	}
 
 }

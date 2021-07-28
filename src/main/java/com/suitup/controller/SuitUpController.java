@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
@@ -23,6 +24,7 @@ import com.suitup.domain.SuitUpCommentVO;
 import com.suitup.domain.SuitUpCustomerVO;
 import com.suitup.domain.SuitUpOrderVO;
 import com.suitup.domain.SuitUpProductVO;
+import com.suitup.domain.SuitUpWishVO;
 import com.suitup.service.SuitUpService;
 
 @Controller
@@ -42,7 +44,7 @@ public class SuitUpController {
 	@RequestMapping("index.do")
 	public String index(Model m, String cateNum) {
 		
-		
+		System.out.println("현재 인기상품 카테고리 번호 : " + cateNum);
 		SuitUpProductVO vo = new SuitUpProductVO();
 		if(cateNum == null)
 			vo.setCateNum(1);
@@ -53,6 +55,7 @@ public class SuitUpController {
 		m.addAttribute("categoryList", suitupService.getCategoryList());
 		// 인기 상품 불러오기
 		m.addAttribute("popularList", suitupService.getPopularList(vo));
+		// System.out.println("popularList로 불러온 상품코드" + suitupService.getPopularList(vo).get(0).getCateNum());
 		// 신상품 불러오기
 		m.addAttribute("newList", suitupService.getNewList());
 		return "index";
@@ -88,6 +91,35 @@ public class SuitUpController {
 		else
 			return "login-register";
 			
+	}
+	
+	// ajax로 cartNum이랑 cartCount 가져옴
+	// 장바구니 수량 변경 ajax
+	@RequestMapping(value = "changeCart.do",  produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String changeCart(SuitUpCartVO vo) {
+		
+		// 기존 카트 재고에 변경된 재고를 뺀값 -> su_pro 테이블에 넣을값
+		int newCount = suitupService.getCartOne(vo).getCartCount() - vo.getCartCount();
+
+		int proNum = suitupService.getCartOne(vo).getProNum();
+		
+		int result = suitupService.changeCart(vo);
+		
+		if(result == 1) {
+			
+			// 장바구니 수량 변경 성공시 장바구니 수량 변화한 만큼 재고도 변화
+			SuitUpProductVO pro = new SuitUpProductVO();
+			pro.setProNum(proNum);
+			pro.setDtproCount(newCount);
+			
+			suitupService.updateProduct(pro);
+			
+			
+			return "수량 변경 성공";
+		}
+		else
+			return "수량 변경 실패";
 	}
 	
 	// 주문하러 가기
@@ -307,7 +339,7 @@ public class SuitUpController {
 		
 		// 로그 아웃 눌렀을때 쿠키 삭제
 		@RequestMapping(value="logout.do")
-		public String logout(HttpServletResponse response, HttpSession session){
+		public String logout(HttpServletResponse response, HttpSession session, HttpServletRequest request){
 
 		Cookie cookie = new Cookie("SuitUpidCookie", null); // 쿠키에 대한 값을 null로 지정
 		
@@ -324,7 +356,9 @@ public class SuitUpController {
 		
 		session.invalidate();
 		
-		return "redirect:index.jsp";
+		String referer = request.getHeader("REFERER");
+		
+		return "redirect:"+referer;
 		}
 		
 		
@@ -360,18 +394,75 @@ public class SuitUpController {
 					
 			return "redirect:product-insert.do";
 		}
-				// 관리자 상품 목록
-				@RequestMapping("product-list.do") 
-				public void adminlist(Model m) {
-					SuitUpProductVO vo = new SuitUpProductVO();
-					
-					System.out.println("--------------Controller-----------------");
-					
-					List<SuitUpProductVO> adminlist=suitupService.getAdminList();
+		// 관리자 상품 목록
+		@RequestMapping("product-list.do") 
+		public void adminlist(Model m) {
+			SuitUpProductVO vo = new SuitUpProductVO();
 			
-					m.addAttribute("adminlist",adminlist);		
-				}
-				// 관리자 상품 수정 
+			System.out.println("--------------Controller-----------------");
+			
+			List<SuitUpProductVO> adminlist=suitupService.getAdminList();
+	
+			m.addAttribute("adminlist",adminlist);		
+		}
+       
+		// 관리자 상품 수정 페이지
+	
+ 		@RequestMapping("product-modify.do")
+ 		 public String productModifypage(HttpServletRequest httpServletRequest, 
+ 				 RedirectAttributes rttr,SuitUpProductVO vo, Model m) {
+	       
+	       
+	        String proNum1 = httpServletRequest.getParameter("mdProNum");
+	        
+	        int proNum;
+	        proNum = Integer.parseInt(proNum1);
+	        
+	        vo.setProNum(proNum);
+	        
+	        SuitUpProductVO product = suitupService.getProductDetails(vo);
+	        
+	        System.out.println("데이터확인");
+	        System.out.println(product.getCateDtnum());
+	        System.out.println(product.getDtproCount());
+	 
+	        m.addAttribute("productDetails", product);
+	        m.addAttribute("proNum", proNum);
+	        m.addAttribute("categoryList", suitupService.getCategoryList());
+	        return "product-modify";
+ 		}
+ 		//관리자 상품 DB에 수정하기
+		@RequestMapping(value="productModify",method=RequestMethod.POST) 
+		public String productModify(HttpServletRequest httpServletRequest, Model m,SuitUpProductVO vo) {
+			System.out.println("####productModify######");
+			
+			String proNum1 = httpServletRequest.getParameter("proNum");
+			 int proNum;
+	        proNum = Integer.parseInt(proNum1);
+	        
+	        vo.setProNum(proNum);
+			
+			System.out.println(vo.getProNum()); 	
+			System.out.println(vo.getProName());
+			System.out.println(vo.getProPrice());
+			System.out.println(vo.getCateNum());
+			System.out.println(vo.getCateDtnum());
+			System.out.println(vo.getDtproCount());
+			
+			suitupService.productModify(vo);
+			return "redirect:product-list.do";
+		}
+ 		// 관리자 상품 삭제
+		@RequestMapping(value="productDelete",method=RequestMethod.POST) 
+		public String productDelete(HttpServletRequest httpServletRequest, Model m) {
+			System.out.println("####productDelete######");
+			String proNum1 = httpServletRequest.getParameter("mdProNum");
+			 int proNum;
+	        proNum = Integer.parseInt(proNum1);
+			
+			suitupService.productDelete(proNum);
+			return "redirect:product-list.do";
+		}
 				
 				//주소 팝업
 			    @RequestMapping("/jusoPopup.do")
@@ -415,7 +506,20 @@ public class SuitUpController {
 			    
 		// 상품 상세 페이지
 		@RequestMapping("product.do")
-		public String productDetails(SuitUpProductVO vo,Model m) {
+		public String productDetails(SuitUpProductVO vo,Model m, HttpServletRequest request,HttpSession session) {
+			
+			 // 쿠키에서 가져올 id값을 저장할 변수 id 선언
+	        String id = null;
+	        // 쿠키 가져오기
+	        Cookie[] cookies = request.getCookies();
+	        for(Cookie cookie : cookies) {
+	            if(cookie.getName().equals("SuitUpidCookie"))
+	                id = cookie.getValue();
+	        }
+	        // 쿠키가 null 이면 세션 가져오기
+	        if(id == null)
+	        id = (String) session.getAttribute("SuitUpid");
+	        
 			SuitUpProductVO product = suitupService.getProductDetails(vo);
 			
 			// 잘못된 상품일 경우 에러페이지로 연결 예정
@@ -434,6 +538,15 @@ public class SuitUpController {
 			if(count != 0)
 				avg = suitupService.getReviewAvg(comment);
 			
+			if(id != null) {
+			// 찜 여부 넘기기
+			SuitUpWishVO wish = new SuitUpWishVO();
+			wish.setMemId(id);
+			wish.setProNum(vo.getProNum());			
+			m.addAttribute("wish", suitupService.overlapWish(wish));
+			}
+			else
+				m.addAttribute("wish", 0);
 			// 리뷰 갯수 불러오기
 			m.addAttribute("reviewCount", count);		
 			// 상품 별점 불러오기
@@ -614,4 +727,63 @@ public class SuitUpController {
 			return "admin-chart" ;
 		}
 		
+		// 찜 등록 (AJAX)
+		@RequestMapping(value = "insertWish.do", produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public String insertWish(SuitUpWishVO vo) {
+			
+			if(suitupService.overlapWish(vo) > 0)
+				return "이미 찜한 상품입니다";
+			else {
+			
+			
+			int result = suitupService.insertWish(vo);
+			if(result == 1)
+				return "찜 목록에 추가하였습니다";
+			else
+				return "에러가 발생했습니다";
+			}
+		}
+		
+		// 찜 삭제 (AJAX)
+		@RequestMapping(value = "deleteWish.do", produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public String deleteWish(SuitUpWishVO vo) {
+			if(vo.getMemId().equals(null) || vo.getProNum() == 0)
+				return "에러가 발생했습니다";
+			int result = suitupService.deleteWish(vo);
+			if(result == 1)
+				return "찜 목록에서 삭제하였습니다";
+			else
+				return "에러가 발생했습니다";
+		}
+				
+		// 찜목록 불러오기
+		@RequestMapping("my-page-wishlist.do")
+		public String wishList(Model m, HttpServletRequest request,HttpSession session) {
+			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
+			String memId = null;
+			// 쿠키 가져오기
+			Cookie[] cookies = request.getCookies();
+				for(Cookie cookie : cookies) {
+						if(cookie.getName().equals("SuitUpidCookie"))
+							memId = cookie.getValue();
+						}
+									
+			// 쿠키가 null 이면 세션 가져오기
+			if(memId == null)
+				memId = (String) session.getAttribute("SuitUpid");
+			if(memId == null)
+				return "login-register";
+			m.addAttribute("wishList", suitupService.getWishList(memId));
+				return "my-page-wishlist";
+			
+		}
+		
+		// 찜 삭제 (개별 삭제, 전체 삭제 포함)	
+		@RequestMapping("dropWishlist.do")
+		public String dropWishlist(SuitUpWishVO vo) {
+			suitupService.deleteWish(vo);
+			return "my-page-wishlist";
+		}
 }

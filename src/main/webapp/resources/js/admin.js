@@ -26,6 +26,38 @@
 			 }		 
 		})
 	})
-  
+        
+		
 	
-	// 상품 삭제
+	
+			 // 상품 삭제
+function dlBtn(proNum){
+	 var con = confirm("정말로 삭제하시겠습니까?");
+	 if(con) { 
+		$('#mdProNum').val(proNum);
+		
+		var modForm = document.testForm;
+		modForm.action = "productDelete.do";
+	 }
+	return; 
+
+}							
+				
+			 // 상품 수정
+function mdBtn(proNum){
+
+	$('#mdProNum').val(proNum);
+	
+	var modForm = document.testForm;
+	modForm.action = "product-modify.do";
+
+	return;
+
+}
+	
+				 
+			 //뒤로가기 기능
+			 $("#backBtn").click(function(){
+			  history.back();
+			 }) 
+  
