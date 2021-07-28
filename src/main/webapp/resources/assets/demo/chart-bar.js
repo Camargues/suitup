@@ -2,43 +2,31 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
-var date = new Date();
-var now = date.getMonth()+1;
-var oneAgo = date.getMonth(); // 값 6
-var twoAgo = date.getMonth()-1; // 값 6
-var threeAgo = date.getMonth()-2; // 값 6
-var fourAgo = date.getMonth()-3; // 값 6
-var fiveAgo = date.getMonth()-4; // 값 6
-
-var oneAgoSum = 0000;
-var twoAgoSum = 0000;
-var threeAgoSum = 0000;
-var fourAgoSum = 0000;
-var fiveAgoSum = 0000;
-
-$.ajax({
-    url: "getMonthSum.do",
-    type: "post",
-    dataType:"json",
-    success: function (data) {
-    	alert(data);
-    },
-    error : function(){
-    	alert("error")
-    }
-  });
+// 최근 6개월 값
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: [fiveAgo+"월", fourAgo+"월", threeAgo+"월", twoAgo+"월", oneAgo+"월", now+"월"],
+    labels: [
+    	$('#month6').val()+"월",
+    	$('#month5').val()+"월",
+    	$('#month4').val()+"월",
+    	$('#month3').val()+"월",
+    	$('#month2').val()+"월",
+    	$('#month1').val()+"월"],
     datasets: [{
       label: "Revenue",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data: [4215, 5312, 6251, 7841, 9821, oneAgoSum],
+      data: [    	  
+    	  $('#monthsum6').val(),
+    	  $('#monthsum5').val(),
+    	  $('#monthsum4').val(),
+    	  $('#monthsum3').val(),
+    	  $('#monthsum2').val(),
+    	  $('#monthsum1').val()],
     }],
   },
   options: {
@@ -57,8 +45,8 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 15000,
-          maxTicksLimit: 5
+          max: 10000,
+          maxTicksLimit: 10
         },
         gridLines: {
           display: true
