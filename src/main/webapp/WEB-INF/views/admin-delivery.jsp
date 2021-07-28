@@ -16,9 +16,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-<c:if test="${sessionScope.admin != 1 || cookie.admin.value == null}">
+ <c:if test="${cookie.admin.value == null}">
+<c:if test="${sessionScope.admin != 1}">
 	<c:redirect url="index.do"/>
 </c:if>
+ </c:if> 
     
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
