@@ -81,9 +81,17 @@ public interface SuitUpDAO {
 	
 	public List<SuitUpCustomerVO> getCustomerList();
 
+	public List<SuitUpOrderVO> getAdminOrderList(SuitUpOrderVO vo);
+
 	public List<Map<String,String>> getMonthSum();
 
 	public List<Map<String,String>> getDaySum();
+
+	public List<Map<String,String>> getCateSum();
+	
+	public int deliveryStart(SuitUpOrderVO vo);
+	
+	public int deliveryEnd(SuitUpOrderVO vo);
 
 	public int insertWish(SuitUpWishVO vo);
 	

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UrlPathHelper;
 
 import com.suitup.domain.SuitUpCartVO;
 import com.suitup.domain.SuitUpCategoryVO;
@@ -707,25 +708,72 @@ public class SuitUpController {
 					return "login-register";
 		}
 		//관리자페이지 회원정보
-		@RequestMapping("admin-table.do")
-		public String customerInfo(Model m) {
-			m.addAttribute("customerList", suitupService.getCustomerList());
-			return "admin-table";
-		}
-		// 관리자페이지 차트
-		@RequestMapping(value="admin-chart.do", method=RequestMethod.GET)
-		public String getMonthSum(Model m){
-			//월별
-			List<Map<String,String>> list= suitupService.getMonthSum();
-			//일별
-			List<Map<String,String>> list2= suitupService.getDaySum();
-			//카테고리별
-//			List<Map<String,String>> list3= suitupService.getCateSum();
-			m.addAttribute("list",list);
-			m.addAttribute("list2",list2);
-//			m.addAttribute("list3",list3);
-			return "admin-chart" ;
-		}
+				@RequestMapping("admin-table.do")
+				public String customerInfo(Model m) {
+					m.addAttribute("customerList", suitupService.getCustomerList());
+					return "admin-table";
+				}
+				//관리자페이지 주문관리
+				@RequestMapping(value= {"admin-order.do","admin-delivery.do","admin-delivery-ok.do"})
+				//여러 페이지
+				public String orderInfo(Model m,SuitUpOrderVO vo,HttpServletRequest request) {
+					// 현재 받은 페이지 값 나타내고 substring 으로 맨앞 / 삭제
+					UrlPathHelper urls = new UrlPathHelper(); 
+					String url = urls.getOriginatingServletPath(request).substring(1);
+					String returnUrl="";
+
+					if("admin-order.do".equals(url)) {
+						vo.setOrderStatus("주문완료");
+						m.addAttribute("orderList", suitupService.getAdminOrderList(vo));
+						returnUrl= "admin-order";				
+					}else if("admin-delivery.do".equals(url)){
+						vo.setOrderStatus("배송중");
+						m.addAttribute("orderList", suitupService.getAdminOrderList(vo));			
+						returnUrl= "admin-delivery";								
+					}else {
+						vo.setOrderStatus("배송완료");
+						m.addAttribute("orderList", suitupService.getAdminOrderList(vo));			
+						returnUrl= "admin-delivery-ok";												
+					}
+					return returnUrl;				
+				}
+				// 관리자페이지 차트
+				@RequestMapping(value="admin-chart.do", method=RequestMethod.GET)
+				public String getMonthSum(Model m){
+					//월별
+					List<Map<String,String>> list= suitupService.getMonthSum();
+					//일별
+					List<Map<String,String>> list2= suitupService.getDaySum();
+					//카테고리별
+					List<Map<String,String>> list3= suitupService.getCateSum();
+					m.addAttribute("list",list);
+					m.addAttribute("list2",list2);
+					m.addAttribute("list3",list3);
+					return "admin-chart" ;
+				}
+				// 배송시작 ajax
+				@RequestMapping(value="deliveryStart.do", produces="application/text;charset=UTF-8")
+				@ResponseBody 
+				public String deliveryStart(SuitUpOrderVO vo) {
+					int result = suitupService.deliveryStart(vo);
+					String ok = "실패";
+					if(result ==1) {
+						ok="성공";
+					}
+					return ok;
+				}
+				// 배송 완료 ajax
+				@RequestMapping(value="deliveryEnd.do", produces="application/text;charset=UTF-8")
+				@ResponseBody 
+				public String deliveryEnd(SuitUpOrderVO vo) {
+					int result = suitupService.deliveryEnd(vo);
+					String ok = "실패";
+					if(result ==1) {
+						ok="성공";
+					}
+					return ok;
+				}
+
 		
 		// 찜 등록 (AJAX)
 		@RequestMapping(value = "insertWish.do", produces="application/text;charset=UTF-8")

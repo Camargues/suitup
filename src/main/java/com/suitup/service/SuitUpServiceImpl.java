@@ -166,9 +166,14 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public SuitUpCommentVO getComment(SuitUpCommentVO vo) {
 		return suitupDAO.getComment(vo);
 	}
-	// 유저 리스트
+	// 회원 리스트
 	public List<SuitUpCustomerVO> getCustomerList() {
 		return suitupDAO.getCustomerList();
+	}
+
+	// 주문 리스트
+	public List<SuitUpOrderVO> getAdminOrderList(SuitUpOrderVO vo) {
+		return suitupDAO.getAdminOrderList(vo);
 	}
 	
 	//월별 총액
@@ -179,6 +184,21 @@ public class SuitUpServiceImpl implements SuitUpService {
 	//일별 총액
 	public List<Map<String, String>> getDaySum() {
 		return suitupDAO.getDaySum();
+	}
+
+	//일별 총액
+	public List<Map<String, String>> getCateSum() {
+		return suitupDAO.getCateSum();
+	}
+
+	//배송 시작
+	public int deliveryStart(SuitUpOrderVO vo) {
+		return suitupDAO.deliveryStart(vo);
+	}
+
+	//배송 완료
+	public int deliveryEnd(SuitUpOrderVO vo) {
+		return suitupDAO.deliveryEnd(vo);
 	}
 
 	// 찜 추가

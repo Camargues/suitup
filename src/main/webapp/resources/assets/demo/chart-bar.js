@@ -3,7 +3,6 @@ Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSyste
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // 최근 6개월 값
-
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
@@ -58,3 +57,5 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+
+

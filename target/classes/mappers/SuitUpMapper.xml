@@ -224,6 +224,14 @@
 	SELECT * FROM SU_MEM WHERE MEM_ADMIN = 0 
 	</select>
 	
+		<!-- 주문정보 가져오기 -->
+	<select id="getAdminOrderList" resultType="SuitUpOrderVO" parameterType="SuitUpOrderVO">
+	SELECT *
+    FROM SU_ORDER
+    WHERE ORDER_STATUS = #{orderStatus}
+    ORDER BY ORDER_DATE
+	</select>
+	
 	<!-- 월별 총액 -->
 	<resultMap type="HashMap" id="monthMap">
 		<id column="sum" property="sum"/>
@@ -249,6 +257,33 @@
 	GROUP BY TO_CHAR(order_date,'YY-MM-DD')
 	ORDER BY TO_CHAR(order_date,'YY-MM-DD') DESC
 	</select>
+
+	<!-- 카테고리별 -->
+	<resultMap type="HashMap" id="cateMap">
+		<id column="cnt" property="cnt"/>
+		<id column="num" property="num"/>
+	</resultMap>
+	<select id="getCateSum" resultMap="cateMap">
+	SELECT COUNT(CATE_NUM) AS CNT,
+	CATE_NUM AS NUM
+	FROM SU_ORDER 
+	GROUP BY CATE_NUM
+	ORDER BY CATE_NUM
+	</select>
+
+	<!-- 주문완료에서 배송중 -->	
+	<update id="deliveryStart" parameterType="SuitUpOrderVO">
+		UPDATE SU_ORDER 
+		SET order_status = '배송중' 
+		WHERE ORDER_NUM = #{orderNum}
+	</update>
+
+	<!-- 배송중에서 배송완료 -->	
+	<update id="deliveryEnd" parameterType="SuitUpOrderVO">
+		UPDATE SU_ORDER 
+		SET order_status = '배송완료' 
+		WHERE ORDER_NUM = #{orderNum}
+	</update>
 	
 	<!-- 찜 등록 -->
 	<insert id="insertWish">

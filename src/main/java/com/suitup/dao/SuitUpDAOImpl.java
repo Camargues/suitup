@@ -206,6 +206,12 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("==> Mybatis getMemberList() 호출");
 		return mybatis.selectList("SuitUpDAO.getMemberList");	
 	}
+
+	// 주문 정보 가져오기
+	public List<SuitUpOrderVO> getAdminOrderList(SuitUpOrderVO vo) {
+		System.out.println("==> Mybatis getAdminOrderList 호출");
+		return mybatis.selectList("SuitUpDAO.getAdminOrderList",vo);	
+	}
 	
 	// 월별 총액
 	public List<Map<String,String>>  getMonthSum() {
@@ -213,10 +219,28 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		return mybatis.selectList("SuitUpDAO.getMonthSum");
 	}
 	
-	// 월별 총액
+	// 일별 총액
 	public List<Map<String,String>>  getDaySum() {
 		System.out.println("==> Mybatis getDaySum() 호출");
 		return mybatis.selectList("SuitUpDAO.getDaySum");
+	}
+	
+	// 일별 총액
+	public List<Map<String,String>>  getCateSum() {
+		System.out.println("==> Mybatis getCateSum() 호출");
+		return mybatis.selectList("SuitUpDAO.getCateSum");
+	}
+
+	// 배송 시작
+	public int deliveryStart(SuitUpOrderVO vo) {
+		System.out.println("==> Mybatis deliveryStart() 호출");
+		return mybatis.update("SuitUpDAO.deliveryStart",vo);
+	}
+
+	// 배송 완료
+	public int deliveryEnd(SuitUpOrderVO vo) {
+		System.out.println("==> Mybatis deliveryEnd() 호출");
+		return mybatis.update("SuitUpDAO.deliveryEnd",vo);
 	}
 	
 	// 찜 추가

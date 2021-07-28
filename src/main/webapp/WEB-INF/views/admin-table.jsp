@@ -16,6 +16,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
+<c:if test="${sessionScope.admin != 1 || cookie.admin.value == null}">
+	<c:redirect url="index.do"/>
+</c:if>
+    
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="admin-chart.do">관리자 페이지</a>
@@ -53,15 +57,24 @@
                         		   차트
                             </a>
                             <a class="nav-link" href="admin-table.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div>
+                                	회원 정보
+                            </a>
+                           <div class="sb-sidenav-menu-heading">주문 관리</div>
+                             <a class="nav-link" href="admin-order.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                	회원 테이블
+                                주문 완료
+                            </a>
+                             <a class="nav-link" href="admin-delivery.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                배송 중
+                            </a>
+                             <a class="nav-link" href="admin-delivery-ok.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                배송 완료
                             </a>
                         </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
-                    </div>
+                    </div>   
                 </nav>
             </div>
             <div id="layoutSidenav_content">
@@ -71,8 +84,8 @@
                        
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Customer DataTable
+                                <i class="fas fa-address-card me-1"></i>
+                                회원 목록
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
