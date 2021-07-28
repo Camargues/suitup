@@ -70,4 +70,10 @@ public interface SuitUpService {
 	public SuitUpCommentVO getComment(SuitUpCommentVO vo);
 	
 	public SuitUpCustomerVO getUserInfo(SuitUpCustomerVO vo);
+	
+	public List<SuitUpCustomerVO> getCustomerList();
+	
+	public List<Map<String,String>> getMonthSum();
+
+	public List<Map<String,String>> getDaySum();
 }

@@ -592,9 +592,26 @@ public class SuitUpController {
 				// id값이 없을시 로그인 페이지로
 				else
 					return "login-register";
-				
-						
-				
+		}
+		//관리자페이지 회원정보
+		@RequestMapping("admin-table.do")
+		public String customerInfo(Model m) {
+			m.addAttribute("customerList", suitupService.getCustomerList());
+			return "admin-table";
+		}
+		// 관리자페이지 차트
+		@RequestMapping(value="admin-chart.do", method=RequestMethod.GET)
+		public String getMonthSum(Model m){
+			//월별
+			List<Map<String,String>> list= suitupService.getMonthSum();
+			//일별
+			List<Map<String,String>> list2= suitupService.getDaySum();
+			//카테고리별
+//			List<Map<String,String>> list3= suitupService.getCateSum();
+			m.addAttribute("list",list);
+			m.addAttribute("list2",list2);
+//			m.addAttribute("list3",list3);
+			return "admin-chart" ;
 		}
 		
 }
