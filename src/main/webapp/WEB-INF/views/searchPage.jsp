@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!doctype html>
-<html class="no-js" lang="en">
+     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>주문서 작성 | Suit Up</title>
+    <title>Suit Up</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -35,7 +36,7 @@
 
 
     <!-- Modernizr JS -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
 
-        <!-- Body main wrapper start -->
+    <!-- Body main wrapper start -->
     <div class="wrapper fixed__footer">
         <!-- Start Header Style -->
         <header id="header" class="htc-header header--3 bg__white">
@@ -65,14 +66,16 @@
                                     <li class="drop"><a href="index.jsp">홈</a></li>
                                     <li class="drop"><a href="#">인기상품</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">아우터</a></li>
-                                            <li><a href="#">상의</a></li>
-                                            <li><a href="#">하의</a></li>
-                                            <li><a href="#">신발</a></li>
-                                            <li><a href="#">모자</a></li>
+                                        <c:set var="cateName" value=""/>
+                                        <c:forEach items="${categoryList }" var="list">
+                                        <c:if test="${cateName != list.cateName}">
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                         </ul>
                                     </li>
-                                  <li class="drop"><a href="#">카테고리</a>
+                                    <li class="drop"><a href="#">카테고리</a>
                                         <ul class="dropdown mega_dropdown">
                                             <!-- Start Single Mega MEnu -->
                                             <li><a class="mega__title" href="#">카테고리별</a>
@@ -153,9 +156,8 @@
                                         </ul>
                                     </li>
                                     <li><a href="my-page-cart.do">장바구니</a></li>
-                                  
-                                    <!-- mem_admin 쿼리값이 1일때만 노출 -->
-                                     <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
+                          
+                                    <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -165,7 +167,6 @@
                                         </ul>
                                     </li>
                                     </c:if>
-                                    
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix visible-xs visible-sm">
@@ -174,32 +175,28 @@
                                         <li><a href="index.jsp">홈</a></li>
                                         <li><a href="#">인기상품</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                   <c:set var="cateName" value=""/>
+                                       		 <c:forEach items="${categoryList }" var="list">
+                                       		 <c:if test="${cateName != list.cateName}">
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
+                                     
                                         <li><a href="#">카테고리별</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                <c:set var="cateName" value=""/>
+                                       			 <c:forEach items="${categoryList }" var="list">
+                                        		<c:if test="${cateName != list.cateName}">
+                                            <li><a href="shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
                                         <li><a href="my-page-cart.do">장바구니</a></li>
-                                     <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
-                                    
-                                    <li class="drop"><a href="#">관리자 메뉴</a>
-                                        <ul class="dropdown">
-                                            <li><a href="product-insert.do">상품 등록</a></li>
-                                            <li><a href="product-list.do">상품 목록</a></li>
-                                        </ul>
-                                    </li>
-                                    </c:if>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -208,7 +205,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                	<c:choose>   
+								   	<c:choose>   
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
@@ -221,7 +218,7 @@
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
 								</c:choose>
-                            	
+                            
                             </ul>
                         </div>
                     </div>
@@ -255,6 +252,9 @@
                 </div>
             </div>
             <!-- End Search Popap -->
+		</div>
+        
+        
         <!-- Start Bradcaump area -->
         <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/images/bg/2.jpg) no-repeat scroll center center / cover ;">
             <div class="ht__bradcaump__wrap">
@@ -262,11 +262,11 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">결제하기</h2>
+                                <h2 class="bradcaump-title">상품 목록</h2>
                                 <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.jsp">홈</a>
+                                  <a class="breadcrumb-item" href="index.html">홈</a>
                                   <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">결제하기</span>
+                                  <span class="breadcrumb-item active">상품 목록</span>
                                 </nav>
                             </div>
                         </div>
@@ -274,201 +274,146 @@
                 </div>
             </div>
         </div>
-    </div>
-        <!-- End Bradcaump area -->
-        <!-- cart-main-area start -->
-        <div class="cart-main-area ptb--120 bg__white">
+        <!-- End Bradcaump area --> 
+        <!-- Start Our Product Area -->
+        <section class="htc__product__area shop__page ptb--130 bg__white">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <form action="insertOrder.do" method="post" id="payment">  
-                                    
-                            <div class="table-content table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="product-thumbnail">상품이미지</th>
-                                            <th class="product-name">상품명</th>
-                                            <th class="product-price">가격</th>
-                                            <th class="product-size">사이즈</th>
-                                            <th class="product-color">색상</th>
-                                            <th class="product-quantity">수량</th>
-                                            <th class="product-subtotal">합계</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <!-- 장바구니 합계 구할 sum 함수 선언 -->
-                                    <c:set var = "sum" value = "0" />
-                                    <c:if test="${not empty cartList }">
-                                   <c:set var= "i" value = "0"/>
-                                    <c:forEach items="${cartList }" var="cart">
-                                   
-                                        <tr>
-                                            <td class="product-thumbnail"><img src="resources/images/imgUpload/${fn:split(cart.proImage,'/')[0]}" alt="${cart.proName }" /></td>
-                                            <td class="product-name">${cart.proName }</td>
-                                            <td class="product-price"><span class="amount">${cart.proPrice } 원</span></td>
-                                            <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
-                                            <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
-                                            <td class="product-quantity"><input type="number" value="${cart.cartCount }" readonly/></td>
-                                            <td class="product-subtotal">${cart.proPrice * cart.cartCount } 원</td>
-                                        </tr>
-                                                          
-                                        
-                                        <c:set var= "sum" value="${sum + (cart.proPrice * cart.cartCount)}"/>
-                                        </c:forEach>
-                                        </c:if>
-                                    </tbody>
-                                </table>
-                            </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- cart-main-area end -->
-        <!-- Start Checkout Area -->
-        <section class="our-checkout-area ptb--120 bg__white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-lg-8">
-                        <div class="ckeckout-left-sidebar">
-                            <!-- Start Checkbox Area -->
-                            <div class="checkout-form">
-                                <h2 class="section-title-3">주문 / 결제</h2>
-                                
-                                <div class="checkout-form-inner">
-                                <!-- 배송지 선택하는 라디오 버튼 -->
-                                <div style="width:200px; padding-bottom: 30px">
-  									<input type="radio" name="add" id="new" value="new" checked><label for="new">직접 입력하기</label>
-  									<input type="radio" name="add" id="default" value="default" style="margin-left: 10px"><label for="default">기존 배송지</label>
-								</div>
-                                    <div class="single-checkout-box">
-                                    <label>수령인</label>
-                                        <input type="text" placeholder="홍길동*" name="receiver" id="receiver" class="new" style="margin-left: 34px">
-                                        <input type="hidden" name="receiver" id="receiver" class="default" readonly="readonly" disabled="disabled" value="${userInfo.memName }"/>
-                                    </div>
-                                    <div class="single-checkout-box">
-                                    <label>연락처</label>
-                                        <input type="text" placeholder="010-0000-0000*" name="phone" id="phone" class="new" style="margin-left: 34px">
-                                        <input type="hidden" name="phone" id="phone" class="default" readonly="readonly" disabled="disabled" value="${userInfo.memPhone }"/>
-                                    </div>
-                                    <div class="single-checkout-box">
-                                    <label>배송지</label>
-                                        <input type="text" placeholder="서울시 금천구*" name="address" id="address" class="new" style="margin-left: 34px"	>
-                                        <input type="hidden" name="address" id="address" class="default" readonly="readonly" disabled="disabled" value="${userInfo.memAddr }"/>
-                                    </div>
-                                    <div class="single-checkout-box">
-                                    <label>배송 요청사항</label>
-                                        <textarea placeholder="요청사항을 입력해주세요*" name="memo"></textarea>
-                                    </div>
+                <div class="htc__product__container">
+                    <!-- Start Product MEnu -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filter__menu__container">                                
+                                <div class="filter__box">
+                                    <!-- <a class="filter__menu" href="#">filter</a> -->
                                 </div>
                             </div>
-                            <!-- End Checkbox Area -->
-                            <!-- Start Payment Box -->
-                            <div class="payment-form">
-                                <h2 class="section-title-3">결제 정보 입력</h2>
-                                <p>구현하지 않은 부분입니다</p>
-                                <div class="payment-form-inner">
-                                <label>카드 번호</label><p/>
-                                    <div class="single-checkout-box">
-                                        
-                                        <input type="text" placeholder="xxxx-xxxx-xxxx-xxxx*">
+                        </div>
+                    </div>
+                    <!-- Start Filter Menu -->
+                    <div class="filter__wrap">
+                        <div class="filter__cart">
+                            <div class="filter__cart__inner">
+                                <div class="filter__menu__close__btn">
+                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                </div>
+                                <div class="filter__content">
+                                    <!-- Start Single Content -->
+                                    <div class="fiter__content__inner">
+                                        <div class="single__filter">
+                                            <h2>Sort By</h2>
+                                            <ul class="filter__list">
+                                                <li><a href="#default">Default</a></li>
+                                                <li><a href="#accessories">Accessories</a></li>
+                                                <li><a href="#bags">Bags</a></li>
+                                                <li><a href="#chair">Chair</a></li>
+                                                <li><a href="#decoration">Decoration</a></li>
+                                                <li><a href="#fashion">Fashion</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="single__filter">
+                                            <h2>Size</h2>
+                                            <ul class="filter__list">
+                                                <li><a href="#xxl">XXL</a></li>
+                                                <li><a href="#xl">XL</a></li>
+                                                <li><a href="#x">X</a></li>
+                                                <li><a href="#l">L</a></li>
+                                                <li><a href="#m">M</a></li>
+                                                <li><a href="#s">S</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="single__filter">
+                                            <h2>Tags</h2>
+                                            <ul class="filter__list">
+                                                <li><a href="#">All</a></li>
+                                                <li><a href="#">Accessories</a></li>
+                                                <li><a href="#">Bags</a></li>
+                                                <li><a href="#">Chair</a></li>
+                                                <li><a href="#">Decoration</a></li>
+                                                <li><a href="#">Fashion</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="single__filter">
+                                            <h2>Price</h2>
+                                            <ul class="filter__list">
+                                                <li><a href="#">$0.00 - $50.00</a></li>
+                                                <li><a href="#">$50.00 - $100.00</a></li>
+                                                <li><a href="#">$100.00 - $150.00</a></li>
+                                                <li><a href="#">$150.00 - $200.00</a></li>
+                                                <li><a href="#">$300.00 - $500.00</a></li>
+                                                <li><a href="#">$500.00 - $700.00</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="single__filter">
+                                            <h2>Color</h2>
+                                            <ul class="filter__list sidebar__list">
+                                                <li class="black"><a href="#"><i class="zmdi zmdi-circle"></i>Black</a></li>
+                                                <li class="blue"><a href="#"><i class="zmdi zmdi-circle"></i>Blue</a></li>
+                                                <li class="brown"><a href="#"><i class="zmdi zmdi-circle"></i>Brown</a></li>
+                                                <li class="red"><a href="#"><i class="zmdi zmdi-circle"></i>Red</a></li>
+                                                <li class="orange"><a href="#"><i class="zmdi zmdi-circle"></i>Orange</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="single-checkout-box select-option">
-                                    <label>카드 유효기간</label>
-                                    <p/>
-                                        <select>
-                                            <option>MM/YY*</option>
-                                            <option>MM/YY</option>
-                                            <option>MM/YY</option>
-                                            <option>MM/YY</option>
-                                            <option>MM/YY</option>
-                                        </select>
-                                        <p/>
-                                        <label>CVC번호</label><p/>
-                                        <input type="text" placeholder="카드 뒷면 숫자 3자리*">
+                                    <!-- End Single Content -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Filter Menu -->
+                    <!-- End Product MEnu -->
+                    <div class="row">
+                        <div class="product__list another-product-style">
+                            <!-- Start Single Product -->
+                            <c:if test="${not empty searchProductList }">
+                            <c:forEach items="${searchProductList }" var="list">
+                            
+                            <div class="col-md-3 single__pro col-lg-3 col-sm-4 col-xs-12 cat--1">
+                                <div class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            <a href="product.do?proNum=${list.proNum }">
+                                                <img src="resources/images/imgUpload/${fn:split(list.proImage,'/')[0]}" alt="${list.proName }">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product__details">
+                                        <h2><a href="product.do?proNum=${list.proNum }">${list.proName }</a></h2>
+                                        <ul class="product__price">
+                                            <li class="new__price"><fmt:formatNumber value="${list.proPrice }"/> 원</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- End Payment Box -->
-
+                             </c:forEach>
+                             </c:if>
+                             <c:if test="${empty searchProductList }">
+                             <div class="bradcaump__inner text-center">
+                             <h2 class="bradcaump-title">검색 결과가 없습니다</h2>
+                             </div>
+                             </c:if>
+                            <!-- End Single Product -->
                         </div>
                     </div>
-                    
-                    <div class="col-md-4 col-lg-4">
-                        <div class="checkout-right-sidebar">
-                                    <div class="cart_totals">
-                                        <h2>장바구니 합계</h2>
-                                        <table>
-                                            <tbody>
-                                                <tr class="cart-subtotal">
-                                                    <th>합계</th>
-                                                    <td><span class="amount">${sum } 원</span></td>
-                                                </tr>
-                                                <tr class="shipping">
-                                                    <th>배송비</th>
-                                                    <td>
-                                                        <ul id="shipping_method">
-                                                            <li>
-                                                            <!-- 10만원 미만시 2500원 -->
-                                                                <label>
-                                                                 <c:choose>
-                                                                 <c:when test="${empty cartList or sum < 100000}">
-                                                                    <span class="amount">2500 원</span>
-                                                                    <c:set var= "sum" value="${sum + 2500}"/>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                    <span class="amount">무료</span>
-                                                                    </c:otherwise>
-                                                                    </c:choose>
-                                                                </label>
-                                                            </li>
-                                                            <li>
-                                                        </ul>
-                                                        <p class="shipping-calculator-button">10만원 이상 구매시 배송비 무료</p>
-                                                    </td>
-                                                </tr>
-                                                <tr class="order-total">
-                                                    <th>합계</th>
-                                                    <td>
-                                                    <c:if test="${sum <= 2500}">
-                                                    <c:set var="sum" value="0"/>
-                                                    </c:if>
-                                                        <strong><span class="amount">${sum }&nbsp;원</span></strong>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                <td align="right" colspan="2">
-                                                
-                                                <!-- Start Payment Way -->
-                                <div align="right">
-                                <div class="wc-proceed-to-checkout">
-                                            <a href="#" onclick="payment_check()">결제하기</a>
-                                </div>
-                                </div>    
-                                </form>
-                                
-                            <!-- End Payment Way -->  
-                            </td>
-                            </tr>              
-                                                
-                        
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                   
-                                </div>
-                               
+                    <!-- Start Load More BTn -->
+                    <c:if test="${not empty searchProductList }">
+                    <div class="row mt--60">
+                        <div class="col-md-12">
+                            <div class="htc__loadmore__btn">
+                                <a href="#">load more</a>
+                            </div>
                         </div>
-                        
                     </div>
-                   
+                    </c:if>
+                    <!-- End Load More BTn -->
                 </div>
-            </section>                                                                   
-        <!-- End Checkout Area -->
-       <footer class="htc__foooter__area gray-bg">
+            </div>
+        </section>
+        <!-- End Our Product Area -->
+
+
+        <!-- Start Footer Area -->
+        <footer class="htc__foooter__area gray-bg">
             <div class="container">
                 <div class="row">
                     <div class="footer__container clearfix">
@@ -538,7 +483,7 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="index.jsp">홈</a></li>
+                                    <li><a href="#">홈</a></li>
                                     <li><a href="#">인기상품</a></li>
                                     <li><a href="cart.do">장바구니</a></li>
                                 </ul>
@@ -567,10 +512,9 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
-    <!-- 유효성 검사 스크립트 -->
-	<script src="resources/js/paymentCheck.js"></script>
-	
-	
+    <script src="resources/js/shop.js"></script>
+    
+
 </body>
 
 </html>

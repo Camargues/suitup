@@ -240,8 +240,8 @@
                         <div class="col-md-12" >
                             <div class="search__inner">
                             <!-- 검색창 -->
-                                <form action="#" method="get">
-                                    <input placeholder="" type="text">
+                                <form action="searchPage.do" method="get">
+                                    <input placeholder="" type="text" name="proName">
                                     <button type="submit"></button>
                                 </form>
                                 <div class="search__close__btn">

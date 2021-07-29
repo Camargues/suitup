@@ -194,7 +194,7 @@
 	</select>
 	<!-- 리뷰  작성 -->
 	<insert id="insertComment" parameterType="SuitUpCommentVO">
-		INSERT INTO SU_COMMENT VALUES (#{proNum}, #{memId}, #{comTitle}, #{comContent}, SYSDATE, 0,#{comAvg} ,COMMENT_NUM_SEQ.NEXTVAL)
+		INSERT INTO SU_COMMENT VALUES (#{proNum}, #{memId}, #{comTitle}, #{comContent}, SYSDATE, #{comAvg} ,COMMENT_NUM_SEQ.NEXTVAL)
 	</insert>
 	<!-- 리뷰 삭제 -->
 	<delete id="deleteComment" parameterType="SuitUpCommentVO">
@@ -325,5 +325,10 @@
 		<if test="proNum != '' or proNum != 0">AND PRO_NUM = #{proNum}</if>
 		</where>
 	</delete>
+	
+	<!-- 상품명 검색 -->
+	<select id="searchProductList" parameterType="SuitUpProductVO" resultType="SuitUpProductVO">
+		SELECT * FROM SU_PRO WHERE PRO_NAME LIKE '%${proName}%'
+	</select>
 	
 </mapper>
