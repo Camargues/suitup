@@ -506,6 +506,8 @@ public class SuitUpController {
 			System.out.println(vo.getCateNum());
 			System.out.println(vo.getCateDtnum());
 			System.out.println(vo.getDtproCount());
+			System.out.println(vo.getDetail().get(0));
+			System.out.println(vo.getImage().get(0));
 			
 			suitupService.productModify(vo);
 			m.addAttribute("categoryList", suitupService.getCategoryList());

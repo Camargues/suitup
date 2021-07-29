@@ -140,6 +140,8 @@
 	<update id="productModify" parameterType="SuitUpProductVO">
 	UPDATE SU_PRO SET PRO_NAME = #{proName} , PRO_PRICE = #{proPrice},
 	CATE_NUM = #{cateNum} , CATE_DTNUM = #{cateDtnum}, DTPRO_COUNT = #{dtproCount}
+	<if test="proImage.length() gt 8">, PRO_IMAGE = #{proImage}</if>
+	<if test="proDetail.length() gt 8">, PRO_DETAIL = #{proDetail}</if>
 	WHERE PRO_NUM = #{proNum}
 	</update>
 	
