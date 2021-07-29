@@ -331,4 +331,23 @@
 		SELECT * FROM SU_PRO WHERE PRO_NAME LIKE '%${proName}%'
 	</select>
 	
+	<!-- 비밀번호 리셋  -->
+	<update id="userPwdReset" parameterType="SuitUpCustomerVO">
+	UPDATE SU_MEM SET MEM_PASS= #{memPass}
+	WHERE MEM_ID = #{memId} AND MEM_NAME=#{memName}
+	</update>
+
+	<!-- 비밀번호 변경  -->
+	<update id="pwdModifyOk" parameterType="SuitUpCustomerVO">
+	UPDATE SU_MEM SET MEM_PASS= #{memPass}
+	WHERE MEM_ID = #{memId} 
+	</update>
+
+	<!-- 회원탈퇴 -->
+	<delete id="myDelete" parameterType="SuitUpCustomerVO">
+	DELETE FROM SU_MEM
+	WHERE MEM_ID= #{memId}
+	AND MEM_PASS = #{memPass}
+	</delete>
+	
 </mapper>

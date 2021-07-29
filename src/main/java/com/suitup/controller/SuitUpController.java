@@ -912,4 +912,55 @@ public class SuitUpController {
 			m.addAttribute("searchProductList", suitupService.searchProductList(vo));
 			
 		}
+		
+		//비밀번호 리셋 ajax
+		@RequestMapping(value="pwdReset.do",  produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public String pwdReset(SuitUpCustomerVO vo) {
+			String result="일치하는 정보가 없습니다.";
+			int count = suitupService.userPwdReset(vo);
+			if(count == 1) {
+				result= "임시 비밀번호 : "+vo.getMemPass()+"로 변경되었습니다.";
+			}
+			return result;
+		}
+		//비밀번호 변경 ajax
+		@RequestMapping(value="pwdModify.do",  produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public String pwdModify(SuitUpCustomerVO vo) {
+			SuitUpCustomerVO result = suitupService.userIdCheck(vo);
+			String ok= "no";
+			if(result != null) {
+				ok= "ok";				
+			}
+			return ok;
+		}
+		//비밀번호 변경 완료 ajax
+		@RequestMapping(value="pwdModifyOk.do",  produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public String pwdModifyOk(SuitUpCustomerVO vo) {
+			String result= "";
+			int count = suitupService.pwdModifyOk(vo);
+			if(count == 1) {
+				result= "비밀번호가 변경되었습니다.";
+			}else {
+				result = "오류";
+			}
+			return result;
+		}
+		//회원탈퇴
+		@RequestMapping(value="myDelete.do",  produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public String myDelete(SuitUpCustomerVO vo ,HttpServletResponse response, HttpSession session, HttpServletRequest request) {
+			String ok="no";
+			int count = suitupService.myDelete(vo);
+			if(count == 1) {
+				ok= "ok";
+				Cookie cookie = new Cookie("SuitUpidCookie", null); // 쿠키에 대한 값을 null로 지정
+				cookie.setMaxAge(0); // 유효시간을 0으로 설정
+				response.addCookie(cookie); // 응답 헤더에 추가해서 없어지도록 함
+				session.invalidate();
+			}
+			return ok;
+		}
 }

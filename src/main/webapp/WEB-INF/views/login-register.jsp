@@ -275,7 +275,7 @@
                                 <div class="tabs__checkbox">
                                     <input type="checkbox" name="cookieOn" value="cookieOn">
                                     <span> 로그인 상태 유지</span>
-                                    <span class="forget"><a href="#">비밀번호 찾기</a></span>
+                                     <span class="forget"><a href="#" onclick="goPassword();">비밀번호 찾기</a></span>
                                 </div>
                                 <div class="htc__login__btn mt--30">
                                     <a href="#" onclick="id_check();">Login</a>

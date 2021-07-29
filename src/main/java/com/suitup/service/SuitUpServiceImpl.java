@@ -228,5 +228,19 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public List<SuitUpProductVO> searchProductList(SuitUpProductVO vo){
 		return suitupDAO.searchProductList(vo);
 	}
+	// 비밀번호 리셋
+	public int userPwdReset(SuitUpCustomerVO vo) {
+		return suitupDAO.userPwdReset(vo);
+	}
+	
+	// 비밀번호 변경
+	public int pwdModifyOk(SuitUpCustomerVO vo) {
+		return suitupDAO.pwdModifyOk(vo);
+	}
+	
+	// 회원탈퇴
+	public int myDelete(SuitUpCustomerVO vo) {
+		return suitupDAO.myDelete(vo);
+	}
 
 }

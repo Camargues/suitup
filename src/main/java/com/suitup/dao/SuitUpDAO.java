@@ -104,4 +104,11 @@ public interface SuitUpDAO {
 	public List<Map<String, String>> getWishList(String memId);
 	
 	List<SuitUpProductVO> searchProductList(SuitUpProductVO vo);
+	
+	public int userPwdReset(SuitUpCustomerVO vo);
+
+	public int pwdModifyOk(SuitUpCustomerVO vo);
+	
+	public int myDelete(SuitUpCustomerVO vo);
+
 }

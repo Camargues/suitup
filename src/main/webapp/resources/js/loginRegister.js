@@ -134,3 +134,9 @@ function jusoCallBack(roadFullAddr){
 		document.registerForm.memAddr.value = roadFullAddr;		
 	
 }
+//====================================비밀번호 찾기====================================
+function goPassword(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	var passpop = window.open("password-reset.do","pop","width=570,height=500, scrollbars=no, resizable=yes"); 
+	
+}
