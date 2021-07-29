@@ -107,7 +107,7 @@ public class SuitUpProductVO {
 						
 						String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 						
-						String safeFile = path + System.currentTimeMillis() + originFileName;
+						String safeFile = path + serialNo + originFileName;
 						
 						try {
 							mf.transferTo(new File(safeFile));
@@ -152,7 +152,7 @@ public class SuitUpProductVO {
 				this.proDetail += serialNo + mf.getOriginalFilename() + "/";
 								
 				String originFileName = mf.getOriginalFilename(); // 원본 파일 명	
-				String safeFile = path + System.currentTimeMillis() + originFileName;
+				String safeFile = path + serialNo + originFileName;
 								
 				try {
 					mf.transferTo(new File(safeFile));
