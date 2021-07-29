@@ -537,7 +537,6 @@ public class SuitUpController {
 			        int result = suitupService.memModifiy(vo);
 			        
 			        System.out.println(result);
-
 			        mv.setViewName("redirect:my-page-modify.do");
 			        mv.addObject("result", result);
 			        
@@ -562,6 +561,8 @@ public class SuitUpController {
 			        if(id != null) {
 			        vo.setMemId(id);
 			        }
+
+			        m.addAttribute("categoryList", suitupService.getCategoryList());
 			        m.addAttribute("mem",suitupService.userIdCheck(vo));
 			    }
 			    
