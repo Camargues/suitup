@@ -57,7 +57,6 @@ public class SuitUpController {
 		m.addAttribute("categoryList", suitupService.getCategoryList());
 		// 인기 상품 불러오기
 		m.addAttribute("popularList", suitupService.getPopularList(vo));
-		// System.out.println("popularList로 불러온 상품코드" + suitupService.getPopularList(vo).get(0).getCateNum());
 		// 신상품 불러오기
 		m.addAttribute("newList", suitupService.getNewList());
 		return "index";
@@ -898,5 +897,12 @@ public class SuitUpController {
 				return "장바구니가 전부 삭제되었습니다";
 			else
 				return "장바구니가 비어있습니다";
+		}
+		
+		@RequestMapping("searchPage.do")
+		public void search(SuitUpProductVO vo, Model m) {
+			m.addAttribute("categoryList", suitupService.getCategoryList());
+			m.addAttribute("searchProductList", suitupService.searchProductList(vo));
+			
 		}
 }

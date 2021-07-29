@@ -223,5 +223,10 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public List<Map<String, String>> getWishList(String memId) {
 		return suitupDAO.getWishList(memId);
 	}
+	
+	// 상품 검색
+	public List<SuitUpProductVO> searchProductList(SuitUpProductVO vo){
+		return suitupDAO.searchProductList(vo);
+	}
 
 }

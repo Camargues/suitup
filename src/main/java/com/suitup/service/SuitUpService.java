@@ -105,4 +105,6 @@ public interface SuitUpService {
 	public int overlapWish(SuitUpWishVO vo);
 	
 	public List<Map<String, String>> getWishList(String memId);
+	
+	List<SuitUpProductVO> searchProductList(SuitUpProductVO vo);
 }

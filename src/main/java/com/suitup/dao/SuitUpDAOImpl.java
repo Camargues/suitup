@@ -273,4 +273,10 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("==> Mybatis getWishList() 호출");
 		return mybatis.selectList("SuitUpDAO.getWishList", memId);
 	}
+	
+	// 상품 검색하기
+	public List<SuitUpProductVO> searchProductList(SuitUpProductVO vo){
+		System.out.println("==> Mybatis searchProductList() 호출");
+		return mybatis.selectList("SuitUpDAO.searchProductList", vo);
+	}
 }
