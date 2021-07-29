@@ -155,7 +155,6 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                    <li><a href="my-page-cart.do">장바구니</a></li>
                           
                                     <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
