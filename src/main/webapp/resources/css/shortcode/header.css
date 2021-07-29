@@ -1139,12 +1139,12 @@ h4.offset__title {
 .category-menu-list ul li .category-common {
     float: left;
     padding-right: 27px;
-    width: 50%;
+    width: 100%;
 }
 .category-menu-list ul li .category-common2 {
     float: left;
     padding-right: 27px;
-    width: 33.333%;
+    width: 100%;
 }
 .category-menu-list ul li .category-common h4,
 .category-menu-list ul li .category-common2 h4 {

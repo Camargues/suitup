@@ -68,7 +68,11 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("===> Mybatis getOrderList() 호출");
 		return mybatis.selectList("SuitUpDAO.orderList", vo);
 	}
-	
+	// 주문 건수
+	public int getOrderListCount(String id) {
+		System.out.println("==> Mybatis getOrderListCount() 호출");
+		return mybatis.selectOne("SuitUpDAO.orderListCount", id);
+	}
 	// 회원가입
 	public int memberInsert(SuitUpCustomerVO vo) {
 		System.out.println("===> Mybatis userInsert() 호출");

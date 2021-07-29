@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -254,7 +255,7 @@
             <!-- End Search Popap -->
 		</div>
         <!-- Start Feature Product -->
-        <section class="categories-slider-area bg__white">
+        <section class="categories-slider-area bg__white" style="padding-bottom: 30px">
             <div class="container">
                 <div class="row">
                     <!-- Start Left Feature -->
@@ -293,7 +294,7 @@
                             <div class="category-menu-list">
                                 <ul>
                                     <li><a href="#"><img alt="" src="images/icons/thum2.png"> 인기 상품 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
+                                        <div class="category-menu-dropdown" style="width: 350px">
                                             <div class="category-part-1 category-common mb--30">
                                                 <h4 class="categories-subtitle"> 인기 상품</h4>
                                                 <ul>
@@ -309,7 +310,7 @@
                                         </div>
                                     </li>
                                     <li><a href="#"><img alt="" src="images/icons/thum3.png"> 아우터 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
+                                        <div class="category-menu-dropdown" style="width: 350px">
                                             <div class="category-part-1 category-common2 mb--30">
                                                 <h4 class="categories-subtitle"> 아우터</h4>
                                                 <ul>
@@ -329,7 +330,7 @@
                                         </div>
                                     </li>
                                     <li><a href="#"><img alt="" src="images/icons/thum4.png"> 상의 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
+                                        <div class="category-menu-dropdown" style="width: 350px">
                                             <div class="category-menu-dropdown-top">
                                                 <div class="category-part-1 category-common2 mb--30">
                                                     <h4 class="categories-subtitle"> 상의</h4>
@@ -346,7 +347,7 @@
                                         </div>
                                     </li>
                                     <li><a href="#"><img alt="" src="images/icons/thum5.png"> 하의 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
+                                        <div class="category-menu-dropdown" style="width: 350px">
                                             <div class="category-menu-dropdown-left">
                                                 <div class="category-part-1 category-common mb--30">
                                                     <h4 class="categories-subtitle"> 하의</h4>
@@ -368,7 +369,7 @@
                                         </div>
                                     </li>
                                     <li><a href="#"><img alt="" src="images/icons/thum6.png"> 신발 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
+                                        <div class="category-menu-dropdown" style="width: 350px">
                                             <div class="category-menu-dropdown-left">
                                                 <div class="category-part-1 category-common">
                                                     <h4 class="categories-subtitle"> 신발</h4>
@@ -385,7 +386,7 @@
                                             </div>
                                     </li>
                                     <li><a href="#"><img alt="" src="images/icons/thum6.png"> 모자 <i class="zmdi zmdi-chevron-right"></i></a>
-                                        <div class="category-menu-dropdown">
+                                        <div class="category-menu-dropdown" style="width: 350px">
                                             <div class="category-menu-dropdown-left">
                                                 <div class="category-part-1 category-common">
                                                     <h4 class="categories-subtitle" id="populer"> 모자</h4>
@@ -486,7 +487,7 @@
                                             <div class="product__details">
                                                 <h2><a href="product.do?proNum=${list.proNum }">${list.proName }</a></h2>
                                                 <ul class="product__price">
-                                                    <li>${list.proPrice }</li>
+                                                    <li><fmt:formatNumber value="${list.proPrice }"/> 원</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -517,7 +518,7 @@
                                             <div class="product__details">
                                                 <h2><a href="product.do?proNum=${list.proNum }">${list.proName }</a></h2>
                                                 <ul class="product__price">
-                                                    <li>${list.proPrice }</li>
+                                                    <li><fmt:formatNumber value="${list.proPrice }"/> 원</li>
                                                 </ul>
                                             </div>
                                         </div>

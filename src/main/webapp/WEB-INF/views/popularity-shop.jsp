@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -303,7 +304,7 @@
                                     </c:forEach>
                                 </div>
                                 <div class="filter__box">
-                                    <a class="filter__menu" href="#">filter</a>
+                                    <!-- <a class="filter__menu" href="#">filter</a> -->
                                 </div>
                             </div>
                         </div>
@@ -401,7 +402,7 @@
                                     <div class="product__details">
                                         <h2><a href="product.do?proNum=${list.proNum }">${list.proName }</a></h2>
                                         <ul class="product__price">
-                                            <li class="new__price">${list.proPrice } 원</li>
+                                            <li class="new__price"><fmt:formatNumber value="${list.proPrice }"/> 원</li>
                                         </ul>
                                     </div>
                                 </div>

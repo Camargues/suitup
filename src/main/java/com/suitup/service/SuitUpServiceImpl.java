@@ -60,6 +60,10 @@ public class SuitUpServiceImpl implements SuitUpService {
 	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo) {
 		return suitupDAO.getOrderList(vo);
 	}
+	// 주문건수 불러오기
+	public int getOrderListCount(String id) {
+		return suitupDAO.getOrderListCount(id);
+	}
 	// 회원가입
 	public int userInsert(SuitUpCustomerVO vo) {
 		return suitupDAO.memberInsert(vo);

@@ -28,6 +28,8 @@ public interface SuitUpDAO {
 	int changeCart(SuitUpCartVO vo);
 	
 	public List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo);
+	
+	public int getOrderListCount(String id);
 		
 	int memberInsert(SuitUpCustomerVO vo);
 	
