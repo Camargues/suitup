@@ -297,4 +297,10 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("==> Mybatis myDelete() 호출");		
 		return mybatis.delete("SuitUpDAO.myDelete", vo);
 	}
+
+	// 비밀번호 일치 하는지
+	public SuitUpCustomerVO userPassCheck(SuitUpCustomerVO vo) {
+		System.out.println("==> Mybatis userPassCheck() 호출");		
+		return mybatis.selectOne("SuitUpDAO.userPassCheck", vo);
+	}
 }

@@ -111,4 +111,6 @@ public interface SuitUpDAO {
 	
 	public int myDelete(SuitUpCustomerVO vo);
 
+	public SuitUpCustomerVO userPassCheck(SuitUpCustomerVO vo);
+
 }

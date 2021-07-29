@@ -78,9 +78,6 @@
 	<!-- 아이디 중복 체크 -->
 	<select id="idCheck" resultType="SuitUpCustomerVO" parameterType="SuitUpCustomerVO">
 		SELECT * FROM SU_MEM WHERE MEM_ID = #{memId} 
-		<if test="memPass != null">
-		AND MEM_PASS=#{memPass}
-		</if>
 	</select>
 	
 	<!-- 회원 정보 불러오기 -->
@@ -347,7 +344,11 @@
 	<delete id="myDelete" parameterType="SuitUpCustomerVO">
 	DELETE FROM SU_MEM
 	WHERE MEM_ID= #{memId}
-	AND MEM_PASS = #{memPass}
 	</delete>
+
+	<!-- 비밀번호 일치하는지 -->
+	<select id="userPassCheck" parameterType="SuitUpCustomerVO" resultType="SuitUpCustomerVO">
+		SELECT * FROM SU_MEM WHERE MEM_ID= #{memId} AND MEM_PASS = #{memPass}
+	</select>
 	
 </mapper>

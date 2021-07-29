@@ -243,4 +243,9 @@ public class SuitUpServiceImpl implements SuitUpService {
 		return suitupDAO.myDelete(vo);
 	}
 
+	// 비밀번호 일치하는지
+	public SuitUpCustomerVO userPassCheck(SuitUpCustomerVO vo) {
+		return suitupDAO.userPassCheck(vo);
+	}
+
 }

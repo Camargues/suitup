@@ -114,4 +114,6 @@ public interface SuitUpService {
 
 	public int myDelete(SuitUpCustomerVO vo);
 
+	public SuitUpCustomerVO userPassCheck(SuitUpCustomerVO vo);
+
 }

@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +36,8 @@ public class SuitUpController {
 	@Autowired
 	private SuitUpService suitupService;
 	
-	
+	@Inject
+	BCryptPasswordEncoder pwEncoder;
 	
 	@RequestMapping("/{url}.do")
 	public String viewPage(@PathVariable String url, Model m) {
@@ -323,7 +326,10 @@ public class SuitUpController {
 		// 회원가입 진입시
 		@RequestMapping("register.do") 
 		public ModelAndView register(SuitUpCustomerVO vo, Model m) {
-			int result = suitupService.userInsert(vo); 
+			String inputPw = vo.getMemPass();
+			String pw = pwEncoder.encode(inputPw);
+			vo.setMemPass(pw);
+			suitupService.userInsert(vo); 
 			
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("login-register-ok"); // 회원가입 완료 페이지로 이동
@@ -354,7 +360,9 @@ public class SuitUpController {
 					Cookie cookie = new Cookie("SuitUpidCookie", result.getMemId());
 					Cookie admin = new Cookie("admin", result.getMemAdmin());
 					String message ="아이디 또는 비밀번호를 확인하세요.";
-					if(result != null) {
+					boolean pwMatch = pwEncoder.matches(vo.getMemPass(), result.getMemPass());
+					System.out.println(pwMatch);
+					if(result != null && pwMatch == true ) {
 						message="로그인성공";
 						session.setAttribute("SuitUpid", result.getMemId());
 							if(vo.getMemCookie().equals("cookieOn")) {
@@ -917,10 +925,16 @@ public class SuitUpController {
 		@RequestMapping(value="pwdReset.do",  produces="application/text;charset=UTF-8")
 		@ResponseBody
 		public String pwdReset(SuitUpCustomerVO vo) {
+			String save= vo.getMemPass();
+			
 			String result="일치하는 정보가 없습니다.";
+			String inputPw = save;
+			String pw = pwEncoder.encode(inputPw);
+			vo.setMemPass(pw);
+
 			int count = suitupService.userPwdReset(vo);
 			if(count == 1) {
-				result= "임시 비밀번호 : "+vo.getMemPass()+"로 변경되었습니다.";
+				result= "임시 비밀번호 : "+save+"로 변경되었습니다.";
 			}
 			return result;
 		}
@@ -929,8 +943,9 @@ public class SuitUpController {
 		@ResponseBody
 		public String pwdModify(SuitUpCustomerVO vo) {
 			SuitUpCustomerVO result = suitupService.userIdCheck(vo);
+			boolean pwMatch = pwEncoder.matches(vo.getMemPass(), result.getMemPass());
 			String ok= "no";
-			if(result != null) {
+			if(result != null && pwMatch == true) {
 				ok= "ok";				
 			}
 			return ok;
@@ -940,6 +955,9 @@ public class SuitUpController {
 		@ResponseBody
 		public String pwdModifyOk(SuitUpCustomerVO vo) {
 			String result= "";
+			String inputPw = vo.getMemPass();
+			String pw = pwEncoder.encode(inputPw);
+			vo.setMemPass(pw);
 			int count = suitupService.pwdModifyOk(vo);
 			if(count == 1) {
 				result= "비밀번호가 변경되었습니다.";
@@ -953,13 +971,17 @@ public class SuitUpController {
 		@ResponseBody
 		public String myDelete(SuitUpCustomerVO vo ,HttpServletResponse response, HttpSession session, HttpServletRequest request) {
 			String ok="no";
-			int count = suitupService.myDelete(vo);
-			if(count == 1) {
-				ok= "ok";
-				Cookie cookie = new Cookie("SuitUpidCookie", null); // 쿠키에 대한 값을 null로 지정
-				cookie.setMaxAge(0); // 유효시간을 0으로 설정
-				response.addCookie(cookie); // 응답 헤더에 추가해서 없어지도록 함
-				session.invalidate();
+			SuitUpCustomerVO result = suitupService.userIdCheck(vo);
+			boolean pwMatch = pwEncoder.matches(vo.getMemPass(), result.getMemPass());
+			if(pwMatch == true) {
+				int count = suitupService.myDelete(vo);
+				if(count == 1) {
+					ok= "ok";
+					Cookie cookie = new Cookie("SuitUpidCookie", null); // 쿠키에 대한 값을 null로 지정
+					cookie.setMaxAge(0); // 유효시간을 0으로 설정
+					response.addCookie(cookie); // 응답 헤더에 추가해서 없어지도록 함
+					session.invalidate();
+				}
 			}
 			return ok;
 		}
