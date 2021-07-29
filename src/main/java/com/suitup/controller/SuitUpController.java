@@ -909,9 +909,32 @@ public class SuitUpController {
 		@RequestMapping(value="deleteCartlist.do", produces="application/text;charset=UTF-8")
 		@ResponseBody
 		public String deleteCartlist(SuitUpCartVO vo) {
+		
+			List<Map> cartList = suitupService.getCartList(vo);
+			
+			if(cartList == null)
+				return "장바구니가 비어있습니다";
+			
+			for(Map map : cartList) {
+				
+				int dtproCount = (Integer.parseInt(map.get("cartCount").toString()));
+
+				int proNum = (Integer.parseInt(map.get("proNum").toString()));
+				
+				// 장바구니 수량 변경 성공시 장바구니 수량 변화한 만큼 재고도 변화
+				SuitUpProductVO pro = new SuitUpProductVO();
+				pro.setProNum(proNum);
+				pro.setDtproCount(dtproCount);
+				
+				suitupService.updateProduct(pro);
+			}
+			
+			
 			int result = suitupService.deleteCartList(vo);
-			if(result > 0)
+			System.out.println("삭제된 장바구니 수 : " + result);
+			if(result > 0) {			
 				return "장바구니가 전부 삭제되었습니다";
+			}
 			else
 				return "장바구니가 비어있습니다";
 		}

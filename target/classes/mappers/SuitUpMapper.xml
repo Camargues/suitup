@@ -35,6 +35,11 @@
 		SELECT * FROM SU_CART WHERE CART_NUM=#{cartNum}
 	</select>
 	
+	<!-- 상품 번호로 상품 재고 가져오기 -->
+	<select id="getProCount" resultType="Integer" parameterType="Integer">
+		SELECT DTPRO_COUNT FROM SU_PRO WHERE PRO_NUM = #{proNum};
+	</select>
+	
 	<!-- 주문하기 -->
 	<insert id="insertOrder" parameterType="SuitUpOrderVO">
 	
@@ -163,7 +168,7 @@
 	INSERT INTO SU_CART VALUES(#{proNum}, #{proName},#{memId},#{dtproSize}, #{dtproColor},#{cartCount}, #{proPrice}, CART_NUM_SEQUENCE.NEXTVAL, #{cateNum}, #{cateDtnum})
 	</insert>
 	
-	<!-- 상품 장바구니 담기 -->
+	<!-- 장바구니 수량 변경 -->
 	<insert id="changeCart" parameterType="SuitUpCartVO">
 	UPDATE SU_CART SET CART_COUNT = #{cartCount} WHERE CART_NUM=#{cartNum}
 	</insert>

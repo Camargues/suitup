@@ -19,6 +19,8 @@ public interface SuitUpDAO {
 	
 	public SuitUpCartVO getCartOne(SuitUpCartVO vo);
 	
+	public int getProCount(int proNum);
+	
 	public int insertOrder(SuitUpOrderVO vo);
 		
 	public void deleteCart(String cart_num);

@@ -35,6 +35,10 @@ public class SuitUpServiceImpl implements SuitUpService {
 		return suitupDAO.getCartOne(vo);
 	}
 	
+	// 상품번호로 상품재고 가져오기
+	public int getProCount(int proNum) {
+		return suitupDAO.getProCount(proNum);
+	}
 	// 주문 하기
 	public int insertOrder(SuitUpOrderVO vo) {
 		return suitupDAO.insertOrder(vo);
