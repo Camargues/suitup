@@ -415,7 +415,7 @@
                     <div class="row mt--60">
                         <div class="col-md-12">
                             <div class="htc__loadmore__btn">
-                                <a href="#">load more</a>
+                                <!-- <a href="#">load more</a> -->
                             </div>
                         </div>
                     </div>
