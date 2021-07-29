@@ -1,5 +1,6 @@
 package com.suitup.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -240,7 +241,7 @@ public class SuitUpController {
 	
 	// 주문내역 진입시
 		@RequestMapping("my-page.do")
-		public String history(Model m, HttpServletRequest request, HttpSession session) {
+		public String history(Model m, HttpServletRequest request, HttpSession session, String page) {
 			
 			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
 			String id = null;
@@ -261,11 +262,58 @@ public class SuitUpController {
 			
 			
 			
-			// 테스트용으로 admin 계정 카트 목록 불러오기
-			// 세션값 넣는걸로 변경 예정
 			
+			// 주문 내역
 			m.addAttribute("orderList", suitupService.getOrderList(vo));
 			m.addAttribute("categoryList", suitupService.getCategoryList());
+			
+			// 페이징
+			// 주문건수 불러오기
+			int maxNum = suitupService.getOrderListCount(id);
+			// 주문건수가 0건이 아닌 경우에만 페이징 처리
+			if(maxNum != 0) {
+				
+				if(page == null)
+					page = "1";
+			
+				int pageNum = Integer.parseInt(page);
+			
+				// 페이지 수가 1 미만인 경우 1로 수정
+				if(pageNum < 1)
+					pageNum = 1;
+				
+				// 한페이지에 보여줄 테이블 갯수
+				int pageCount = 5;
+				// 첫번째 테이블
+				int min = (pageNum-1) * pageCount;
+				// 마지막 테이블
+				int max = (pageNum * pageCount) - 1;
+				// 전체 페이지
+				int totPage = (int)Math.ceil(((double)maxNum / (double)pageCount));
+				// 현재 페이지가 전체 페이지보다 클 경우 전체 페이지로 변경
+				if(pageNum > totPage)
+					pageNum = totPage;
+				// 현재 최소 페이지
+				int minPage = pageNum - 4;
+				// 1보다 작으면 1로 변경
+				if(minPage < 1)
+					minPage = 1;
+				// 현재 최대 페이지
+				int maxPage = pageNum + 4;
+				// 현재 최대 페이지가 전체 페이지보다 클 경우 전체 페이지로 변경
+				if(maxPage > totPage)
+					maxPage = totPage;
+				// 페이징 데이터 해쉬맵에 담기
+				HashMap pageMap = new HashMap();
+				pageMap.put("min", min);
+				pageMap.put("max", max);
+				pageMap.put("minPage", minPage);
+				pageMap.put("maxPage", maxPage);
+				pageMap.put("totPage", totPage);
+				pageMap.put("currentPage", pageNum);
+				m.addAttribute("pageMap", pageMap);
+				
+				}
 			return "my-page";
 			}
 			return "login-register";

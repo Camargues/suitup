@@ -29,6 +29,8 @@ public interface SuitUpService {
 	int changeCart(SuitUpCartVO vo);
 	
 	List<SuitUpOrderVO> getOrderList(SuitUpOrderVO vo);
+	
+	int getOrderListCount(String id);
 
 	// 회원가입 
 	public int userInsert(SuitUpCustomerVO vo);

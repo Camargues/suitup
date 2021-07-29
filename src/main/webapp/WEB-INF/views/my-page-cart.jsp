@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
      <c:if test="${cookie.SuitUpidCookie.value == null}">
      <c:if test="${sessionScope.SuitUpid == null}">
    	<c:redirect url="login-register.do"/>
@@ -314,12 +315,12 @@
                                         <tr>
                                             <td class="product-thumbnail"><a href="product.do?proNum=${cart.proNum }"><img src="resources/images/imgUpload/${fn:split(cart.proImage,'/')[0]}" alt="${cart.proName }" /></a></td>
                                             <td class="product-name"><a href="product.do?proNum=${cart.proNum }">${cart.proName }</a></td>
-                                            <td class="product-price"><span class="amount">${cart.proPrice }</span></td>
+                                            <td class="product-price"><span class="amount"><fmt:formatNumber value="${cart.proPrice }"/></span></td>
                                             <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
                                             <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>
                                             <td class="product-quantity"><input class="cnt" type="number" value="${cart.cartCount }" id="${cart.cartNum }"/></td>
-                                            <td class="product-subtotal">${cart.proPrice * cart.cartCount }</td>
-                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cart.cartNum }&pro_num=${cart.proNum}&count=${cart.cartCount}" onclick="if(!confirm('리뷰를 삭제하시겠습니까?')){return false;}">X</a></td>
+                                            <td class="product-subtotal"><fmt:formatNumber value="${cart.proPrice * cart.cartCount }"/></td>
+                                            <td class="product-remove"><a href="dropCart.do?cart_num=${cart.cartNum }&pro_num=${cart.proNum}&count=${cart.cartCount}" onclick="if(!confirm('장바구니에서 삭제하시겠습니까?')){return false;}">X</a></td>
                                         </tr>
                                         <c:set var= "sum" value="${sum + (cart.proPrice * cart.cartCount)}"/>
                                         </c:forEach>
@@ -333,7 +334,7 @@
                                             <tbody>
                                                 <tr class="cart-subtotal">
                                                     <th>합계</th>
-                                                    <td style="width:200px"><span class="amount">${sum } 원</span></td>
+                                                    <td style="width:200px"><span class="amount"><fmt:formatNumber value="${sum }"/> 원</span></td>
                                                 </tr>
                                                 <tr class="shipping">
                                                     <th>배송비</th>
@@ -344,7 +345,7 @@
                                                                 <label>
                                                                  <c:choose>
                                                                  <c:when test="${empty cartList or sum < 100000}">
-                                                                    <span class="amount">2500 원</span>
+                                                                    <span class="amount">2,500 원</span>
                                                                     <c:set var= "sum" value="${sum + 2500}"/>
                                                                     </c:when>
                                                                     <c:otherwise>
@@ -365,7 +366,7 @@
                                                     <c:if test="${sum <= 2500}">
                                                     <c:set var="sum" value="0"/>
                                                     </c:if>
-                                                        <strong><span class="amount">${sum }&nbsp;원</span></strong>
+                                                        <strong><span class="amount"><fmt:formatNumber value="${sum }"/>&nbsp;원</span></strong>
                                                     </td>
                                                 </tr>                                           
                                                 <tr><th><td></td></th></tr>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
      <c:if test="${cookie.SuitUpidCookie.value == null}">
      <c:if test="${sessionScope.SuitUpid == null}">
    	<c:redirect url="login-register.do"/>
@@ -303,21 +304,31 @@
                                                     <!-- 장바구니 합계 구할 sum 함수 선언 -->
                                                     <c:if test="${not empty orderList }">
                                                    
-                                                    <c:forEach items="${orderList }" var="order">
+                                                    <c:forEach items="${orderList }" var="order" begin="${pageMap.min }" end="${pageMap.max }">
                                                    
                                                         <tr>
                                                             <td class="product-thumbnail" ><span class="amount">${order.orderNum }</span></td>
                                                             <td class="product-name"><a href="#">${order.proName }</a></td>
-                                                            <td class="product-price" ><span class="amount">${order.proPrice }</span></td>
+                                                            <td class="product-price" ><span class="amount"><fmt:formatNumber value="${order.proPrice }"/></span></td>
                                                             <td class="product-size" ><span class="amount">${order.dtproSize }</span></td>
                                                             <td class="product-color" ><span class="amount">${order.dtproColor }</span></td>
                                                             <td class="product-quantity" ><input type="number" value="${order.orderCount }" readonly/></td>
-                                                            <td class="product-subtotal" >${order.proPrice * order.orderCount }</td>
+                                                            <td class="product-subtotal" ><fmt:formatNumber value="${order.proPrice * order.orderCount }"/></td>
                                                             <td class="product-remove" >${order.orderStatus }</td>
                                                             <td class="product-remove">${order.orderMemo }</td>
                                                         </tr>
                                                         
                                                         </c:forEach>
+                                                        <tr>
+                                                        <td colspan="9" style="font-size: 15px">
+                                                        <c:if test="${pageMap.minPage ne 1 }"><a href="my-page.do?page=${ pageMap.currentPage - 5}"><i class="zmdi zmdi-chevron-left"></i></a></c:if>
+                                                        <c:forEach var="i" begin="${pageMap.minPage }" end="${pageMap.maxPage }">
+                                                        <a href="my-page.do?page=${ i}">${i }</a>
+                                                        
+                                                        </c:forEach>
+                                                        <c:if test="${pageMap.maxPage ne pageMap.totPage }"><a href="my-page.do?page=${ pageMap.currentPage + 5}"><i class="zmdi zmdi-chevron-right"></i></a></c:if>
+                                                        </td>
+                                                        </tr>
                                                         </c:if>
                                                     </tbody>
                                                 </table>
@@ -331,7 +342,7 @@
                 </div>
             </div>
         <!-- End Feature Product -->
-      
+     
         <!-- Start Footer Area -->
         <footer class="htc__foooter__area gray-bg">
             <div class="container">

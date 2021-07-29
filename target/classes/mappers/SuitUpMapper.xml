@@ -64,6 +64,11 @@
 		SELECT * FROM SU_ORDER WHERE MEM_ID = #{memId} ORDER BY ORDER_NUM DESC
 	</select>
 	
+	<!-- 주문 내역 건수 불러오기 -->
+	<select id="orderListCount" parameterType="String" resultType="Integer">
+	SELECT COUNT(*) FROM SU_ORDER WHERE MEM_ID = #{id}
+	</select>
+	
 	<!-- 회원 가입 -->
 	<insert parameterType="SuitUpCustomerVO" id="userInsert">
 	INSERT INTO SU_MEM(MEM_ID,mem_admin,MEM_PASS,MEM_NAME,MEM_ADDR,MEM_PHONE)
