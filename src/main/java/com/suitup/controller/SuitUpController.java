@@ -197,6 +197,8 @@ public class SuitUpController {
 						ordervo.setOrderMemo(memo);
 						ordervo.setProPrice(vo.getProPrice());
 						ordervo.setProName(vo.getProName());
+						ordervo.setCateNum(vo.getCateNum());
+						ordervo.setCateDtnum(vo.getCateDtnum());
 					
 						result = result + suitupService.insertOrder(ordervo);
 					
@@ -881,14 +883,18 @@ public class SuitUpController {
 		}
 		
 		// 찜 삭제 (개별 삭제, 전체 삭제 포함)	
-		@RequestMapping("dropWishlist.do")
+		@RequestMapping(value="dropWishlist.do",produces="application/text;charset=UTF-8")
 		@ResponseBody
 		public String dropWishlist(SuitUpWishVO vo) {
 			int result = suitupService.deleteWish(vo);
 			System.out.println("찜 목록 삭제 갯수 : " + result);
-			return "삭제되었습니다";
+			if(result > 1)
+				return "삭제되었습니다";
+			else
+				return "찜 목록이 비어있습니다";
 		}
 		
+		// 장바구니 삭제
 		@RequestMapping(value="deleteCartlist.do", produces="application/text;charset=UTF-8")
 		@ResponseBody
 		public String deleteCartlist(SuitUpCartVO vo) {
@@ -899,6 +905,7 @@ public class SuitUpController {
 				return "장바구니가 비어있습니다";
 		}
 		
+		// 검색
 		@RequestMapping("searchPage.do")
 		public void search(SuitUpProductVO vo, Model m) {
 			m.addAttribute("categoryList", suitupService.getCategoryList());

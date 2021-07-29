@@ -304,8 +304,8 @@
                                     <c:forEach items="${cartList }" var="cart">
                                    
                                         <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="resources/images/imgUpload/${fn:split(cart.proImage,'/')[0]}" alt="${cart.proName }" /></a></td>
-                                            <td class="product-name"><a href="#">${cart.proName }</a></td>
+                                            <td class="product-thumbnail"><img src="resources/images/imgUpload/${fn:split(cart.proImage,'/')[0]}" alt="${cart.proName }" /></td>
+                                            <td class="product-name">${cart.proName }</td>
                                             <td class="product-price"><span class="amount">${cart.proPrice } 원</span></td>
                                             <td class="product-size"><span class="amount">${cart.dtproSize }</span></td>
                                             <td class="product-color"><span class="amount">${cart.dtproColor }</span></td>

@@ -48,13 +48,7 @@
         starCount.setAttribute("value","5");
     }
 
-    $("input[name=cartCount]").click(function(){
-    	alert($("input[name=cartCount]").val());
-    })
-    
-    $("input[name=productCount]").click(function(){
-    	alert($("input[name=productCount]").val());
-    })
+
 // 주문하기 유효성 검사
     function product_check(){
     	
