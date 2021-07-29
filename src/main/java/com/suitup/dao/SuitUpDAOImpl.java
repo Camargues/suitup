@@ -279,4 +279,22 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("==> Mybatis searchProductList() 호출");
 		return mybatis.selectList("SuitUpDAO.searchProductList", vo);
 	}
+	
+	// 비밀번호 리셋
+	public int userPwdReset(SuitUpCustomerVO vo) {
+		System.out.println("==> Mybatis userPwdReset() 호출");		
+		return mybatis.update("SuitUpDAO.userPwdReset", vo);
+	}
+
+	// 비밀번호 변경
+	public int pwdModifyOk(SuitUpCustomerVO vo) {
+		System.out.println("==> Mybatis pwdModifyOk() 호출");		
+		return mybatis.update("SuitUpDAO.pwdModifyOk", vo);
+	}
+
+	// 회원 탈퇴
+	public int myDelete(SuitUpCustomerVO vo) {
+		System.out.println("==> Mybatis myDelete() 호출");		
+		return mybatis.delete("SuitUpDAO.myDelete", vo);
+	}
 }

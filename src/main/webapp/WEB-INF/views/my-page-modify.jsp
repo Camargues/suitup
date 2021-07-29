@@ -40,6 +40,22 @@
     <!-- Modernizr JS -->
     <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
     <script type="text/javascript" src="resources/js/jquery-1.7.1.js"></script>
+    <script type="text/javascript">
+
+    
+    function goPasswordModify(){
+
+    var id = $("#regimemId").val();
+    	var passpop = window.open("password-modify.do?id="+id,"pop","width=570,height=400, scrollbars=no, resizable=yes"); 
+    	
+    }
+    function myDelete(){
+    	 
+    var id = $("#regimemId").val();
+    	//var passpop = window.open("my-page-delete.do?id="+id,"pop","width=570,height=400, scrollbars=no, resizable=yes"); 
+    	window.location.href="my-page-delete.do?id="+id;
+    }
+    </script>
 </head>
 <body>
 
@@ -291,16 +307,17 @@
                        		<br/><h1>&emsp; 회원 정보 변경 </h1><br/><br/>
 						<form class="login" id="modifyForm" action="memModify.do" method="post" name="memModify" >
 							    <div class="col-md-4 inputGroupContainer">
-							    <c:choose>
-							    <c:when test="${cookie.SuitUpidCookie.value != null} }">
-							    <input type="hidden" name="memId" value="${cookie.SuitUpidCookie.value}">
-							    </c:when>
-							    <c:otherwise>
-							    <input type="hidden" name="memId" value="${sessionScope.SuitUpid}">
-							    </c:otherwise>
-							    </c:choose>
+
 							     <div class="input-group"></div>
 							     <br/>
+	
+							    <div class="input-group">
+							        <span class="ti-lock"><a href="#" onclick="goPasswordModify();" >&emsp;비밀번호 변경</a></span>
+							    </div>
+								<br/>
+							    <div class="input-group">
+							  <input  type="hidden" placeholder="아이디" class="form-control" id="regimemId" name="memId" value="${mem.memId}">
+							    </div>
 							    <div class="input-group">
 							        <span class="ti-id-badge">&emsp;이름</span>
 							  <input  type="text" placeholder="이름" class="form-control" id="regiMemName" name="memName" value="${mem.memName }" >
@@ -312,9 +329,9 @@
 							    <div class="input-group">
 							        <span class="ti-mobile">&emsp;휴대폰 번호</span>
 							  <input type="text" placeholder="휴대폰 번호" class="form-control"  id="regiMemPhone"  name="memPhone"  value="${mem.memPhone }">		
+							    </div>
 								<div class="input-group"></div>
 							
-							    </div>
 							    
 							    <br/>
 
@@ -336,8 +353,13 @@
                            <div class="buttons-cart" style="width:100px;margin-top:30px">
                                         <a href="my-page-modify.do">취소</a>
                            </div>
+                   
                     </div>
+                    
+			
                     	</div>
+                    	<br/><br/>
+                    <a href="#" onclick="myDelete();">&emsp;&emsp;회원 탈퇴</a>
 							  </div>
 							</div>
     	                
