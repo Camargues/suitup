@@ -2,6 +2,37 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
+var maxvalue = Math.max(
+	  $('#daysum14').val(),
+  	  $('#daysum13').val(),
+	  $('#daysum12').val(),
+	  $('#daysum11').val(),
+	  $('#daysum10').val(),
+	  $('#daysum9').val(),
+	  $('#daysum8').val(),
+	  $('#daysum7').val(),
+	  $('#daysum6').val(),
+	  $('#daysum5').val(),
+	  $('#daysum4').val(),
+	  $('#daysum3').val(),
+	  $('#daysum2').val(),
+	  $('#daysum1').val()    	);
+var minvalue = Math.min(
+	  $('#daysum14').val(),
+  	  $('#daysum13').val(),
+	  $('#daysum12').val(),
+	  $('#daysum11').val(),
+	  $('#daysum10').val(),
+	  $('#daysum9').val(),
+	  $('#daysum8').val(),
+	  $('#daysum7').val(),
+	  $('#daysum6').val(),
+	  $('#daysum5').val(),
+	  $('#daysum4').val(),
+	  $('#daysum3').val(),
+	  $('#daysum2').val(),
+	  $('#daysum1').val()    	);
+
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
@@ -68,8 +99,8 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          min: 0,
-          max: 10000,
+          min: minvalue,
+          max: maxvalue,
           maxTicksLimit: 10
         },
         gridLines: {

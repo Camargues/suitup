@@ -910,7 +910,7 @@ public class SuitUpController {
 		@ResponseBody
 		public String deleteCartlist(SuitUpCartVO vo) {
 			int result = suitupService.deleteCartList(vo);
-			if(result > 1)
+			if(result > 0)
 				return "장바구니가 전부 삭제되었습니다";
 			else
 				return "장바구니가 비어있습니다";

@@ -2,6 +2,21 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
+var maxvalue2 = Math.max(
+	  $('#monthsum6').val(),
+  	  $('#monthsum5').val(),
+  	  $('#monthsum4').val(),
+  	  $('#monthsum3').val(),
+  	  $('#monthsum2').val(),
+  	  $('#monthsum1').val()    	);
+	var minvalue2 = Math.min(
+      $('#monthsum6').val(),
+	  $('#monthsum5').val(),
+	  $('#monthsum4').val(),
+	  $('#monthsum3').val(),
+	  $('#monthsum2').val(),
+	  $('#monthsum1').val()   	);
+	alert(maxvalue2+ " , " + minvalue2);
 // 최근 6개월 값
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
@@ -43,9 +58,9 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          min: 0,
-          max: 10000,
-          maxTicksLimit: 10
+          min: minvalue2,
+          max: maxvalue2,
+          maxTicksLimit: 6
         },
         gridLines: {
           display: true

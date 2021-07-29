@@ -308,7 +308,7 @@
                                                    
                                                         <tr>
                                                             <td class="product-thumbnail" ><span class="amount">${order.orderNum }</span></td>
-                                                            <td class="product-name"><a href="#">${order.proName }</a></td>
+                                                            <td class="product-name"><a href="product.do?proNum=${order.proNum }">${order.proName }</a></td>
                                                             <td class="product-price" ><span class="amount"><fmt:formatNumber value="${order.proPrice }"/></span></td>
                                                             <td class="product-size" ><span class="amount">${order.dtproSize }</span></td>
                                                             <td class="product-color" ><span class="amount">${order.dtproColor }</span></td>

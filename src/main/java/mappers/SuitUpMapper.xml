@@ -52,11 +52,7 @@
 	
 	<!-- 카트 삭제 -->
 	<delete id="deleteCart" parameterType="String">
-		DELETE FROM SU_CART
-		<where>
-		 <if test="cartNum != null">AND CART_NUM = #{cartNum}</if>
-		 <if test="memId != null">AND MEM_ID = #{memId}</if>
-		 </where>
+		DELETE FROM SU_CART WHERE CART_NUM = #{cartNum}
 	</delete>
 	
 	<!-- 주문 목록 불러오기 -->
