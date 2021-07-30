@@ -49,7 +49,7 @@
     }
 
 
-// 주문하기 유효성 검사
+// 장바구니 담기
     function product_check(){
     	
     	if ($("input[name=dtproColor]:radio:checked").length < 1) {
@@ -102,18 +102,26 @@
   			 data : {proNum : proNum, memId : memId},
   			 success:function(result){
   				orderCount = result;
+  			 },
+  			 error:function(){
+  				 alert("로그인을 해주세요");
   			 }
+  			
 		});
 		
 		if(orderCount > 0){
 			document.getElementById("insertReview").submit();
 		}
-		else{
+		else if(orderCount = 0){
 			 alert("해당 상품을 구매해야 리뷰 작성이 가능합니다");
 			var offset = $(".rating__wrap").offset();
 			$('html, body').animate({scrollTop : offset.top-250}, 400);
 			return false;
 		}
+		else
+			var offset = $(".rating__wrap").offset();
+			$('html, body').animate({scrollTop : offset.top-250}, 400);
+			return false;
     }
 
     // 찜목록 추가
