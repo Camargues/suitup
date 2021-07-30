@@ -73,6 +73,7 @@
  // 리뷰 작성하기 유효성 검사
     function review_check(){
     	
+    	// 제목 체크
     	if ($("input[name=comTitle]").val() == "") {
             alert("제목을 입력해주세요");
             $("input[name=comTitle]").focus();
@@ -80,19 +81,41 @@
             $('html, body').animate({scrollTop : offset.top-250}, 400);
             return false;
           } 
-    	
-    	if ($("input[name=comContent]").val() == "") {
+    	// 내용 체크
+    	if ($("textarea[name=comContent]").val() == "") {
             alert("내용을 입력해주세요");
-            $("input[name=comContent]").focus();
+            $("textarea[name=comContent]").focus();
             var offset = $(".rating__wrap").offset();
             $('html, body').animate({scrollTop : offset.top-250}, 400);
             return false;
           } 
     	
+    	// 구매내역 체크
+    	var proNum = $('input[name="proNum"]').val();
+		var memId = $('input[name="memId"]').val();
+		var orderCount = 0;
     	
-    	document.getElementById("insertReview").submit();
+		$.ajax({
+  			 type : "post",
+  			 url : "orderCheck.do",
+  			 contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+  			 data : {proNum : proNum, memId : memId},
+  			 success:function(result){
+  				orderCount = result;
+  			 }
+		});
+		
+		if(orderCount > 0){
+			document.getElementById("insertReview").submit();
+		}
+		else{
+			 alert("주문 내역이 있어야 리뷰 작성이 가능합니다");
+			var offset = $(".rating__wrap").offset();
+			$('html, body').animate({scrollTop : offset.top-250}, 400);
+			return false;
+		}
     }
-    
+
     // 찜목록 추가
     function insert_wish(){
     	

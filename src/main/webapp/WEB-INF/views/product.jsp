@@ -793,7 +793,6 @@
     <script src="resources/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="resources/js/main.js"></script>
-    <script src="resources/js/product-details.js"></script>
 <script src="resources/js/product.js"></script>
 
 </body>

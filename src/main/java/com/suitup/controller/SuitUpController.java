@@ -1,5 +1,7 @@
 package com.suitup.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -622,9 +624,16 @@ public class SuitUpController {
 			return "product";
 		}
 		
+		// 리뷰 등록전 구매내역 확인
+		@RequestMapping(value = "orderCheck.do", produces="application/text;charset=UTF-8")
+		@ResponseBody
+		public int orderCheck(SuitUpCommentVO vo) {
+			return suitupService.orderCheck(vo);
+		}
+		
 		// 리뷰 등록하기
 		@RequestMapping("insertReview.do")
-		public String insertReview(SuitUpCommentVO vo, HttpServletRequest request,HttpSession session) {
+		public String insertReview(SuitUpCommentVO vo, HttpServletRequest request,HttpSession session, HttpServletResponse response) throws IOException {
 			
 			// 쿠키에서 가져올 id값을 저장할 변수 id 선언
 			String id = null;

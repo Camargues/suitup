@@ -192,6 +192,10 @@
 	<select id="getCommentList" parameterType="SuitUpCommentVO" resultType="SuitUpCommentVO">
 		SELECT * FROM SU_COMMENT WHERE PRO_NUM = #{proNum}
 	</select>
+	<!-- 상품 구매여부 확인 -->
+	<select id="orderCheck" parameterType="SuitUpCommentVO" resultType="Integer">
+		SELECT COUNT(*) FROM SU_ORDER WHERE PRO_NUM = #{proNum} AND MEM_ID = #{memId}
+	</select>
 	<!-- 리뷰  작성 -->
 	<insert id="insertComment" parameterType="SuitUpCommentVO">
 		INSERT INTO SU_COMMENT VALUES (#{proNum}, #{memId}, #{comTitle}, #{comContent}, SYSDATE, #{comAvg} ,COMMENT_NUM_SEQ.NEXTVAL)
@@ -315,6 +319,7 @@
 	<select id="overlapWish" parameterType="SuitUpWishVO" resultType="Integer">
 		SELECT COUNT(*) FROM SU_WISH WHERE MEM_ID = #{memId} AND PRO_NUM = #{proNum}
 	</select>
+	
 	
 	<!-- 찜 삭제 -->
 	<delete id="deleteWish" parameterType="SuitUpWishVO">

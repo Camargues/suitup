@@ -510,7 +510,7 @@
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
                                                 <!-- 상세 페이지 링크 -->
-                                                    <a href="#">
+                                                    <a href="product.do?proNum=${list.proNum }">
                                                         <img src="resources/images/imgUpload/${fn:split(list.proImage,'/')[0]}" alt="${list.proName }">
                                                     </a>
                                                 </div>

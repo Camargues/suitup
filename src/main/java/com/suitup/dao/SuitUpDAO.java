@@ -69,6 +69,8 @@ public interface SuitUpDAO {
 	
 	public List<SuitUpCommentVO> getCommentList(SuitUpCommentVO vo);
 	
+	int orderCheck(SuitUpCommentVO vo);
+	
 	public int insertComment(SuitUpCommentVO vo);
 	
 	public int deleteComment(SuitUpCommentVO vo);

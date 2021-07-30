@@ -150,6 +150,9 @@ public class SuitUpServiceImpl implements SuitUpService {
 		return suitupDAO.insertComment(vo);
 	}
 
+	public int orderCheck(SuitUpCommentVO vo) {
+		return suitupDAO.orderCheck(vo);
+	}
 	// 리뷰 삭제하기
 	public int deleteComment(SuitUpCommentVO vo) {
 		return suitupDAO.deleteComment(vo);

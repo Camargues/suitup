@@ -173,7 +173,11 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		System.out.println("==> Mybatis getCommentList() 호출");
 		return mybatis.selectList("SuitUpDAO.getCommentList", vo);
 	}
-
+	// 주문내역 확인
+	public int orderCheck(SuitUpCommentVO vo) {
+		System.out.println("==> Mybatis orderCheck() 호출");
+		return mybatis.selectOne("SuitUpDAO.orderCheck", vo);
+	}
 	// 리뷰 작성하기
 	public int insertComment(SuitUpCommentVO vo) {
 		System.out.println("==> Mybatis insertComment() 호출");
