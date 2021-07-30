@@ -32,6 +32,18 @@ var minvalue = Math.min(
 	  $('#daysum3').val(),
 	  $('#daysum2').val(),
 	  $('#daysum1').val()    	);
+var maxLength= maxvalue.toString().length-1;
+var minLength= minvalue.toString().length-1;
+var maxten=10;
+var minten=10;
+for(var i=1;i<maxLength;i++){
+	 maxten *=10;
+}
+for(var i=1;i<minLength;i++){
+	 minten *=10;
+}
+var maxResult = Math.ceil(maxvalue/maxten)*maxten;
+var minResult = Math.floor(minvalue/minten)*minten;
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
@@ -99,8 +111,8 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          min: minvalue,
-          max: maxvalue,
+          min: minResult,
+          max: maxResult,
           maxTicksLimit: 10
         },
         gridLines: {
