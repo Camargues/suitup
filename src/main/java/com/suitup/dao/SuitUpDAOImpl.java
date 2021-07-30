@@ -39,6 +39,11 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 		return mybatis.selectOne("SuitUpDAO.getCartOne", vo);
 	}
 	
+	// 상품번호로 상품재고 가져오기
+	public int getProCount(int proNum) {
+		System.out.println("==> Mybatis getProCount() 호출");
+		return mybatis.selectOne("SuitUpDAO.getProCount", proNum);
+	}
 	// 주문 완료
 	public int insertOrder(SuitUpOrderVO vo) {
 		System.out.println("===> Mybatis insertOrder() 호출");
@@ -296,5 +301,11 @@ public class SuitUpDAOImpl implements SuitUpDAO {
 	public int myDelete(SuitUpCustomerVO vo) {
 		System.out.println("==> Mybatis myDelete() 호출");		
 		return mybatis.delete("SuitUpDAO.myDelete", vo);
+	}
+
+	// 비밀번호 일치 하는지
+	public SuitUpCustomerVO userPassCheck(SuitUpCustomerVO vo) {
+		System.out.println("==> Mybatis userPassCheck() 호출");		
+		return mybatis.selectOne("SuitUpDAO.userPassCheck", vo);
 	}
 }

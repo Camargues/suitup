@@ -19,6 +19,8 @@ public interface SuitUpDAO {
 	
 	public SuitUpCartVO getCartOne(SuitUpCartVO vo);
 	
+	public int getProCount(int proNum);
+	
 	public int insertOrder(SuitUpOrderVO vo);
 		
 	public void deleteCart(String cart_num);
@@ -110,5 +112,7 @@ public interface SuitUpDAO {
 	public int pwdModifyOk(SuitUpCustomerVO vo);
 	
 	public int myDelete(SuitUpCustomerVO vo);
+
+	public SuitUpCustomerVO userPassCheck(SuitUpCustomerVO vo);
 
 }

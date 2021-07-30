@@ -35,6 +35,11 @@
 		SELECT * FROM SU_CART WHERE CART_NUM=#{cartNum}
 	</select>
 	
+	<!-- 상품 번호로 상품 재고 가져오기 -->
+	<select id="getProCount" resultType="Integer" parameterType="Integer">
+		SELECT DTPRO_COUNT FROM SU_PRO WHERE PRO_NUM = #{proNum};
+	</select>
+	
 	<!-- 주문하기 -->
 	<insert id="insertOrder" parameterType="SuitUpOrderVO">
 	
@@ -52,11 +57,7 @@
 	
 	<!-- 카트 삭제 -->
 	<delete id="deleteCart" parameterType="String">
-		DELETE FROM SU_CART
-		<where>
-		 <if test="cartNum != null">AND CART_NUM = #{cartNum}</if>
-		 <if test="memId != null">AND MEM_ID = #{memId}</if>
-		 </where>
+		DELETE FROM SU_CART WHERE CART_NUM = #{cartNum}
 	</delete>
 	
 	<!-- 주문 목록 불러오기 -->
@@ -78,9 +79,6 @@
 	<!-- 아이디 중복 체크 -->
 	<select id="idCheck" resultType="SuitUpCustomerVO" parameterType="SuitUpCustomerVO">
 		SELECT * FROM SU_MEM WHERE MEM_ID = #{memId} 
-		<if test="memPass != null">
-		AND MEM_PASS=#{memPass}
-		</if>
 	</select>
 	
 	<!-- 회원 정보 불러오기 -->
@@ -143,6 +141,8 @@
 	<update id="productModify" parameterType="SuitUpProductVO">
 	UPDATE SU_PRO SET PRO_NAME = #{proName} , PRO_PRICE = #{proPrice},
 	CATE_NUM = #{cateNum} , CATE_DTNUM = #{cateDtnum}, DTPRO_COUNT = #{dtproCount}
+	<if test="proImage.length() gt 8">, PRO_IMAGE = #{proImage}</if>
+	<if test="proDetail.length() gt 8">, PRO_DETAIL = #{proDetail}</if>
 	WHERE PRO_NUM = #{proNum}
 	</update>
 	
@@ -168,7 +168,7 @@
 	INSERT INTO SU_CART VALUES(#{proNum}, #{proName},#{memId},#{dtproSize}, #{dtproColor},#{cartCount}, #{proPrice}, CART_NUM_SEQUENCE.NEXTVAL, #{cateNum}, #{cateDtnum})
 	</insert>
 	
-	<!-- 상품 장바구니 담기 -->
+	<!-- 장바구니 수량 변경 -->
 	<insert id="changeCart" parameterType="SuitUpCartVO">
 	UPDATE SU_CART SET CART_COUNT = #{cartCount} WHERE CART_NUM=#{cartNum}
 	</insert>
@@ -347,7 +347,11 @@
 	<delete id="myDelete" parameterType="SuitUpCustomerVO">
 	DELETE FROM SU_MEM
 	WHERE MEM_ID= #{memId}
-	AND MEM_PASS = #{memPass}
 	</delete>
+
+	<!-- 비밀번호 일치하는지 -->
+	<select id="userPassCheck" parameterType="SuitUpCustomerVO" resultType="SuitUpCustomerVO">
+		SELECT * FROM SU_MEM WHERE MEM_ID= #{memId} AND MEM_PASS = #{memPass}
+	</select>
 	
 </mapper>

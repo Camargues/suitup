@@ -18,7 +18,7 @@
         		
 		    	var id = $('#inputId').val()
 		    	var name = $('#inputName').val()
-  				var pass = Math.random().toString(36);
+  				var pass = Math.random().toString(36).substr(2,11);
         		// 아이디
         	 	if(id==""){
         			alert("아이디를 입력하세요.")

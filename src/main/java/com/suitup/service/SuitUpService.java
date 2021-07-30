@@ -20,6 +20,8 @@ public interface SuitUpService {
 	
 	SuitUpCartVO getCartOne(SuitUpCartVO vo);
 	
+	int getProCount(int proNum);
+	
 	int insertOrder(SuitUpOrderVO vo);
 	
 	int deleteCartList(SuitUpCartVO vo);
@@ -113,5 +115,7 @@ public interface SuitUpService {
 	public int pwdModifyOk(SuitUpCustomerVO vo);
 
 	public int myDelete(SuitUpCustomerVO vo);
+
+	public SuitUpCustomerVO userPassCheck(SuitUpCustomerVO vo);
 
 }

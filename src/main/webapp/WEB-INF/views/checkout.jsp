@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!doctype html>
-<html class="no-js" lang="en">
+     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>주문서 작성 | Suit Up</title>
+    <title>Suit Up | 결제 정보</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -35,7 +36,7 @@
 
 
     <!-- Modernizr JS -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="resources/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->  
 
-        <!-- Body main wrapper start -->
+    <!-- Body main wrapper start -->
     <div class="wrapper fixed__footer">
         <!-- Start Header Style -->
         <header id="header" class="htc-header header--3 bg__white">
@@ -65,14 +66,16 @@
                                     <li class="drop"><a href="index.jsp">홈</a></li>
                                     <li class="drop"><a href="#">인기상품</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">아우터</a></li>
-                                            <li><a href="#">상의</a></li>
-                                            <li><a href="#">하의</a></li>
-                                            <li><a href="#">신발</a></li>
-                                            <li><a href="#">모자</a></li>
+                                        <c:set var="cateName" value=""/>
+                                        <c:forEach items="${categoryList }" var="list">
+                                        <c:if test="${cateName != list.cateName}">
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                         </ul>
                                     </li>
-                                  <li class="drop"><a href="#">카테고리</a>
+                                    <li class="drop"><a href="#">카테고리</a>
                                         <ul class="dropdown mega_dropdown">
                                             <!-- Start Single Mega MEnu -->
                                             <li><a class="mega__title" href="#">카테고리별</a>
@@ -152,10 +155,8 @@
                                             <!-- End Single Mega MEnu -->
                                         </ul>
                                     </li>
-                                    <li><a href="my-page-cart.do">장바구니</a></li>
-                                  
-                                    <!-- mem_admin 쿼리값이 1일때만 노출 -->
-                                     <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
+                            
+                                    <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
                                     
                                     <li class="drop"><a href="#">관리자 메뉴</a>
                                         <ul class="dropdown">
@@ -165,7 +166,6 @@
                                         </ul>
                                     </li>
                                     </c:if>
-                                    
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix visible-xs visible-sm">
@@ -174,32 +174,28 @@
                                         <li><a href="index.jsp">홈</a></li>
                                         <li><a href="#">인기상품</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                   <c:set var="cateName" value=""/>
+                                       		 <c:forEach items="${categoryList }" var="list">
+                                       		 <c:if test="${cateName != list.cateName}">
+                                            <li><a href="popularity-shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
+                                     
                                         <li><a href="#">카테고리별</a>
                                             <ul>
-                                                <li><a href="#">아우터</a></li>
-                                                <li><a href="#">상의</a></li>
-                                                <li><a href="#">하의</a></li>
-                                                <li><a href="#">신발</a></li>
-                                                <li><a href="#">모자</a></li>
+                                                <c:set var="cateName" value=""/>
+                                       			 <c:forEach items="${categoryList }" var="list">
+                                        		<c:if test="${cateName != list.cateName}">
+                                            <li><a href="shop.do?cateNum=${list.cateNum }">${list.cateName }</a></li>
+                                            <c:set var="cateName" value="${list.cateName }"/>
+                                            </c:if>
+                                            </c:forEach>
                                             </ul>
                                         </li>
-                                        <li><a href="my-page-cart.do">장바구니</a></li>
-                                     <c:if test="${sessionScope.admin eq 1 || cookie.admin.value != null}">
-                                    
-                                    <li class="drop"><a href="#">관리자 메뉴</a>
-                                        <ul class="dropdown">
-                                            <li><a href="product-insert.do">상품 등록</a></li>
-                                            <li><a href="product-list.do">상품 목록</a></li>
-                                        </ul>
-                                    </li>
-                                    </c:if>
+                                        
                                     </ul>
                                 </nav>
                             </div>                          
@@ -208,7 +204,7 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                	<c:choose>   
+								   	<c:choose>   
 								<c:when test="${cookie.SuitUpidCookie.value != null }">
 								<li><a href="my-page.do"><span class="ti-user"></span></a></li>								
 								<li id="logout"><a href="logout.do"><img src="resources/images/icons/logout.png"/></a></li>
@@ -221,7 +217,7 @@
                                 <li><a href="login-register.do"><span class="ti-user"></span></a></li>			
 								</c:otherwise>
 								</c:choose>
-                            	
+                            
                             </ul>
                         </div>
                     </div>
@@ -242,8 +238,8 @@
                         <div class="col-md-12" >
                             <div class="search__inner">
                             <!-- 검색창 -->
-                                <form action="#" method="get">
-                                    <input placeholder="" type="text">
+                                <form action="searchPage.do" method="get">
+                                    <input placeholder="" type="text" name="proName">
                                     <button type="submit"></button>
                                 </form>
                                 <div class="search__close__btn">
@@ -468,7 +464,8 @@
                 </div>
             </section>                                                                   
         <!-- End Checkout Area -->
-       <footer class="htc__foooter__area gray-bg">
+      <!-- Start Footer Area -->
+        <footer class="htc__foooter__area gray-bg">
             <div class="container">
                 <div class="row">
                     <div class="footer__container clearfix">
@@ -513,16 +510,41 @@
                         <!-- End Single Footer Widget -->
  
                         <!-- Start Single Footer Widget -->
-                      <div class="col-md-3 col-lg-2 col-sm-6 smt-30 xmt-30" >
+                      <div class="col-md-3 col-lg-3 col-sm-6">
+                            <div class="ft__widget">
+                                <h2 class="ft__title">인기상품</h2>
+                                <ul class="footer-categories">
+                                    <li><a href="popularity-shop.do?cateNum=1">아우터</a></li>
+                                    <li><a href="popularity-shop.do?cateNum=2">상의</a></li>
+                                    <li><a href="popularity-shop.do?cateNum=3">하의</a></li>
+                                    <li><a href="popularity-shop.do?cateNum=4">신발</a></li>
+                                    <li><a href="popularity-shop.do?cateNum=5">모자</a></li>
+                                </ul>
+                            </div>
+                        </div> 
+                        <!-- End Single Footer Widget -->
+                         <!-- Start Single Footer Widget -->
+                      <div class="col-md-3 col-lg-3 col-sm-6">
                             <div class="ft__widget">
                                 <h2 class="ft__title">카테고리</h2>
                                 <ul class="footer-categories">
-                                    <li><a href="#">인기상품</a></li>
-                                    <li><a href="#">아우터</a></li>
-                                    <li><a href="#">상의</a></li>
-                                    <li><a href="#">하의</a></li>
-                                    <li><a href="#">신발</a></li>
-                                    <li><a href="#">모자</a></li>
+                                    <li><a href="shop.do?cateNum=1">아우터</a></li>
+                                    <li><a href="shop.do?cateNum=2">상의</a></li>
+                                    <li><a href="shop.do?cateNum=3">하의</a></li>
+                                    <li><a href="shop.do?cateNum=4">신발</a></li>
+                                    <li><a href="shop.do?cateNum=5">모자</a></li>
+                                </ul>
+                            </div>
+                        </div> 
+                        <!-- End Single Footer Widget -->
+                         <!-- Start Single Footer Widget -->
+                      <div class="col-md-3 col-lg-3 col-sm-6">
+                            <div class="ft__widget">
+                                <h2 class="ft__title">마이페이지</h2>
+                                <ul class="footer-categories">
+                                    <li><a href="my-page.do">주문내역</a></li>
+                                    <li><a href="my-page-cart.do">장바구니</a></li>
+                                    <li><a href="my-page-wishlist.do">찜 목록</a></li>
                                 </ul>
                             </div>
                         </div> 
@@ -538,9 +560,9 @@
                                     <p>© 2021 KOSMO 86 GEN All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">
-                                    <li><a href="index.jsp">홈</a></li>
-                                    <li><a href="#">인기상품</a></li>
-                                    <li><a href="cart.do">장바구니</a></li>
+                                    <li><a>배준건</a></li>
+                                    <li><a>안영상</a></li>
+                                    <li><a>안효석</a></li>
                                 </ul>
                             </div>
                         </div>
