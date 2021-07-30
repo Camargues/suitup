@@ -294,11 +294,11 @@
                                     <input type="hidden"/>
                                     <input type="password" placeholder="비밀번호*" id="regiMemPass" name="memPass">
                                     <input type="password" placeholder="비밀번호 재확인*" id="regiMemPassConfirm">
-                                    <input type="text" placeholder="이름*" id="regiMemName" name="memName">
-                                    <input type="text" placeholder="주소" id="regiMemAddr" name="memAddr">
+                                    <input type="text" placeholder="이름*" id="regiMemName" name="memName" onkeyup="check(this)" onkeydown="check(this)">
+                                    <input type="text" placeholder="주소" id="regiMemAddr" name="memAddr" readonly onclick="AddrFunction();">
                                     <a href="#" onclick="goPopup();">> 주소찾기</a>
                                     <input type="hidden"/>
-                                    <input type="text" placeholder="휴대폰 번호" id="regiMemPhone" name="memPhone">
+                                    <input type="text" placeholder="휴대폰 번호 " id="regiMemPhone" name="memPhone">
                                 <div class="htc__login__btn">
                                   <a href='#'  onclick="register_check();">register</a>
                                   </div>

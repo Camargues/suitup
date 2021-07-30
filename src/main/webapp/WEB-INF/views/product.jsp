@@ -411,13 +411,8 @@
             </c:choose>
                                 </ul>
                                 <span class="rat__qun">${reviewCount }개의 상품평이 있습니다</span>
-                                
                             </div>
-                            
-                            
-                           
                             <ul class="pro__dtl__prize">
-                            
                                 <li><fmt:formatNumber value="${productDetails.proPrice }"/> 원</li>
                                 <input type="hidden" value="${productDetails.proPrice }" name="proPrice"/>
                             </ul>
@@ -454,15 +449,11 @@
                                         <div class="product-quantity">
                                             <div class="cart-plus-minus" style="cursor: pointer;">
                                                 <input type="text" class="cart-plus-minus-box"  name="cartCount" value="1"  style="cursor: pointer;" >
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                </div>
-                               
+                                            </div>                                            
+                                        </div>                                        
+                                </div>                               
                                 <div class="prodict-statas"><span>재고 : <input type="text" class="cart-box"  name="productCount" value="${productDetails.dtproCount }" readonly="readonly" ></span>
-                                            </div>
-                                            
+                                            </div>                                            
                             </div>
                             <ul class="pro__dtl__btn">
                             <li class="buy__now__btn" ><a href="#" onclick="product_check()">장바구니 담기</a></li>
@@ -504,11 +495,7 @@
                             <!-- Start Single Content -->
                             <div role="tabpanel" id="description" class="product__tab__content fade in active">
                                 <div class="product__description__wrap">
-                                    <div class="product__desc">
-                                        <h2 class="title__6">상세설명</h2>
-                                       
-                                    </div>
-                                    <div class="pro__feature" align="center">
+                                <div class="pro__feature" align="center">
                                       <c:forEach items="${fn:split(productDetails.proDetail, '/') }" var="detail" varStatus="status">
                                     	  <img src="resources/images/imgUpload/${detail }" alt="${productDetails.proName}">
                                		  </c:forEach>

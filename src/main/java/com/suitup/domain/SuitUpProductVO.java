@@ -84,7 +84,7 @@ public class SuitUpProductVO {
 		this.image = image;
 		this.proImage = "";
 		// 각자 환경에 맞게 경로 수정
-		String path = "C:\\dev\\suitup\\src\\main\\webapp\\resources\\images\\imgUpload\\";
+		String path = "C:\\Users\\sonic\\Documents\\GitHub\\suitup\\src\\main\\webapp\\resources\\images\\imgUpload\\";
 		File Folder = new File(path);
 
 		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
@@ -130,7 +130,7 @@ public class SuitUpProductVO {
 		this.detail = detail;
 		this.proDetail = "";
 		// 각자 환경에 맞게 경로 수정
-		String path = "C:\\dev\\suitup\\src\\main\\webapp\\resources\\images\\imgUpload\\";
+		String path = "C:\\Users\\sonic\\Documents\\GitHub\\suitup\\src\\main\\webapp\\resources\\images\\imgUpload\\";
 		File Folder = new File(path);
 
 		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.

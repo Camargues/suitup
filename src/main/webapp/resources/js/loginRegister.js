@@ -1,8 +1,13 @@
 
 //====================================로그인====================================
-
+document.getElementById("memId").addEventListener("focusin", ()=>{	
+	$('#idResult').text("");
+})
+document.getElementById("memPass").addEventListener("focusin", ()=>{	
+	$('#idResult').text("");
+})
 function id_check(){
-
+	
 	//쿠키 저장 
 	var cookie = $(":input:checkbox[name=cookieOn]:checked").val() ;
 	if( cookie != "cookieOn"){
@@ -41,15 +46,22 @@ var raddr = document.getElementById("regiMemAddr");
 var rphone = document.getElementById("regiMemPhone");
 
 //유효성 검사
-var ridCheck = /^[a-z0-9]{4,12}$/
-var rpwCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/
+var ridCheck = /^[a-z0-9]{4,12}$/;
+//아이디 체크
+var rphoneCheck =  /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;
+//휴대폰번호 체크
+var rpwCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+//비밀번호 체크
+var rnameCheck =  /^[가-힣]{2,15}$/;
+//이름 체크
 var idFlag = false ;
+//중복체크
 
 //아이디 중복 검사 ajax  
 document.getElementById("regiMemId").addEventListener("focusout", ()=>{	
 	
-	// 아이디 값 4자 이상일때 ajax  
-	if(rid.value.length>=4){
+	// 아이디 값 4자 이상 12자 이하일때 ajax  
+	if(rid.value.length>=4 && rid.value.length<=12){
 		
 	$.ajax({
 		type:"post",
@@ -99,11 +111,11 @@ function register_check(){
 		rpw.focus();
 		return false;
 	}
-//	if(!rpwCheck.test(rpw.value)){
-//		alert("비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요. ")
-//		rpw.focus();
-//		return false;
-//	}
+	if(!rpwCheck.test(rpw.value)){
+		alert("비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요. ")
+		rpw.focus();
+		return false;
+	}
 
 	if(rpw.value!=rcpw.value){
 		alert("비밀번호가 일치하지 않습니다. ")
@@ -117,12 +129,27 @@ function register_check(){
 		rname.focus();
 		return false;
 	}
+	if(!rnameCheck.test(rname.value)){
+		alert("이름은 한글로 2글자 이상 입력해주세요.")
+		rname.focus();
+		return false;
+	}
+	if(rphone.value.length>=1){
+		if(!rphoneCheck.test(rphone.value)){
+			alert("휴대폰 번호는 "+"-"+" 를 포함한 000-0000-0000 형식으로 작성해주세요 ")
+			rphone.focus();
+			return false;
+		}
+	}
 	
 	document.getElementById("registerForm").submit();
 	
 }
 
 //====================================주소====================================
+function AddrFunction(){
+	alert("주소 입력,수정은 주소찾기를 이용해주세요.")
+}
 function goPopup(){
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	var pop = window.open("jusoPopup.do","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 

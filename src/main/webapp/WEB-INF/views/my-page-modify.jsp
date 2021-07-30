@@ -42,6 +42,7 @@
     <script type="text/javascript" src="resources/js/jquery-1.7.1.js"></script>
     <script type="text/javascript">
 
+ 
     
     function goPasswordModify(){
 
@@ -334,7 +335,7 @@
 
 							    <div class="input-group" style="width:400px">
 							        <span class="ti-home">&emsp;주소</span> 
-							  <input  placeholder="주소" class="form-control"  type="text" id="regiMemAddr" name="memAddr" value="${mem.memAddr }">					 	
+							  <input  placeholder="주소" class="form-control"  type="text" id="regiMemAddr" name="memAddr" value="${mem.memAddr }" onclick="AddrFunction();" readonly>					 	
 							    </div>
 								<a href="#" onclick="goPopup();">> 주소찾기</a><br/>
 							    </div>
