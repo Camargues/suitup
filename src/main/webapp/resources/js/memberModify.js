@@ -16,6 +16,11 @@ function modify_check(){
 		
 	}
 	
+	if(!rnameCheck.test(rname.value)){
+		alert("이름은 한글로 2글자 이상 입력해주세요.")
+		rname.focus();
+		return false;
+	}
 	
 	if(rphone.value.length>=1){
 		if(!rphoneCheck.test(rphone.value)){
