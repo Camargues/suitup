@@ -286,20 +286,11 @@
                         <div class="col-md-12">
                             <div class="filter__menu__container">
                                 <div class="product__menu">
-
- 										<button data-filter="*"  class="is-checked">전체</button>
-  									
-  									
-                                        <c:forEach items="${categoryList }" var="list">
-                                        <c:if test="${param.cateNum eq list.cateNum}">                                        
-                                         
-  										<button data-filter=".cat--${list.cateDtnum }">${list.cateDtname }</button>
-
-                                        
-                                    
-                                    
-                                    
-                                    </c:if>
+                                <button data-filter="*"  class="is-checked">전체</button>
+ 										<c:forEach items="${categoryList }" var="list">
+                                        <c:if test="${param.cateNum eq list.cateNum}">
+                                        <button data-filter=".cat--${list.cateDtnum }">${list.cateDtname }</button>
+                                        </c:if>
                                     </c:forEach>
                                 </div>
                                 <div class="filter__box">
@@ -387,8 +378,7 @@
                         <div class="product__list another-product-style">
                         
                             <!-- Start Single Product -->
-                            <c:forEach items="${popularList }" var="list">
-                            
+                            <c:forEach items="${popularList }" var="list">                            
                             <div class="col-md-3 single__pro col-lg-3 col-sm-4 col-xs-12 cat--${list.cateDtnum}">
                                 <div class="product foo">
                                     <div class="product__inner">

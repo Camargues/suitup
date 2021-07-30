@@ -24,12 +24,12 @@
 
 function init(){
 	var url = location.href;
-	var confmKey = "devU01TX0FVVEgyMDIxMDcyOTE2MjcyNjExMTQ2ODM=";
+	var confmKey = "devU01TX0FVVEgyMDIxMDczMDA5NTAxMzExMTQ2OTk=";
 	var resultType = "4"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번+상세보기(관련지번, 관할주민센터), 3 : 도로명+상세보기(상세건물명), 4 : 도로명+지번+상세보기(관련지번, 관할주민센터, 상세건물명)
 	var inputYn= "<%=inputYn%>";
 	if(inputYn != "Y"){
 		document.form.confmKey.value = confmKey;
-		document.form.returnUrl.value = "http://localhost:8082/Suitup/jusoPopup.do";
+		document.form.returnUrl.value = "http://122.45.33.118:8082/Suitup/jusoPopup.do";
 		document.form.resultType.value = resultType;
 		document.form.action="https://www.juso.go.kr/addrlink/addrLinkUrl.do"; //인터넷망
 		//document.form.action="https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do"; //모바일 웹인 경우, 인터넷망
