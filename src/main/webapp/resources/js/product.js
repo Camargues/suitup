@@ -109,7 +109,7 @@
 			document.getElementById("insertReview").submit();
 		}
 		else{
-			 alert("주문 내역이 있어야 리뷰 작성이 가능합니다");
+			 alert("해당 상품을 구매해야 리뷰 작성이 가능합니다");
 			var offset = $(".rating__wrap").offset();
 			$('html, body').animate({scrollTop : offset.top-250}, 400);
 			return false;
